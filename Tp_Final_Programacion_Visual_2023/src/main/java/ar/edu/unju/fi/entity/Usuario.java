@@ -41,7 +41,6 @@ public class Usuario {
 	
 	@Column(name="usu_estatura")
 	private int estatura;
-	
 	@Column(name="usu_estado")
 	private boolean estado;
 	
