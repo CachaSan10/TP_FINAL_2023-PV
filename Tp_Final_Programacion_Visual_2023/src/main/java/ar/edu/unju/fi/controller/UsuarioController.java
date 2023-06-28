@@ -3,6 +3,7 @@ package ar.edu.unju.fi.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.entity.Usuario;
 import ar.edu.unju.fi.service.IUsuarioService;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/usuario")
@@ -31,11 +33,24 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("/guardar")
-	public String postGuardarUsuarioPage(@ModelAttribute("usuario") Usuario usuario, Model model) {
-		usuarioService.guardarUsuario(usuario);
-		model.addAttribute("idUsuario", usuario.getId());
-		return "agradecimiento";
+	public ModelAndView postGuardarUsuarioPage(@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult bindingResult) {
+
+	    if (bindingResult.hasErrors()) {
+	    	ModelAndView mav = new ModelAndView("nuevo_usuario");
+	    	mav.addObject("usuario", usuario);
+	        mav.addObject("edicion", false);
+	        return mav;
+	    }
+
+
+	    ModelAndView mav = new ModelAndView("agradecimiento");
+	    usuarioService.guardarUsuario(usuario);
+	    mav.addObject("idUsuario", usuario.getId());
+	  
+
+	    return mav;
 	}
+
 
 	@GetMapping("/modificar/{id}")
 	public String getModificarUsuarioPage(Model model, @PathVariable(value="id")Long id) {
@@ -48,7 +63,11 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("/modificar/{id}")
-	public String modificarUsuario(@ModelAttribute("usuario") Usuario usuarioModificado) {
+	public String modificarUsuario(@Valid @ModelAttribute("usuario") Usuario usuarioModificado, BindingResult bindingResult) {
+		if ( bindingResult.hasErrors() ) {
+			return "nuevo_usuario";
+		}
+		
 		usuarioService.modificarUsuario(usuarioModificado);
 		return "redirect:/usuario/listado";
 	}

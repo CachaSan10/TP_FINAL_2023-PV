@@ -28,17 +28,20 @@
 							<div class="form-group">
 								<label for="nombre" class="form-label">Nombre : </label>
 								<input th:field="*{nombre}" class="form-control" type="text" name="nombres" id="nombres" placeholder="Nombre" >
+								<div class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
 							</div>
 		
 							<div class="form-group">
 								<label for="apellido" class="form-label">Apellido : </label>
 								<input th:field="*{apellido}" class="form-control" type="text" name="mail" id="mail" placeholder="Direccion" >
+								<div class="text-danger" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></div>
 							</div>
 							
 
 							<div class="form-group">
 								<label for="fecha" class="form-label">Fecha de Nacimiento : </label>
 								<input th:field="*{fechaN}" class="form-control" type="date" name="fecha" id="fecha" placeholder="fecha" >
+								<div class="text-danger" th:if="${#fields.hasErrors('fechaN')}" th:errors="*{fechaN}"></div>
 							</div>
 							
 
@@ -46,25 +49,29 @@
 							<div class="form-group">
 								<label for="nombre" class="form-label">Email : </label>
 								<input th:field="*{email}" class="form-control" type="email" name="email" id="email" placeholder="Email" >
+								<div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
 							</div>
 							
 							<div class="form-group">
 								<label for="nombre" class="form-label">Telefono : </label>
 								<input th:field="*{telefono}" class="form-control" type="text" name="telefono" id="telefono" placeholder="Telefono">
+								<div class="text-danger" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></div>
 							</div>
 
 							<div class="form-group">
-								<label for="sexo" class="form-label">Género:</label> <select
-									th:field="*{sexo}" class="form-control" id="sexo"
-									name="sexo" placeholder="Seleccionar">
-									<option value="Masculino">Masculino</option>
-									<option value="Femenino">Femenino</option>
-									<option value="No especifica">No especifica</option>
-								</select>
+							    <label for="sexo" class="form-label">Género:</label>
+							    <select th:field="*{sexo}" class="form-control" id="sexo" name="sexo" placeholder="Seleccionar">
+							        <option value="">Seleccionar</option>
+							        <option value="Masculino">Masculino</option>
+							        <option value="Femenino">Femenino</option>
+							        <option value="No especifica">No especifica</option>
+							    </select>
+							    <div class="text-danger" th:if="${#fields.hasErrors('sexo')}" th:errors="*{sexo}"></div>
 							</div>
 							<div class="form-group">
 							  <label for="estatura" class="form-label">Estatura (en metros):</label>
-							  <input th:field="*{estatura}" class="form-control" type="number" step="0.01" name="estatura" id="estatura" placeholder="Estatura">
+								<input th:field="*{estatura}" class="form-control" type="number" step="0.01" name="estatura" id="estatura" placeholder="Estatura">
+    							<div class="text-danger" th:if="${#fields.hasErrors('estatura')}" th:errors="*{estatura}"></div>
 							</div>
 
 							<br>
