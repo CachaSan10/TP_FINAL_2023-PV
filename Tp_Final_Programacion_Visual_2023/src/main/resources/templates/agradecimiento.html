@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+		<meta charset="UTF-8">
+		<!--Especificacion de viewport -->
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<title>Registro de usuario</title>
+		<!-- Bootstrap referencia  -->
+		<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+		
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+		<!-- Css referencia-->
+		<link th:rel="stylesheet" th:href="@{/css/estilos.css}">
+  
+</head>
+<body>
+
+	 <div class="card">
+        <h1>Gracias por registrarte</h1>
+        <p>Se ha registrado el usuario con ID: <span th:text="${idUsuario}"></span></p>
+        <div class="card-buttons">
+            <a href="/usuario/nuevo" class="btn btn-primary">Registrar otro usuario</a>
+            <a href="/usuario/listado" class="btn btn-secondary">Volver</a>
+        </div>
+    </div>
+
+</body>
+</html>

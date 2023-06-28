@@ -14,7 +14,7 @@ import ar.edu.unju.fi.entity.Usuario;
 import ar.edu.unju.fi.service.IUsuarioService;
 
 @Controller
-@RequestMapping("/registrarme")
+@RequestMapping("/usuario")
 public class UsuarioController {
 	@Autowired
 	private IUsuarioService usuarioService;
@@ -31,11 +31,10 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("/guardar")
-	public ModelAndView getGuardarUsuarioPage(@ModelAttribute("sucursal") Usuario usuario) {
-		ModelAndView mav = new ModelAndView("usuarios");
-		
+	public String postGuardarUsuarioPage(@ModelAttribute("usuario") Usuario usuario, Model model) {
 		usuarioService.guardarUsuario(usuario);
-		return mav;
+		model.addAttribute("idUsuario", usuario.getId());
+		return "agradecimiento";
 	}
 
 	@GetMapping("/modificar/{id}")
@@ -51,9 +50,10 @@ public class UsuarioController {
 	@PostMapping("/modificar/{id}")
 	public String modificarUsuario(@ModelAttribute("usuario") Usuario usuarioModificado) {
 		usuarioService.modificarUsuario(usuarioModificado);
-		return "redirect:/inicio";
+		return "redirect:/usuario/listado";
 	}
 	
+	@GetMapping("/eliminar{id}")
 	public String eliminarUsuario(@PathVariable(value="id")Long id) {
 		Usuario usuarioEncontrado = usuarioService.buscarUsuario(id);
 		usuarioService.eliminarUsuario(usuarioEncontrado);
