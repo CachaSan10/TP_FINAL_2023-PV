@@ -1,1 +1,23 @@
-@charset "ISO-8859-1";
+/*
+Colores de mi sitio web
+
+*/
+.bg-fondo{
+	background-color:#E3F4F4;
+}
+.bg-navbar-fuerte{
+	background-color:#03C988;
+}
+.bg-navbar-hover{
+	background-color:#D0F5BE;
+}
+.bg-gestion-fuerte{
+	background-color:#A084DC;
+}
+.bg-gestion-hover{
+	background-color:#BFACE2;
+}
+
+.nav-link:hover{
+	background:#D0F5BE;
+}
