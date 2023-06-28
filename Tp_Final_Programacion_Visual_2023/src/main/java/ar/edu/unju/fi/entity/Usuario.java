@@ -40,14 +40,34 @@ public class Usuario {
 	private String sexo;
 	
 	@Column(name="usu_estatura")
-	private int estatura;
+	private Double estatura;
 	@Column(name="usu_estado")
 	private boolean estado;
 	
 	
 	public Usuario() {
 		
+		
 	}
+	
+	
+
+
+	public Usuario(Long id, String nombre, String apellido, String email, LocalDate fechaN, String telefono,
+			String sexo, Double estatura, boolean estado) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+		this.fechaN = fechaN;
+		this.telefono = telefono;
+		this.sexo = sexo;
+		this.estatura = estatura;
+		this.estado = estado;
+	}
+
+
 
 
 	public Long getId() {
@@ -120,12 +140,15 @@ public class Usuario {
 	}
 
 
-	public int getEstatura() {
+
+
+
+	public Double getEstatura() {
 		return estatura;
 	}
 
 
-	public void setEstatura(int estatura) {
+	public void setEstatura(Double estatura) {
 		this.estatura = estatura;
 	}
 

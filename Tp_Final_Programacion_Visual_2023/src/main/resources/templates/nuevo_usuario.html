@@ -17,57 +17,72 @@
 <body >
 	<!--Uso del fragmento header -->
 	<header th:replace="~{layouts/header :: header}"></header>
+	<div class="form-container">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+					<h3 th:text="${edicion}?'Modificar Usuario':'Registrar Usuario'" class="text-center mb-3"></h3>
 					<div class="card-body">
-						Formulario de alta/edicion sucursales
-						<form  method="post">
+						<!--Formulario de alta/edicion sucursales -->
+						<form  th:action="${edicion}?@{/usuario/modificar/}+${usuario.id}:@{/usuario/guardar}" th:object="${usuario}" method="post">
 							<div class="form-group">
 								<label for="nombre" class="form-label">Nombre : </label>
-								<input  >
+								<input th:field="*{nombre}" class="form-control" type="text" name="nombres" id="nombres" placeholder="Nombre" >
 							</div>
 		
 							<div class="form-group">
-								<label for="nombre" class="form-label">Direccion : </label>
-								<input  >
+								<label for="apellido" class="form-label">Apellido : </label>
+								<input th:field="*{apellido}" class="form-control" type="text" name="mail" id="mail" placeholder="Direccion" >
 							</div>
 							
-							<div class="form-group">
-               					 <label for="provinciaId" class="form-label">Provincia : </label>
-               					 <select >
-               					 	<option/>
-               					 </select>
-							</div>
 
 							<div class="form-group">
-								<label for="nombre" class="form-label">Fecha Inicio : </label>
-								<input  >
+								<label for="fecha" class="form-label">Fecha de Nacimiento : </label>
+								<input th:field="*{fechaN}" class="form-control" type="date" name="fecha" id="fecha" placeholder="fecha" >
 							</div>
 							
 
 																					
 							<div class="form-group">
 								<label for="nombre" class="form-label">Email : </label>
-								<input >
+								<input th:field="*{email}" class="form-control" type="email" name="email" id="email" placeholder="Email" >
 							</div>
 							
 							<div class="form-group">
-								<label >Telefono : </label>
-								<input >
-							</div>	
+								<label for="nombre" class="form-label">Telefono : </label>
+								<input th:field="*{telefono}" class="form-control" type="text" name="telefono" id="telefono" placeholder="Telefono">
+							</div>
+
+							<div class="form-group">
+								<label for="sexo" class="form-label">Género:</label> <select
+									th:field="*{sexo}" class="form-control" id="sexo"
+									name="sexo" placeholder="Seleccionar">
+									<option value="Masculino">Masculino</option>
+									<option value="Femenino">Femenino</option>
+									<option value="No especifica">No especifica</option>
+								</select>
+							</div>
+							<div class="form-group">
+							  <label for="estatura" class="form-label">Estatura (en metros):</label>
+							  <input th:field="*{estatura}" class="form-control" type="number" step="0.01" name="estatura" id="estatura" placeholder="Estatura">
+							</div>
+
 							<br>
 							<div class="form-group d-flex justify-content-between">
-								<a  >Volver</a>
-								<button >Guardar</button>
-							</div>						
+							  <div class="btn-group btn-group-sm" role="group">
+							    <a class="btn btn-secondary mx-2"  role="button">Volver</a>
+							    <button type="submit" th:text="${edicion}?'Modificar':'Registrar'" class="btn btn-primary"></button>
+							  </div>
+							</div>
+				
 						</form>
 					</div>
 					
 				</div>
 			</div>
 		</div>
-
+	</div>
+		
 <!--Uso del fragmento footer -->
 	<footer th:replace="~{layouts/footer :: footer}"></footer>
 
