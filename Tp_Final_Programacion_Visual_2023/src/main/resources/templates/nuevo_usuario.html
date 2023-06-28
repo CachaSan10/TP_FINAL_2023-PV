@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+		<meta charset="UTF-8">
+		<!--Especificacion de viewport -->
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<title>Registro de usuario</title>
+		<!-- Bootstrap referencia  -->
+		<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+		
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+		<!-- Css referencia-->
+		<link th:rel="stylesheet" th:href="@{/css/estilos.css}">
+  
+</head>
+<body >
+	<!--Uso del fragmento header -->
+	<header th:replace="~{layouts/header :: header}"></header>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+					<div class="card-body">
+						Formulario de alta/edicion sucursales
+						<form  method="post">
+							<div class="form-group">
+								<label for="nombre" class="form-label">Nombre : </label>
+								<input  >
+							</div>
+		
+							<div class="form-group">
+								<label for="nombre" class="form-label">Direccion : </label>
+								<input  >
+							</div>
+							
+							<div class="form-group">
+               					 <label for="provinciaId" class="form-label">Provincia : </label>
+               					 <select >
+               					 	<option/>
+               					 </select>
+							</div>
+
+							<div class="form-group">
+								<label for="nombre" class="form-label">Fecha Inicio : </label>
+								<input  >
+							</div>
+							
+
+																					
+							<div class="form-group">
+								<label for="nombre" class="form-label">Email : </label>
+								<input >
+							</div>
+							
+							<div class="form-group">
+								<label >Telefono : </label>
+								<input >
+							</div>	
+							<br>
+							<div class="form-group d-flex justify-content-between">
+								<a  >Volver</a>
+								<button >Guardar</button>
+							</div>						
+						</form>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+
+<!--Uso del fragmento footer -->
+	<footer th:replace="~{layouts/footer :: footer}"></footer>
+
+
+	<!--Archivo javascript referencia -->
+	<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+</body>
+</html>

@@ -21,3 +21,43 @@ Colores de mi sitio web
 .nav-link:hover{
 	background:#D0F5BE;
 }
+
+/*
+Footer
+
+*/
+
+*{
+	margin: 0px;
+	padding: 0px;
+
+	
+}
+
+footer{
+	background-color: #80ffff;
+	align-self: flex-end;
+	width: 100%;
+	
+}
+.vertical{
+	writing-mode: vertical-rl;
+	font-size: 70px;
+	transform: rotate(180deg);
+}
+
+.hrcolor{
+	background-color: black;
+	height: 2px;
+	width: 50%;
+	margin-left:0;
+}
+
+.container-fluid{
+	width: 94%;
+}
+
+.link:hover{
+	color: white !important;
+}
+
