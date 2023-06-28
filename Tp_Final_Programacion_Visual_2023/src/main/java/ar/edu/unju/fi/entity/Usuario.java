@@ -2,6 +2,7 @@ package ar.edu.unju.fi.entity;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import jakarta.persistence.Column;
@@ -10,6 +11,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Size;
 
 @Component
 @Entity
@@ -21,24 +31,39 @@ public class Usuario {
 	@Column(name="usu_id")
 	private Long id;
 	
+	@NotEmpty(message="El nombre del usuario no puede estar vacio")
+	@Size(min=5, max=50,message="El nombre de usuario debe tener entre 5 y 50 caracteres")
 	@Column(name="usu_nombre")
 	private String nombre;
 	
+	@NotEmpty(message="El apellido del usuario no puede estar vacio")
+	@Size(min=5, max=50,message="El nombre de usuario debe tener entre 5 y 50 caracteres")
 	@Column(name="usu_apellido")
 	private String apellido;
 	
+	@Email(message = "Ingrese un mail valido")
+	@NotEmpty(message="El mail del usuario no puede estar vacio")	
 	@Column(name="usu_email")
 	private String email;
 	
+	@NotNull
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Past(message = "La fecha de nacimiento debe ser anterior a la fecha actual")
 	@Column(name="usu_fecha_nacimiento")
 	private LocalDate fechaN;
 	
+	@NotEmpty(message="Este campo no puede estar vacio")
+	@Size(min=11, max=11,message="Ingrese un numero de telefono valido")
 	@Column(name="usu_telefono")
 	private String telefono;
 	
+	@NotEmpty(message="Este campo no puede estar vacio")
 	@Column(name="usu_sexo")
 	private String sexo;
 	
+	@NotNull(message = "La estatura no puede estar vacía")
+	@DecimalMin(value = "1.20", inclusive = true, message = "La estatura mínima permitida es 1.20 metros")
+	@DecimalMax(value = "2.20", inclusive = true, message = "La estatura máxima permitida es 2.20 metros")
 	@Column(name="usu_estatura")
 	private Double estatura;
 	@Column(name="usu_estado")
