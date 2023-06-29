@@ -1,6 +1,8 @@
 package ar.edu.unju.fi.entity;
 
 import java.time.LocalDate;
+import java.time.Period;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
@@ -10,15 +12,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
-import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
 
 @Component
@@ -50,7 +51,7 @@ public class Usuario {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Past(message = "La fecha de nacimiento debe ser anterior a la fecha actual")
 	@Column(name="usu_fecha_nacimiento")
-	private LocalDate fechaN;
+	private LocalDate fechaNacimiento;
 	
 	@NotEmpty(message="Este campo no puede estar vacio")
 	@Size(min=11, max=11,message="Ingrese un numero de telefono valido")
@@ -69,6 +70,10 @@ public class Usuario {
 	@Column(name="usu_estado")
 	private boolean estado;
 	
+	/* Representa la lista de indice de masa corporal que le pertenecen al usuario*/
+	@OneToMany(mappedBy = "usuario") // Un usuario puede tener almacenada muchos indice de masa corporal
+	private List<IndiceMasaCorporal> indicesMasaCorporal;
+	
 	
 	public Usuario() {
 		
@@ -78,14 +83,14 @@ public class Usuario {
 	
 
 
-	public Usuario(Long id, String nombre, String apellido, String email, LocalDate fechaN, String telefono,
+	public Usuario(Long id, String nombre, String apellido, String email, LocalDate fechaNacimiento, String telefono,
 			String sexo, Double estatura, boolean estado) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.email = email;
-		this.fechaN = fechaN;
+		this.fechaNacimiento = fechaNacimiento;
 		this.telefono = telefono;
 		this.sexo = sexo;
 		this.estatura = estatura;
@@ -135,13 +140,13 @@ public class Usuario {
 	}
 
 
-	public LocalDate getFechaN() {
-		return fechaN;
+	public LocalDate getFechaNacimiento() {
+		return fechaNacimiento;
 	}
 
 
-	public void setFechaN(LocalDate fechaN) {
-		this.fechaN = fechaN;
+	public void setFechaNacimiento(LocalDate fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
 	}
 
 
@@ -188,10 +193,22 @@ public class Usuario {
 	}
 
 
+	/**
+	 * Metodo que calcula el anio del usuario
+	 * @return el anio del usuario
+	 */
+	public byte calcularAnio() {
+		LocalDate fechaActual = LocalDate.now();
+		byte anioPersona;
+		Period periodo = Period.between(fechaNacimiento, fechaActual);
+		anioPersona = (byte) (periodo.getYears());
+		return anioPersona;
+	}
+	
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", fechaN="
-				+ fechaN + ", telefono=" + telefono + ", sexo=" + sexo + ", estatura=" + estatura + ", estado=" + estado
+		return "Usuario [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", fechaNacimiento="
+				+ fechaNacimiento + ", telefono=" + telefono + ", sexo=" + sexo + ", estatura=" + estatura + ", estado=" + estado
 				+ "]";
 	}
 	
