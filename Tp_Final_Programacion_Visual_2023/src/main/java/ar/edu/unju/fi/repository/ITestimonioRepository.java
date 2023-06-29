@@ -2,8 +2,12 @@ package ar.edu.unju.fi.repository;
 
 import java.util.List;
 
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
 import ar.edu.unju.fi.entity.Testimonio;
 
-public interface ITestimonioRepository {
-	List<Testimonio> obtenerTodosLosTestimonios();
+@Repository
+public interface ITestimonioRepository extends CrudRepository<Testimonio, Long>{
+	List<Testimonio>findByEstado(boolean estado);
 }
