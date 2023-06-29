@@ -2,9 +2,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+		<!--Especificacion de viewport -->
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<title>index - Bienestar en Accion</title>
+		<!-- Bootstrap referencia  -->
+		<link th:rel="stylesheet"
+			th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+		<!-- Css referencia-->
+		<link th:rel="stylesheet" th:href="@{/css/estilos.css}">
 </head>
 <body >
+		<!--Uso del fragmento header -->
+	<header th:replace="~{layouts/header :: header}"></header>
+	<nav th:replace="~{layouts/nav :: nav}"></nav>
 		
+		
+		
+				<!--Uso del fragmento footer -->
+			<footer th:replace="~{layouts/footer :: footer}"></footer>
+		<!--Archivo javascript referencia -->
+		<script type="text/javascript"
+			th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </body>
 </html>

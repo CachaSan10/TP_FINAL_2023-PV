@@ -9,8 +9,8 @@ import ar.edu.unju.fi.entity.Usuario;
 import ar.edu.unju.fi.repository.IUsuarioRepository;
 import ar.edu.unju.fi.service.IUsuarioService;
 
-@Service
-public class UsuarioServiceImp implements IUsuarioService {
+@Service("usuarioServiceMysqlImp")
+public class UsuarioServiceMysqlImp implements IUsuarioService {
 
 	@Autowired
 	private IUsuarioRepository usuarioRepository;

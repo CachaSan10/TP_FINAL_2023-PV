@@ -13,6 +13,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
@@ -74,6 +75,8 @@ public class Usuario {
 	@OneToMany(mappedBy = "usuario") // Un usuario puede tener almacenada muchos indice de masa corporal
 	private List<IndiceMasaCorporal> indicesMasaCorporal;
 	
+	@OneToOne(mappedBy = "usuario")
+	private Testimonio testimonio;
 	
 	public Usuario() {
 		
