@@ -9,7 +9,7 @@ import ar.edu.unju.fi.entity.Ingrediente;
 import ar.edu.unju.fi.repository.IIngredienteRepository;
 import ar.edu.unju.fi.service.IIngredienteService;
 
-@Service("ingredienteServiceMysql")
+@Service("ingredienteServiceMysqlImp")
 public class IngredienteServiceMysqlImp implements IIngredienteService {
 
 	@Autowired
