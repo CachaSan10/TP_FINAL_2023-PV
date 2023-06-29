@@ -1,6 +1,7 @@
 package ar.edu.unju.fi.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,15 +20,14 @@ import jakarta.validation.Valid;
 @RequestMapping("/usuario")
 public class UsuarioController {
 	@Autowired
+	@Qualifier("usuarioServiceMysqlImp")
 	private IUsuarioService usuarioService;
 	
-	@Autowired
-	private Usuario usuario;
 	
 	@GetMapping("/nuevo")
 	public String getNuevoUsuarioPage(Model model) {
 		boolean edicion=false;
-		model.addAttribute("usuario", usuario);
+		model.addAttribute("usuario", usuarioService.obtenerUsuario());
 		model.addAttribute("edicion", edicion);
 		return "nuevo_usuario";
 	}

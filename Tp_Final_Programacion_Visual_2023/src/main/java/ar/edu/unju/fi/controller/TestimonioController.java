@@ -31,7 +31,7 @@ import jakarta.validation.Valid;
 public class TestimonioController {
 	
 	@Autowired
-	@Qualifier("testimonioServiceImp")
+	@Qualifier("testimonioServiceMysqlImp")
 	private ITestimonioService testimonioService;
 	
 	

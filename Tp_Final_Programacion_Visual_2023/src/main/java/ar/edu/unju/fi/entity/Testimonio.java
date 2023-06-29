@@ -9,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
@@ -37,6 +39,8 @@ public class Testimonio {
 	private LocalDate fecha;
 
 	@NotNull(message = "El usuario del testimonio es requerido")
+	@OneToOne()
+	@JoinColumn(name="usu_id")
 	private Usuario usuario;
 
 	@Size(min = 1, max = 200, message = "El comentario debe tener entre 1 y 200 caracteres")

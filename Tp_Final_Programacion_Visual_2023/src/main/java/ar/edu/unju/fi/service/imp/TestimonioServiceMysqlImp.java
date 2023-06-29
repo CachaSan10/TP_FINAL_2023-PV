@@ -14,8 +14,8 @@ import ar.edu.unju.fi.service.ITestimonioService;
 import ar.edu.unju.fi.util.UploadFile;
 
 
-@Service("testimonioServiceListaImp")
-public class TestimonioServiceImp implements ITestimonioService{
+@Service("testimonioServiceMysqlImp")
+public class TestimonioServiceMysqlImp implements ITestimonioService{
     
 	@Autowired
 	private ITestimonioRepository testimonioRepository;
