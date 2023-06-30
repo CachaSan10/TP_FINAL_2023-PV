@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<!--Especificacion de viewport -->
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<title>Registros Imc - Bienestar en Accion</title>
+	<!-- Bootstrap referencia  -->
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+	<!-- Css referencia-->
+	<link th:rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+
+<body>
+	<div class="container">
+		<!--Uso del fragmento header -->
+		<header th:replace="~{layouts/header :: header}"></header>
+		<nav th:replace="~{layouts/nav :: nav}"></nav>
+
+
+  <div class="card text-center">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item">
+        <a class="nav-link" aria-current="true" th:href="@{/imc/calculadora}">Calculadora Imc</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" th:href="@{/imc/registros}">Registros Imc</a>
+      </li>
+     
+    </ul>
+  </div>
+  <div class="card-body">
+	  
+   <table class="table table-bordered">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">Fecha</th>
+      <th scope="col">IMC</th>
+      <th scope="col">Tipo Peso</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>12/20/2003</td>
+      <td>23</td>
+      <td>Ideal</td>
+    </tr>
+  </tbody>
+</table>
+  </div>
+</div>
+
+
+		<!--Uso del fragmento footer -->
+		<footer th:replace="~{layouts/footer :: footer}"></footer>
+
+	</div>
+		<!-- Configuracion para usar bootstrap js -->
+	<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>

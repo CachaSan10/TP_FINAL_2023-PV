@@ -15,5 +15,6 @@ public interface IUsuarioService {
 	public void eliminarUsuario(Usuario usuario);
 	public List<Usuario> obtenerLista();
 	public Usuario buscarUsuario(Long id);
+	public boolean existeUsuario(Long id);
 	
 }

@@ -3,8 +3,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
-		<link rel="stylesheet" th:href="@{/css/estilos.css}">
+<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />		
+	<link rel="stylesheet" th:href="@{/css/estilos.css}">
 		<title>Insert title here</title>
 	</head>
 <body class="">
@@ -22,21 +22,21 @@
 				<ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll"
 					style="--bs-scroll-height: 100px;">
 					<li class="nav-item"><a class="nav-link rounded-3 active h5 text-white fw-bold"
-						aria-current="page" href="#">Principal</a></li>
+						aria-current="page" th:href="@{/inicio}">Principal</a></li>
 					<li class="nav-item dropdown"><a
-						class="nav-link rounded-3 dropdown-toggle h4 text-white fw-bold" href="#"
+						class="nav-link rounded-3 dropdown-toggle h4 text-white fw-bold"
 						id="navbarScrollingDropdown" role="button"
 						data-bs-toggle="dropdown" aria-expanded="false"> Servicios </a>
 						<ul class="dropdown-menu bg-navbar-hover"
 							aria-labelledby="navbarScrollingDropdown">
-							<li><a class="dropdown-item rounded-3 h6 text-black" href="#">Calculo IMC</a></li>
-							<li><a class="dropdown-item rounded-3 h6 text-black" href="#">Peso Ideal</a></li>
+							<li><a class="dropdown-item rounded-3 h6 text-black" th:href="@{/imc/calculadora}">Calculo IMC</a></li>
+							<li><a class="dropdown-item rounded-3 h6 text-black" th:href="@{/imc/peso-ideal}">Peso Ideal</a></li>
 														
 						</ul>
 					</li>
 					<li class="nav-item"><a class="nav-link rounded-3 h5 text-white fw-bold" href="#">Recetas</a></li>
 					<li class="nav-item"><a class="nav-link rounded-3 h5 text-white fw-bold" href="#">Testimonios</a></li>
-					<li class="nav-item"><a class="nav-link rounded-3 h5 text-white fw-bold" href="#">Registrarme</a></li>
+					<li class="nav-item"><a class="nav-link rounded-3 h5 text-white fw-bold" th:href="@{/usuario/nuevo}">Registrarme</a></li>
 					<li class="nav-item"><a class="nav-link rounded-3 h5 text-white fw-bold" href="#">Contactanos</a></li>
 					<li class="nav-item"><a class="nav-link rounded-3 h5 text-white fw-bold" href="#">Gestión de Datos</a></li>
 				</ul>
@@ -46,5 +46,6 @@
 	</nav>
 
 </body>
-<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<!-- Configuracion para usar bootstrap js -->
+	<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </html>

@@ -195,6 +195,8 @@ public class Usuario {
 		this.estado = estado;
 	}
 
+	
+	
 
 	/**
 	 * Metodo que calcula el anio del usuario
