@@ -43,6 +43,10 @@ public class IndiceMasaCorporal {
 	/* Representa la disponibilidad del indice de masa corporal en la base de datos */
 	@Column(name = "imc_estado")
 	private boolean estado;
+	
+	/* Representa el peso del usuario*/
+	@Column(name = "imc_peso")
+	private double peso;
 
 
 	/**
@@ -135,11 +139,12 @@ public class IndiceMasaCorporal {
 	 * @param peso representa el peso que ingresa el usuario
 	 * @return el resultado del indice de masa corporal
 	 */
-	public double calcularImc(double peso) {
+	public double calcularImc() {
 		int altura = (int) (usuario.getEstatura() * 100);
 		return peso / Math.pow(altura, 2);
 	}
 
+	
 	/**
 	 * Metodo que calcula el peso ideal del usuario.
 	 * @return el resultado del peso ideal del usuario.

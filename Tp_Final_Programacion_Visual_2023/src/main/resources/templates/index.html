@@ -9,10 +9,15 @@
 		<!-- Bootstrap referencia  -->
 		<link th:rel="stylesheet"
 			th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+		
+		<!-- Cdn para cargar estilos de Font Awesome-->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+			
 		<!-- Css referencia-->
 		<link th:rel="stylesheet" th:href="@{/css/estilos.css}">
 </head>
 <body >
+	<div class="container">
 		<!--Uso del fragmento header -->
 	<header th:replace="~{layouts/header :: header}"></header>
 	<nav th:replace="~{layouts/nav :: nav}"></nav>
@@ -21,8 +26,9 @@
 		
 				<!--Uso del fragmento footer -->
 			<footer th:replace="~{layouts/footer :: footer}"></footer>
-		<!--Archivo javascript referencia -->
-		<script type="text/javascript"
-			th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+			
+	</div>
+		<!-- Configuracion para usar bootstrap js -->
+	<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

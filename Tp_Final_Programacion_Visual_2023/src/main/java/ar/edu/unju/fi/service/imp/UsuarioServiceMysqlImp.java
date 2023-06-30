@@ -57,4 +57,9 @@ public class UsuarioServiceMysqlImp implements IUsuarioService {
 		return usuarioRepository.findById(id).get();
 	}
 
+	@Override
+	public boolean existeUsuario(Long id) {
+		return usuarioRepository.existsById(id);
+	}
+
 }
