@@ -45,11 +45,13 @@ public class IngredienteServiceMysqlImp implements IIngredienteService {
 	}
 
 	@Override
-	public void eliminarIngrediente(Long id) {
-		Ingrediente unIngrediente = new Ingrediente();
-		unIngrediente = buscarIngrediente(id);
-		unIngrediente.setEstado(false);
-		ingredienteRepository.save(unIngrediente);
+	public void eliminarIngrediente(Ingrediente ingrediente) {
+//		Ingrediente unIngrediente = new Ingrediente();
+//		unIngrediente = buscarIngrediente(id);
+//		unIngrediente.setEstado(false);
+//		ingredienteRepository.save(unIngrediente);
+		ingrediente.setEstado(false);
+		ingredienteRepository.save(ingrediente);
 	}
 
 }
