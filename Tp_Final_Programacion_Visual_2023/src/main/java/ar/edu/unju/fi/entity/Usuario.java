@@ -66,7 +66,7 @@ public class Usuario {
 	/* Representa telefono del usuario */
 	@Pattern(regexp = "\\d+", message = "Ingrese un número de teléfono válido solo numeros			")
 	@NotEmpty(message="Este campo no puede estar vacio")
-	@Size(min=10, max=10,message="Ingrese un numero de telefono valido")
+	@Size(min=10, max=10,message="Ingrese un numero de telefono valido de 10 digitos. ")
 	@Column(name="usu_telefono")
 	private String telefono;
 	

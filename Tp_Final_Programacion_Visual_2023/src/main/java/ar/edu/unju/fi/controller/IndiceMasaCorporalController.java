@@ -7,10 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.entity.IndiceMasaCorporal;
@@ -32,35 +30,45 @@ public class IndiceMasaCorporalController {
 	
 	@GetMapping("/calculadora")
 	public String getCalculadoraImcPage(Model model) {
+		boolean existeUsuario=true;
+
 		model.addAttribute("indiceMasaCorporal", indiceMasaCorporalService.obtenerIndiceMasaCorporal());
+		model.addAttribute("existeUsuario", existeUsuario);
 		return "calculadora-imc";
 	}
 	
 	@PostMapping("/calcular-imc")
 	public ModelAndView calcularImc(@Valid @ModelAttribute("indiceMasaCorporal")IndiceMasaCorporal imc ,Long idUsuario,BindingResult result) {
-		ModelAndView modelAndView = new ModelAndView("redirect:/imc/resultado-imc");
+		ModelAndView modelAndView = new ModelAndView("resultado-imc");
+		boolean existeUsuario;
 		if(usuarioService.existeUsuario(idUsuario)) {
+			existeUsuario = true;
 			if(result.hasErrors()) {
 				modelAndView.setViewName("calculadora-imc");
 				modelAndView.addObject("indiceMasaCorporal", imc);
 				return modelAndView;
 			}else {
 			indiceMasaCorporalService.guardarIndiceMasaCorporal(imc, idUsuario);
+			modelAndView.addObject("existeUsuario", existeUsuario);
 			modelAndView.addObject("resultado", indiceMasaCorporalService.calcularImc(imc));
 			}
+		}else {
+			existeUsuario=false;
+		modelAndView.addObject("existeUsuario", existeUsuario);
+		modelAndView.setViewName("calculadora-imc");
 		}
 		return modelAndView;
 	}
 	
 	@GetMapping("/resultado-imc")
-	public ModelAndView obtenerPaginaResultado(@RequestParam(name = "resultado")String resultado) {
-		ModelAndView modelAndView = new ModelAndView("resultado-imc");
-		modelAndView.addObject("resultado", resultado);
-		return modelAndView;
+	public String obtenerPaginaResultado() {
+		return "resultado-imc";
 	}
  	
 	@GetMapping("/registros")
-	public String obtenerPaginaRegistroImc() {
+	public String obtenerPaginaRegistroImc(Model model) {
+		boolean existeUsuario=true;
+		model.addAttribute("existeUsuario", existeUsuario);
 		return "registros-imc";
 	}
 	
@@ -80,12 +88,34 @@ public class IndiceMasaCorporalController {
 		return "registros-imc";
 	}
 	
-	
-	
-	
-	
 	@GetMapping("/peso-ideal")
 	public String getPesoIdelaPage() {
 		return "peso-ideal";
 	}
+	
+	@GetMapping("/buscador")
+	public String obtenerPaginaBuscadorPesoIdeal(Model model) {
+		boolean existeUsuario=true;
+		model.addAttribute("existeUsuario", existeUsuario);
+		return "buscador-peso-ideal";
+	}
+	
+	@PostMapping("/buscar-peso-ideal")
+	public ModelAndView buscarPesoIdeal(Long idUsuario) {
+		boolean existeUsuario=true;
+		ModelAndView modelAndView = new ModelAndView();
+
+		if(usuarioService.existeUsuario(idUsuario)) {
+				modelAndView.setViewName("peso-ideal");
+				modelAndView.addObject("pesoIdeal",indiceMasaCorporalService.obtenerPesoIdeal(idUsuario) );
+				modelAndView.addObject("usuario", usuarioService.buscarUsuario(idUsuario));
+
+		}else {
+			existeUsuario = false;
+			modelAndView.addObject("existeUsuario", existeUsuario);
+			modelAndView.setViewName("buscador-peso-ideal");
+		}
+		return modelAndView;
+	}
+	
 }

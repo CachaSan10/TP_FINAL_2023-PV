@@ -18,19 +18,24 @@
 		<header th:replace="~{layouts/header :: header}"></header>
 		<nav th:replace="~{layouts/nav :: nav}"></nav>
 
+  
 
-<div class="card text-center">
-  <div class="card-header">
-    Peso Ideal
-  </div>
+
+<div class="card w-75 mb-3">
   <div class="card-body">
-    <h5 class="card-title"  th:text="'Usuario '+${usuario.nombre} + ' ' +${usuario.apellido}"></h5>
-    <p class="card-text" th:text="'Su peso ideal es '+ ${pesoIdeal}+ ' Kg' "></p>
-    <a th:href="@{/imc/buscador}" class="btn btn-primary">Aceptar</a>
+    <h5 class="card-title">Buscar Peso Ideal</h5>
+		<form th:action="@{/imc/buscar-peso-ideal}" th:object="${indiceMasaCorporal}" method="post">
+  <div class="mb-3">
+    <label for="idUsuario" class="form-label">Ingrese Id de Usuario</label>
+    <input type="number"  name="idUsuario" class="form-control" id="idUsuario">
+            <div class="text-danger" th:text="${existeUsuario}?'':'No esta registrado el usuario'" ></div>
+
   </div>
   
+  <button type="submit" class="btn btn-primary">Obtener Peso Ideal</button>
+</form>
+  </div>
 </div>
-
 
 
 
