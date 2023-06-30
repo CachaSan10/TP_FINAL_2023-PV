@@ -1,72 +1,74 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
-	<head>
-		<meta charset="UTF-8">
-		<!--Especificacion de viewport -->
-		<meta name="viewport"
-			content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
-		<title>Bienestar en Accion</title>
-		<!-- Bootstrap referencia  -->
-		<link th:rel="stylesheet"
-			th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
-		<!-- Cdn para cargar estilos de Font Awesome-->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		
-		<!-- Css referencia-->
-		<link th:rel="stylesheet" th:href="@{/css/estilos.css}">
-	</head>
-	<body>
-	<!--Uso del fragmento header -->
-			<header th:replace="~{layouts/header :: header}"></header>
-		<div class="container">
-			
-			<!--Uso del fragmento nav -->
+<head>
+<meta charset="UTF-8">
+<!--Especificacion de viewport -->
+<meta name="viewport"
+	content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+<title>Bienestar en Accion</title>
+<!-- Bootstrap referencia  -->
+<link th:rel="stylesheet"
+	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+<!-- Cdn para cargar estilos de Font Awesome-->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+	integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<!-- Css referencia-->
+<link th:rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<div class="container">
+		<!--Uso del fragmento header -->
+		<header th:replace="~{layouts/header :: header}"></header>
+
+
+		<!--Uso del fragmento nav -->
 		<header th:replace="~{layouts/nav :: nav}"></header>
-			<div class="container">
-				<div class="row">
-					<h2 class="my-4">Lista Usuarios</h2>
-				</div>
-	
-				<br>
-	
-	
-				<div class="table-responsive">
-	
-					<!--Tabla de usuarios-->
-					<table
-						class="table-sm table table-striped table-bordered table-hover">
-						<thead class="bg-secondary text-white">
-							<tr>
-								<th>Nombre</th>
-								<th>Apellido</th>
-								<th>Sexo</th>
-								<th>Estatura</th>
-								<th>Fecha de Nacimiento</th>
-								<th>Email</th>
-								<th>Telefono</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="usuario: ${usuarios}">
-								<td th:text="${usuario.nombre}"></td>
-								<td th:text="${usuario.apellido}"></td>
-								<td th:text="${usuario.sexo}"></td>
-								<td th:text="${usuario.estatura}"></td>
-								<td
-									th:text="${#temporals.format(usuario.fechaNacimiento, 'dd/MM/yyyy')}"></td>
-								<td th:text="${usuario.email}"></td>
-								<td th:text="${usuario.telefono}"></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+		
+			<div class="row">
+				<h2 class="my-4">Lista Usuarios</h2>
 			</div>
 
-		</div>
-				<!--Uso del fragmento footer -->
-			<footer th:replace="~{layouts/footer :: footer}"></footer>
-		<!--Archivo javascript referencia -->
-		<script type="text/javascript"
-			th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-	</body>
+			<br>
+
+
+			<div class="table-responsive">
+
+				<!--Tabla de usuarios-->
+				<table
+					class="table-sm table table-striped table-bordered table-hover">
+					<thead class="bg-secondary text-white">
+						<tr>
+							<th>Nombre</th>
+							<th>Apellido</th>
+							<th>Sexo</th>
+							<th>Estatura</th>
+							<th>Fecha de Nacimiento</th>
+							<th>Email</th>
+							<th>Telefono</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="usuario: ${usuarios}">
+							<td th:text="${usuario.nombre}"></td>
+							<td th:text="${usuario.apellido}"></td>
+							<td th:text="${usuario.sexo}"></td>
+							<td th:text="${usuario.estatura}"></td>
+							<td
+								th:text="${#temporals.format(usuario.fechaNacimiento, 'dd/MM/yyyy')}"></td>
+							<td th:text="${usuario.email}"></td>
+							<td th:text="${usuario.telefono}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+	<!--Uso del fragmento footer -->
+	<footer th:replace="~{layouts/footer :: footer}"></footer>
+	</div>
+	<!--Archivo javascript referencia -->
+	<script type="text/javascript"
+		th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
 </html>

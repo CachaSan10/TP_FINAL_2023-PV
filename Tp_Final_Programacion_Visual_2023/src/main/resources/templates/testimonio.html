@@ -9,7 +9,7 @@
 <link th:rel="stylesheet"
 	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
 <!-- Css referencia-->
-<link th:rel="stylesheet" th:href="@{/css/style.css}">
+<link th:rel="stylesheet" th:href="@{/css/estilos.css}">
 <title>Testimonio - Bienestar en Accion</title>
 </head>
 <body>
@@ -17,41 +17,44 @@
 		<!--Uso del fragmento header -->
 		<header th:replace="~{layouts/header :: header}"></header>
 		<nav th:replace="~{layouts/nav :: nav}"></nav>
-		<section class="testimonio seccion-clr"></section>
-		<h2 class="seccion-h1">Testimonios</h2>
-		<h3 class="seccion-h3">Testimonios de nuestros usuario</h3>
 
-		<div id="testimonio-carrusel" class="carousel carousel-dark slide"
-			data-bs-ride="carousel">
-			<div class="carousel-inner">
-				<div th:each="testimonio, iterStat : ${testimonios}"
-					class="carousel-item" th:classappend="${iterStat.first} ? 'active'">
-					<div class="container">
-						<img th:src="@{/testimonio/cargar/}+${testimonio.imagen}"
-							class="testimonio-imagen rounded-circle" alt="...">
-						<p class="testimonio-comentario"
-							th:text="${testimonio.comentario}"></p>
-						<div class="testimonio-info">
-							<p class="usuario" th:text="${testimonio.usuario.nombre}"></p>
-							<p class="fecha">
-								Fecha de Publicacion: <strong
-									th:text="${#temporals.format(testimonio.fecha,'dd-MM-yyyy')}"></strong>
-							</p>
+		<section class="testimonio seccion-clr">
+			<h2 class="seccion-h1">Testimonios</h2>
+			<h3 class="seccion-h3">Testimonios de nuestros usuario</h3>
+
+			<div id="testimonio-carrusel" class="carousel carousel-dark slide"
+				data-bs-ride="carousel">
+				<div class="carousel-inner">
+					<div th:each="testimonio, iterStat : ${testimonios}"
+						class="carousel-item"
+						th:classappend="${iterStat.first} ? 'active'">
+						<div class="container">
+							<img th:src="@{/testimonio/cargar/}+${testimonio.imagen}"
+								class="testimonio-imagen rounded-circle" alt="...">
+							<p class="testimonio-comentario"
+								th:text="${testimonio.comentario}"></p>
+							<div class="testimonio-info">
+								<p class="usuario" th:text="${testimonio.usuario.nombre}"></p>
+								<p class="fecha">
+									Fecha de Publicacion: <strong
+										th:text="${#temporals.format(testimonio.fecha,'dd-MM-yyyy')}"></strong>
+								</p>
+							</div>
 						</div>
 					</div>
 				</div>
+				<button class="carousel-control-prev" type="button"
+					data-bs-target="#testimonio-carrusel" data-bs-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Anterior</span>
+				</button>
+				<button class="carousel-control-next" type="button"
+					data-bs-target="#testimonio-carrusel" data-bs-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Siguiente</span>
+				</button>
 			</div>
-			<button class="carousel-control-prev" type="button"
-				data-bs-target="#testimonio-carrusel" data-bs-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Anterior</span>
-			</button>
-			<button class="carousel-control-next" type="button"
-				data-bs-target="#testimonio-carrusel" data-bs-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Siguiente</span>
-			</button>
-		</div>
+		</section>
 		<!--Uso del fragmento footer -->
 		<footer th:replace="~{layouts/footer :: footer}"></footer>
 	</div>
