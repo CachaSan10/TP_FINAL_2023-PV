@@ -11,5 +11,4 @@ import ar.edu.unju.fi.entity.Usuario;
 public interface IUsuarioRepository extends CrudRepository<Usuario, Long> {
 
 	public List<Usuario> findByEstado (boolean estado);
-	public boolean existUsuarioById(Long id);
 }

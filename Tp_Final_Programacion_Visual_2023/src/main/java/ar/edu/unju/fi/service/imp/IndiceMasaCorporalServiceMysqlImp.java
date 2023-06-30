@@ -85,8 +85,10 @@ public class IndiceMasaCorporalServiceMysqlImp implements IIndiceMasaCorporalSer
 	}
 
 	@Override
-	public String calcularImc(LocalDate fecha) {
-	 double resultadoImc = indiceMasaCorporalRepository.findByFechaImc(fecha).calcularImc();
+	public String calcularImc(IndiceMasaCorporal imc) {
+	 double resultadoImc = indiceMasaCorporalRepository.findById(imc.getId()).get().calcularImc();
+	 System.out.println("id "+ imc.getId() );
+	 System.out.println("Imc del calculo:"+ resultadoImc);
 				if(resultadoImc < 18.5) {
 					return "Está por debajo de su peso ideal";
 				} else if(resultadoImc >= 18.5 && resultadoImc <=25) {

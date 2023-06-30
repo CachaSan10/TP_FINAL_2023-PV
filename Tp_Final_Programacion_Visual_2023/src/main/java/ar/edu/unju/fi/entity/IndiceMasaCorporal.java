@@ -135,6 +135,24 @@ public class IndiceMasaCorporal {
 	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
+	
+	
+
+	/**
+	 * @return the peso
+	 */
+	public double getPeso() {
+		return peso;
+	}
+
+
+	/**
+	 * @param peso the peso to set
+	 */
+	public void setPeso(double peso) {
+		this.peso = peso;
+	}
+
 
 	/**
 	 * Metodo que calcula el indice de masa corporal

@@ -7,12 +7,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.entity.IndiceMasaCorporal;
-import ar.edu.unju.fi.entity.Usuario;
 import ar.edu.unju.fi.service.IIndiceMasaCorporalService;
 import ar.edu.unju.fi.service.IUsuarioService;
 import jakarta.validation.Valid;
@@ -37,7 +38,7 @@ public class IndiceMasaCorporalController {
 	
 	@PostMapping("/calcular-imc")
 	public ModelAndView calcularImc(@Valid @ModelAttribute("indiceMasaCorporal")IndiceMasaCorporal imc ,Long idUsuario,BindingResult result) {
-		ModelAndView modelAndView = new ModelAndView("calculadora-imc");
+		ModelAndView modelAndView = new ModelAndView("redirect:/imc/resultado-imc");
 		if(usuarioService.existeUsuario(idUsuario)) {
 			if(result.hasErrors()) {
 				modelAndView.setViewName("calculadora-imc");
@@ -45,8 +46,16 @@ public class IndiceMasaCorporalController {
 				return modelAndView;
 			}else {
 			indiceMasaCorporalService.guardarIndiceMasaCorporal(imc, idUsuario);
+			modelAndView.addObject("resultado", indiceMasaCorporalService.calcularImc(imc));
 			}
 		}
+		return modelAndView;
+	}
+	
+	@GetMapping("/resultado-imc")
+	public ModelAndView obtenerPaginaResultado(@RequestParam(name = "resultado")String resultado) {
+		ModelAndView modelAndView = new ModelAndView("resultado-imc");
+		modelAndView.addObject("resultado", resultado);
 		return modelAndView;
 	}
  	
@@ -73,8 +82,10 @@ public class IndiceMasaCorporalController {
 	
 	
 	
+	
+	
 	@GetMapping("/peso-ideal")
-	public String getPesoIdelaPage(Model model) {
+	public String getPesoIdelaPage() {
 		return "peso-ideal";
 	}
 }
