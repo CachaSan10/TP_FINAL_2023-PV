@@ -37,7 +37,7 @@ public class TestimonioController {
 	@Autowired
 	private UploadFile uploadFile;
 
-	@GetMapping("listado")
+	@GetMapping("/listado")
 	public String getListaTestimonio(Model model) {
 		model.addAttribute("testimonio", testimonioService.obtenerTodosLosTestimonios());
 		return "testimonio";
