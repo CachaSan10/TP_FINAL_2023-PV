@@ -9,6 +9,9 @@
 		<!-- Bootstrap referencia  -->
 		<link th:rel="stylesheet"
 			th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+		<!-- Cdn para cargar estilos de Font Awesome-->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		
 		<!-- Css referencia-->
 		<link th:rel="stylesheet" th:href="@{/css/estilos.css}">
 	</head>
@@ -18,7 +21,7 @@
 		<div class="container">
 			
 			<!--Uso del fragmento nav -->
-	
+		<header th:replace="~{layouts/nav :: nav}"></header>
 			<div class="container">
 				<div class="row">
 					<h2 class="my-4">Lista Usuarios</h2>
@@ -29,7 +32,7 @@
 	
 				<div class="table-responsive">
 	
-					<!--Tabla de sucursales-->
+					<!--Tabla de usuarios-->
 					<table
 						class="table-sm table table-striped table-bordered table-hover">
 						<thead class="bg-secondary text-white">
@@ -50,7 +53,7 @@
 								<td th:text="${usuario.sexo}"></td>
 								<td th:text="${usuario.estatura}"></td>
 								<td
-									th:text="${#temporals.format(usuario.fechaN, 'dd/MM/yyyy')}"></td>
+									th:text="${#temporals.format(usuario.fechaNacimiento, 'dd/MM/yyyy')}"></td>
 								<td th:text="${usuario.email}"></td>
 								<td th:text="${usuario.telefono}"></td>
 							</tr>

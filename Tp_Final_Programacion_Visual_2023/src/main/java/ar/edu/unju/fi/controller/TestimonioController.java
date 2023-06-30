@@ -29,45 +29,44 @@ import jakarta.validation.Valid;
 @RequestMapping("/testimonio")
 
 public class TestimonioController {
-	
+
 	@Autowired
 	@Qualifier("testimonioServiceMysqlImp")
 	private ITestimonioService testimonioService;
-	
-	
+
 	@Autowired
 	private UploadFile uploadFile;
-	
+
 	@GetMapping("listado")
 	public String getListaTestimonio(Model model) {
 		model.addAttribute("testimonio", testimonioService.obtenerTodosLosTestimonios());
 		return "testimonio";
 	}
-	
+
 	@GetMapping("/nuevo")
 	public String getAgregarTestimonioPage(Model model) {
-		boolean edicion=false;
+		boolean edicion = false;
 		model.addAttribute("consejo", testimonioService.obtenerTodosLosTestimonios());
 		model.addAttribute("edicion", edicion);
 		return "nuevo_testimonio";
 	}
-	
+
 	@PostMapping("/guardar")
-	public ModelAndView agregarTestimonio(@Valid @ModelAttribute("testimonio") Testimonio testimonio, BindingResult result,
-			@RequestParam("file") MultipartFile imagen ) throws IOException {
-		ModelAndView  modelAndView = new ModelAndView("gestion_testimonio");
-		if(result.hasErrors()) {
+	public ModelAndView agregarTestimonio(@Valid @ModelAttribute("testimonio") Testimonio testimonio,
+			BindingResult result, @RequestParam("file") MultipartFile imagen) throws IOException {
+		ModelAndView modelAndView = new ModelAndView("gestion_testimonio");
+		if (result.hasErrors()) {
 			modelAndView.setViewName("nuevo_testimonio");
 			modelAndView.addObject("testimonio", testimonio);
 			return modelAndView;
 		}
-		
+
 		testimonioService.agregarTestimonio(testimonio, imagen);
 		modelAndView.addObject("testimonio", testimonioService.obtenerTodosLosTestimonios());
-		
+
 		return modelAndView;
 	}
-	
+
 	@GetMapping("/cargar/{imagen}")
 	public ResponseEntity<Resource> goImage(@PathVariable String imagen) {
 		Resource resource = null;
@@ -76,44 +75,43 @@ public class TestimonioController {
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
-		return ResponseEntity.ok()
-				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + imagen + "\"")
-	            .body(resource);
+		return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + imagen + "\"")
+				.body(resource);
 	}
-	
+
 	@GetMapping("/modificar/{id}")
-	public String getModificarTestimonioPage(Model model,@PathVariable(value="id")Long id) {
-		boolean edicion=true;
+	public String getModificarTestimonioPage(Model model, @PathVariable(value = "id") Long id) {
+		boolean edicion = true;
 		model.addAttribute("testimonio", testimonioService.obtenerTestimonioEncontrado(id));
 		model.addAttribute("edicion", edicion);
-		
+
 		return "nuevo_testimonio";
 	}
-	
+
 	@PostMapping("/modificar/{id}")
-	public String modificarTestimonio(@ModelAttribute("testimonio")Testimonio testimonioModificado,
-			@RequestParam("file") MultipartFile imagen) throws IOException  {
+	public String modificarTestimonio(@ModelAttribute("testimonio") Testimonio testimonioModificado,
+			@RequestParam("file") MultipartFile imagen) throws IOException {
 		testimonioService.actualizarTestimonio(testimonioModificado, imagen);
 		return "redirect:/testimonio/gestion";
 	}
-	
+
 	@GetMapping("/eliminar/{id}")
-	public String eliminarTestimonio(@PathVariable(value="id")Long id) {
+	public String eliminarTestimonio(@PathVariable(value = "id") Long id) {
 		testimonioService.eliminarTestimonio(id);
 		return "redirect:/testimonio/gestion";
 	}
-	
+
 	@GetMapping("/gestion")
 	public String getGestionTestimonioPage(Model model) {
 		model.addAttribute("testimonios", testimonioService.obtenerTodosLosTestimonios());
 		return "gestion_testimonios";
 	}
-	
+
 	@GetMapping("/{id}")
-	public ModelAndView getTestimonioPage(ModelAndView modelAndView , @PathVariable(value = "id")Long id) {
+	public ModelAndView getTestimonioPage(ModelAndView modelAndView, @PathVariable(value = "id") Long id) {
 		modelAndView.addObject("testimonio", testimonioService.obtenerTestimonioEncontrado(id));
 		modelAndView.setViewName("testimonio");
 		return modelAndView;
 	}
-	
+
 }
