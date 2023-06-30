@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head>
+		<meta charset="UTF-8">
+		<!--Especificacion de viewport -->
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<title>Bienestar en Accion</title>
+		<!-- Bootstrap referencia  -->
+		<link th:rel="stylesheet"
+			th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+		<!-- Cdn para cargar estilos de Font Awesome-->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		
+		<!-- Css referencia-->
+		<link th:rel="stylesheet" th:href="@{/css/estilos.css}">
+	</head>
+	<body>
+	<!--Uso del fragmento header -->
+			<header th:replace="~{layouts/header :: header}"></header>
+		<div class="container">
+			
+			<!--Uso del fragmento nav -->
+		<header th:replace="~{layouts/nav :: nav}"></header>
+			<div class="container">
+				<div class="row">
+					<h2 class="my-4">Lista Ingredientes</h2>
+				</div>
+	
+				<br>
+	
+	
+				<div class="table-responsive">
+	
+					<!--Tabla de ingredientes-->
+					<table
+						class="table-sm table table-striped table-bordered table-hover">
+						<thead class="bg-secondary text-white">
+							<tr>
+								<th>id del ingrediente</th>
+								<th>Nombre del ingrediente</th>
+								<th>Receta</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="ingrediente: ${ingredientes}">
+								<td th:text="${ingrediente.id}"></td>
+								<td th:text="${ingrediente.nombre}"></td>
+								<td th:text="${ingrediente.recetas.nombre}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+		</div>
+				<!--Uso del fragmento footer -->
+			<footer th:replace="~{layouts/footer :: footer}"></footer>
+		<!--Archivo javascript referencia -->
+		<script type="text/javascript"
+			th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+	</body>
+</html>
