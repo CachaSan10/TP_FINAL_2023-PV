@@ -36,7 +36,7 @@ public class IndiceMasaCorporalController {
 	}
 	
 	@PostMapping("/calcular-imc")
-	public ModelAndView getResultadoImcPage(@Valid @ModelAttribute("indiceMasaCorporal")IndiceMasaCorporal imc ,Long idUsuario,BindingResult result) {
+	public ModelAndView calcularImc(@Valid @ModelAttribute("indiceMasaCorporal")IndiceMasaCorporal imc ,Long idUsuario,BindingResult result) {
 		ModelAndView modelAndView = new ModelAndView("calculadora-imc");
 		if(usuarioService.existeUsuario(idUsuario)) {
 			if(result.hasErrors()) {
@@ -51,8 +51,23 @@ public class IndiceMasaCorporalController {
 	}
  	
 	@GetMapping("/registros")
-	public String getRegistroImcPage(Model model, Long idUsuario) {
-		model.addAttribute("indiceMasaCorporal", indiceMasaCorporalService.obtenerFechasImcDescreciente(null));
+	public String obtenerPaginaRegistroImc() {
+		return "registros-imc";
+	}
+	
+	@PostMapping("/obtener-registros-imc")
+	public String obtenerRegistrosImc(Model model, Long idUsuario) {
+		boolean existeUsuario;
+		if(usuarioService.existeUsuario(idUsuario)) {
+			existeUsuario = true;
+			model.addAttribute("existeUsuario", existeUsuario);
+			model.addAttribute("indicesMasaMuscular", indiceMasaCorporalService.obtenerFechasImcDescreciente(idUsuario));
+
+		}else {
+			existeUsuario=false;
+			model.addAttribute("existeUsuario", existeUsuario);
+			model.addAttribute("indicesMasaMuscular", null);
+		}
 		return "registros-imc";
 	}
 	

@@ -14,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.PastOrPresent;
 
 /**
  * @author Nahuel Alberto Cachambi
@@ -32,6 +33,7 @@ public class IndiceMasaCorporal {
 	
 	/* Representa la fecha de indice de masa corporal que registro el usuario */
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@PastOrPresent(message = "La fecha de registro de Imc debe ser anterior o actual a la fecha actual")
 	@Column(name = "imc_fecha")
 	private LocalDate fechaImc;
 	

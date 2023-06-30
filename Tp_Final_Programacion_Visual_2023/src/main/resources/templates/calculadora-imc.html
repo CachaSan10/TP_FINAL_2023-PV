@@ -47,7 +47,14 @@
   <div class="mb-3">
     <label for="idPeso" class="form-label">Ingrese Peso</label>
     <input type="number" th:field="*{peso}"  name="peso"" form-control" id="idPeso">
+    <div class="text-danger" th:if="${#fields.hasErrors('peso')}" th:errors="*{peso}"></div>
   </div>
+  
+  <div class="form-group">
+		   <label for="fecha" class="form-label">Fecha de Registro de Imc : </label>
+			<input th:field="*{fechaImc}" class="form-control" type="date" name="fecha" id="fecha" placeholder="fecha" >
+			<div class="text-danger" th:if="${#fields.hasErrors('fechaImc')}" th:errors="*{fechaImc}"></div>
+		</div>
   <button type="submit" class="btn btn-primary">Calcular</button>
 </form>
   </div>
