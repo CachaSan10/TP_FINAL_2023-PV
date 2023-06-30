@@ -46,7 +46,7 @@ public class TestimonioController {
 	@GetMapping("/nuevo")
 	public String getAgregarTestimonioPage(Model model) {
 		boolean edicion = false;
-		model.addAttribute("consejo", testimonioService.obtenerTodosLosTestimonios());
+		model.addAttribute("testimonio", new Testimonio());
 		model.addAttribute("edicion", edicion);
 		return "nuevo_testimonio";
 	}
@@ -57,7 +57,7 @@ public class TestimonioController {
 		ModelAndView modelAndView = new ModelAndView("gestion_testimonio");
 		if (result.hasErrors()) {
 			modelAndView.setViewName("nuevo_testimonio");
-			modelAndView.addObject("testimonio", testimonio);
+			modelAndView.addObject("edicion", false);
 			return modelAndView;
 		}
 
@@ -89,7 +89,7 @@ public class TestimonioController {
 	}
 
 	@PostMapping("/modificar/{id}")
-	public String modificarTestimonio(@ModelAttribute("testimonio") Testimonio testimonioModificado,
+	public String modificarTestimonio(@Valid @ModelAttribute("testimonio") Testimonio testimonioModificado,
 			@RequestParam("file") MultipartFile imagen) throws IOException {
 		testimonioService.actualizarTestimonio(testimonioModificado, imagen);
 		return "redirect:/testimonio/gestion";
