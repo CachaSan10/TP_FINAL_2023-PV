@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+<meta charset="UTF-8">
+<!--Especificacion de viewport -->
+<meta name="viewport"
+	content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+<title>Contacto - Bienestar en Accion</title>
+<!-- Bootstrap referencia  -->
+<link th:rel="stylesheet"
+	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+<!-- Css referencia-->
+<link th:rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+	<div class="container">
+		<!--Uso del fragmento header -->
+		<header th:replace="~{layouts/header :: header}"></header>
+		<!--Uso del fragmento nav -->
+		<nav id="Menu-principal" th:replace="~{layouts/nav :: nav}"></nav>
+
+		<div class="container">
+			<div class="row">
+				<div
+					class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card ">
+					<h3 class="text-center">Contacto</h3>
+					<div class="card-body">
+						<!--Formulario de contaco -->
+						<form action="">
+							<div class="form-group">
+								<label>Nombre : </label> <input class="form-control" type="text"
+									name="nombres" id="nombres" placeholder="Nombre" required>
+							</div>
+
+							<div class="form-group">
+								<label>Email : </label> <input class="form-control" type="email"
+									name="mail" id="mail" placeholder="Email" required>
+							</div>
+
+							<div class="form-group">
+								<label>Telefono : </label> <input class="form-control"
+									type="text" name="telefono" id="telefono"
+									placeholder="Telefono" required>
+							</div>
+
+							<div class="form-group">
+								<label>Mensaje : </label>
+								<textarea rows="" cols="" class="form-control" type="text"
+									name="mensaje" id="mensaje" placeholder="Ingrese Mensaje"></textarea>
+							</div>
+
+							<br>
+							<div class="d-grid gap-2">
+								<button type="submit" class="btn btn-primary">Enviar</button>
+
+							</div>
+						</form>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!--Uso del fragmento footer -->
+		<footer th:replace="~{layouts/footer :: footer}"></footer>
+	</div>
+	<!--Archivo javascript referencia -->
+	<script type="text/javascript"
+		th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>
