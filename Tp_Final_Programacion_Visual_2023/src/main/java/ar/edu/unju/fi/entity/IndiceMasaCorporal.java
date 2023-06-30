@@ -14,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.PastOrPresent;
 
 /**
  * @author Nahuel Alberto Cachambi
@@ -32,6 +33,7 @@ public class IndiceMasaCorporal {
 	
 	/* Representa la fecha de indice de masa corporal que registro el usuario */
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@PastOrPresent(message = "La fecha de registro de Imc debe ser anterior o actual a la fecha actual")
 	@Column(name = "imc_fecha")
 	private LocalDate fechaImc;
 	
@@ -133,6 +135,24 @@ public class IndiceMasaCorporal {
 	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
+	
+	
+
+	/**
+	 * @return the peso
+	 */
+	public double getPeso() {
+		return peso;
+	}
+
+
+	/**
+	 * @param peso the peso to set
+	 */
+	public void setPeso(double peso) {
+		this.peso = peso;
+	}
+
 
 	/**
 	 * Metodo que calcula el indice de masa corporal
