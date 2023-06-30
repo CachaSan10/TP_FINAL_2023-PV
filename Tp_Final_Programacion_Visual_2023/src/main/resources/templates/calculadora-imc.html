@@ -42,6 +42,8 @@
   <div class="mb-3">
     <label for="idUsuario" class="form-label">Ingrese Id de Usuario</label>
     <input type="number"  name="idUsuario" class="form-control" id="idUsuario">
+            <div class="text-danger" th:text="${existeUsuario}?'':'No esta registrado el usuario'" ></div>
+
   </div>
   
   <div class="mb-3">

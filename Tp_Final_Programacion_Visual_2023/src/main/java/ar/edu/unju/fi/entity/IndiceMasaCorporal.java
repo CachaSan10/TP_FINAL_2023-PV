@@ -1,5 +1,6 @@
 package ar.edu.unju.fi.entity;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -159,20 +160,22 @@ public class IndiceMasaCorporal {
 	 * @param peso representa el peso que ingresa el usuario
 	 * @return el resultado del indice de masa corporal
 	 */
-	public double calcularImc() {
-		int altura = (int) (usuario.getEstatura() * 100);
-		return peso / Math.pow(altura, 2);
+	public String calcularImc() {
+		double imc =  peso / Math.pow(usuario.getEstatura(), 2);
+		String tipoPeso;
+		DecimalFormat format1 = new DecimalFormat("#,#0");
+		if(imc < 18.5) {
+			tipoPeso = "Está por debajo de su peso ideal";
+		} else if(imc >= 18.5 && imc <=25) {
+			tipoPeso = "Está en su peso normal";
+		} else 
+			tipoPeso = "Tiene sobrepeso";
+		
+		return "Su Imc es " + format1.format(imc) + " - "+ tipoPeso;
 	}
 
 	
-	/**
-	 * Metodo que calcula el peso ideal del usuario.
-	 * @return el resultado del peso ideal del usuario.
-	 */
-	public double calcularPesoIdeal() {
-		int altura = (int) (usuario.getEstatura() * 100);
-		return (double)(altura - 100 + ((usuario.calcularAnio()/10)*0.9)); 
-	}
+	
 	
 	@Override
 	public String toString() {

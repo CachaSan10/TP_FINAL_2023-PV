@@ -37,7 +37,7 @@
   <div class="mb-3">
     <label for="idUsuario" class="form-label">Ingrese Id de Usuario</label>
     <input type="number"  name="idUsuario" class="form-control" id="idUsuario">
-        <div class="${existeUsuario}?'text-success':'text-danger'" th:text="${existeUsuario}?'Si existe el usuario':'No existe el usuario'" ></div>
+        <div class="text-danger" th:text="${existeUsuario}?'':'No esta registrado el usuario'" ></div>
 
   </div>
   <button type="submit" class="btn btn-primary">Obtener Registros de indice de Masa Corporal</button>
@@ -55,8 +55,8 @@
   </thead>
   <tbody>
     <tr th:each="imc : ${indicesMasaMuscular}">
-      <td th:text="${#temporals.format(imc.fechaImc, 'dd/MM/yyyy')}">${imc.fechaImc}</td>
-      <td th:text="${imc.fechaImc.calcularImc()}"></td>
+      <td th:text="${#temporals.format(imc.fechaImc, 'dd/MM/yyyy')}"></td>
+      <td th:text="${imc.calcularImc()}"></td>
       <td th:text="${imc.peso}+' Kg'"></td>
     </tr>
   </tbody>

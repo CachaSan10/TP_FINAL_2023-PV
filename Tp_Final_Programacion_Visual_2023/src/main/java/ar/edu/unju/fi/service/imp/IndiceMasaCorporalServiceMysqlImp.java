@@ -1,6 +1,5 @@
 package ar.edu.unju.fi.service.imp;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -68,8 +67,10 @@ public class IndiceMasaCorporalServiceMysqlImp implements IIndiceMasaCorporalSer
 	public double obtenerPesoIdeal(Long id) {
 		Usuario dosUsuario = new Usuario();
 		dosUsuario = usuarioService.buscarUsuario(id);
+			int estaturaConvertido = (int) (dosUsuario.getEstatura() * 100);
+			return (double)(estaturaConvertido - 100 + ((dosUsuario.calcularAnio()/10)*0.9)); 
 		
-		return  indiceMasaCorporalRepository.findByUsuario(dosUsuario).get(1).calcularPesoIdeal();
+
 	}
 	
 
@@ -86,15 +87,7 @@ public class IndiceMasaCorporalServiceMysqlImp implements IIndiceMasaCorporalSer
 
 	@Override
 	public String calcularImc(IndiceMasaCorporal imc) {
-	 double resultadoImc = indiceMasaCorporalRepository.findById(imc.getId()).get().calcularImc();
-	 System.out.println("id "+ imc.getId() );
-	 System.out.println("Imc del calculo:"+ resultadoImc);
-				if(resultadoImc < 18.5) {
-					return "Está por debajo de su peso ideal";
-				} else if(resultadoImc >= 18.5 && resultadoImc <=25) {
-					return "Está en su peso normal";
-				} else 
-					return "Tiene sobrepeso";
+	 return indiceMasaCorporalRepository.findById(imc.getId()).get().calcularImc();	
 	}
 
 
