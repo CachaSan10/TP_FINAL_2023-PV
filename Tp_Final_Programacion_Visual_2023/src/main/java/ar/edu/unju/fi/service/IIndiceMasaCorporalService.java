@@ -7,12 +7,13 @@ import ar.edu.unju.fi.entity.IndiceMasaCorporal;
 
 public interface IIndiceMasaCorporalService {
 	
-	public List<IndiceMasaCorporal> obtenerIndicesMasaCorporal();
 	public IndiceMasaCorporal obtenerIndiceMasaCorporal();
-	public void guardarIndiceMasaCorporal(IndiceMasaCorporal indiceMasaCorporal);
-	public List<IndiceMasaCorporal> filtarFechaImc(LocalDate fechaInicio, LocalDate fechaFin);
+	public void guardarIndiceMasaCorporal(IndiceMasaCorporal indiceMasaCorporal, Long id);
+	public List<IndiceMasaCorporal> obtenerFechasImcDescreciente(Long id);
 	public void modificarIndiceMasaCorporal(IndiceMasaCorporal indiceMasaCorporalModificado);
 	public void eliminarIndiceMasaCorporal(Long id);
 	public IndiceMasaCorporal buscarIndiceMasaCorporal(Long id);
+	public String calcularImc(LocalDate fecha);
+	public double obtenerPesoIdeal(Long id);
 
 }
