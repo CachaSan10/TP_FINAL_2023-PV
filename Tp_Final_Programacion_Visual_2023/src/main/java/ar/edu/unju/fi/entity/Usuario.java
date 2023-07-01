@@ -94,6 +94,11 @@ public class Usuario {
 	@OneToOne(mappedBy = "usuario")
 	private Testimonio testimonio;
 	
+	/* Representa rol del usuario */
+	@NotEmpty(message="Este campo no puede estar vacio")
+	@Column(name="usu_administrador")
+	private String administrador;
+	
 	public Usuario() {
 		
 		
@@ -105,7 +110,7 @@ public class Usuario {
 	 * Constructor parametrizado usando los atributos
 	 */
 	public Usuario(Long id, String nombre, String apellido, String email, LocalDate fechaNacimiento, String telefono,
-			String sexo, Double estatura, boolean estado) {
+			String sexo, Double estatura, boolean estado, String administrador) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -116,6 +121,7 @@ public class Usuario {
 		this.sexo = sexo;
 		this.estatura = estatura;
 		this.estado = estado;
+		this.administrador= administrador;
 	}
 
 
@@ -250,6 +256,25 @@ public class Usuario {
 
 	
 	
+
+
+
+	/**
+	 * @return the administrador
+	 */
+	public String getAdministrador() {
+		return administrador;
+	}
+
+
+	/**
+	 * @param administrador the administrador to set
+	 */
+	public void setAdministrador(String administrador) {
+		this.administrador = administrador;
+	}
+
+
 
 	/**
 	 * Metodo que calcula el anio del usuario

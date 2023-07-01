@@ -26,8 +26,7 @@
 
 		<!--Uso del fragmento nav -->
 		<header th:replace="~{layouts/nav :: nav}"></header>
-		<a class="btn btn-primary btn-consejos" th:href="@{/gestion/datos}">Volver
-			a Menú Principal</a>
+		
 			<div class="row">
 				<h2 class="my-4">Lista Usuarios</h2>
 			</div>
@@ -35,8 +34,9 @@
 			<br>
 
 
-			<div class="table-responsive">
-
+			<div class="table-responsive form-container">
+<a class="btn btn-primary btn-consejos" th:href="@{/gestion/datos}">Volver
+			a Menú Principal</a>
 				<!--Tabla de usuarios-->
 				<table
 					class="table-sm table table-striped table-bordered table-hover">
@@ -44,6 +44,7 @@
 						<tr>
 							<th>Nombre</th>
 							<th>Apellido</th>
+							<th>Administrador</th>
 							<th>Sexo</th>
 							<th>Estatura</th>
 							<th>Fecha de Nacimiento</th>
@@ -56,6 +57,7 @@
 						<tr th:each="usuario: ${usuarios}">
 							<td th:text="${usuario.nombre}"></td>
 							<td th:text="${usuario.apellido}"></td>
+							<td th:text="${usuario.administrador}"></td>
 							<td th:text="${usuario.sexo}"></td>
 							<td th:text="${usuario.estatura}"></td>
 							<td

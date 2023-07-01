@@ -46,6 +46,16 @@
 								<div class="text-danger" th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></div>
 							</div>
 							
+							<div class="form-group">
+							    <label for="admin" class="form-label">Administrador:</label>
+							    <select th:field="*{administrador}" class="form-control" id="admin" name="admin" placeholder="Seleccionar">
+							        <option value="">Seleccionar</option>
+							        <option value="Si">Si</option>
+							        <option value="No">No</option>
+							    </select>
+							    <div class="text-danger" th:if="${#fields.hasErrors('administrador')}" th:errors="*{administrador}"></div>
+							</div>
+
 
 																					
 							<div class="form-group">
