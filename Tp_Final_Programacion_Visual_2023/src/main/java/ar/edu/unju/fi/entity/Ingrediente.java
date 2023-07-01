@@ -35,8 +35,7 @@ public class Ingrediente {
 	
 	/* Representa el nombre del ingrediente*/
 	@NotEmpty()
-	@Size(min=6, max=20)
-	@Pattern(regexp="[a-z A-ZÀ-ÿ\\u00f1\\u00d1]*")
+	@Size(min=6, max=30)
 	@Column(name = "ingre_nombre")
 	private String nombre;
 	
