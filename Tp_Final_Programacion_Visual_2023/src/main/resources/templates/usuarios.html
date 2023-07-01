@@ -34,8 +34,9 @@
 			<br>
 
 
-			<div class="table-responsive">
-
+			<div class="table-responsive form-container">
+<a class="btn btn-primary btn-consejos" th:href="@{/gestion/datos}">Volver
+			a Menú Principal</a>
 				<!--Tabla de usuarios-->
 				<table
 					class="table-sm table table-striped table-bordered table-hover">
@@ -43,23 +44,30 @@
 						<tr>
 							<th>Nombre</th>
 							<th>Apellido</th>
+							<th>Administrador</th>
 							<th>Sexo</th>
 							<th>Estatura</th>
 							<th>Fecha de Nacimiento</th>
 							<th>Email</th>
 							<th>Telefono</th>
+							<th>Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="usuario: ${usuarios}">
 							<td th:text="${usuario.nombre}"></td>
 							<td th:text="${usuario.apellido}"></td>
+							<td th:text="${usuario.administrador}"></td>
 							<td th:text="${usuario.sexo}"></td>
 							<td th:text="${usuario.estatura}"></td>
 							<td
 								th:text="${#temporals.format(usuario.fechaNacimiento, 'dd/MM/yyyy')}"></td>
 							<td th:text="${usuario.email}"></td>
 							<td th:text="${usuario.telefono}"></td>
+							<td><a class="btn btn-info btn-sm"
+								th:href="@{/usuario/modificar/}+${usuario.id}">Modificar</a> <a
+								class="btn btn-danger btn-sm"
+								th:href="@{/usuario/eliminar/}+${usuario.id}">Eliminar</a></td>
 						</tr>
 					</tbody>
 				</table>
