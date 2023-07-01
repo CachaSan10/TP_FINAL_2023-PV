@@ -1,57 +1,110 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
-		<meta charset="UTF-8">
-		<!--Especificacion de viewport -->
-		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+<meta charset="UTF-8">
+<!--Especificacion de viewport -->
+<meta name="viewport"
+	content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
 
-		<!-- Bootstrap referencia  -->
-		<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<!-- Css referencia-->
-		<link th:rel="stylesheet" th:href="@{/css/estilos.css}">
+<!-- Bootstrap referencia  -->
+<link th:rel="stylesheet"
+	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+	integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- Css referencia-->
+<link th:rel="stylesheet" th:href="@{/css/estilos.css}">
 <!-- 		<link rel="stylesheet" th:href="@{/css/estilos.css}"> -->
 </head>
 <body>
 
 
-<footer th:fragment="footer" style="background-color: #80ffff;">
-    <div class="container-fluid pt-3 pb-3"> 
-        <div class="row">
-            <div class="col-md-2">
-                <h1 class="font-weight-bold mt-3 vertical">Bienestar</h1>
-            </div>
+	<footer th:fragment="footer" id="primary-footer">
+		<!-- footer widget start -->
+		<div class="container footer-widget-area">
+			<div class="row">
+				<div class="col-md-4 p-3">
+					<div class="footer-widget-heading">
+						<h4>Nosotros</h4>
+					</div>
+					<p>Somos Bienestar en Accion un lugar donde encontraras toda la
+						informacion para cuidarte tanto fisica como mentalmente.</p>
+					<div class="footer-social-icon">
+						<div class="social-title">Redes:</div>
+						<a href="#"><i
+							class="fab fa-facebook-f circle-icon"></i></a> <a
+							href="#"><i
+							class="fab fa-instagram circle-icon"></i></a> <a
+							href="#"><i
+							class="fab fa-twitter circle-icon"></i></a>
+					</div>
+				</div>
+				<div class="col-md-4 p-3">
+					<div class="footer-widget-heading">
+						<h4>Popular Posts</h4>
+					</div>
+					<ul class="linkediting">
+						<li><a href="#"><i class="fa fa-angle-right"></i>
+								Servicio</a></li>
+						<li><a href="#"><i class="fa fa-angle-right"></i> Recetas</a></li>
+						<li><a href="#"><i class="fa fa-angle-right"></i>
+								Testimonio</a></li>
+						<li><a href="#"><i class="fa fa-angle-right"></i>
+								Registrarme</a></li>
+						<li><a href="#"><i class="fa fa-angle-right"></i> Menu de
+								inicio</a></li>
+					</ul>
+				</div>
+				<div class="col-md-4 p-3">
+					<div class="footer-widget-heading">
+						<h4>Contacto</h4>
+					</div>
+					<ul class="linkediting">
+						<li><a href="#"><i class="fa fa-angle-right"></i>
+								Belgrano 322</a></li>
+						<li><a href="#"><i class="fa fa-angle-right"></i>
+								bienestar@gmail.com</a></li>
+						<li><a href="#"><i class="fa fa-angle-right"></i>
+								+544244499</a></li>
+						<li><a href="#"><i class="fa fa-angle-right"></i>
+								+544244499</a></li>
+					</ul>
+					<div class="col-md-1">
+						<img src="/images/img1.png" width="80px"/>
+					</div>
+				</div>
 
-            <div class="col-md-3">
-                <h4 class="font-weight-bold mb-3">Nosotros</h4><hr class="hrcolor" />
-                <p>Somos Bienestar en Accion</p>
-                <p>un lugar donde encontraras</p>
-                <p>toda la informacion para</p>
-                <p>cuidarte tanto fisica como</p>
-                <p>mentalmente</p>
-            </div>
-            <div class="col-md-3">
-                <h4 class="font-weight-bold mb-3">Redes</h4><hr class="hrcolor" />
-                <p><i class="fa-brands fa-facebook link"></i>Facebook</p>
-                <p><i class="fa-brands fa-twitter link"></i>Twitter</p>
-                <p><i class="fa-brands fa-github link"></i>GitHub</p>
-                <p><i class="fa-brands fa-instagram link"></i>Instagram</p>
-            </div>
-            <div class="col-md-3">
-                <h4 class="font-weight-bold mb-3">Contacto</h4><hr class="hrcolor" />
-                <p><i class="fas fa-home me-3"></i> Belgrano 322</p>
-                <p><i class="fas fa-envelope me-3"></i> bienestar@gmail.com</p>
-                <p><i class="fas fa-phone me-3"></i> +544244499</p>
-                <p><i class="fas fa-print me-3"></i> +544244499</p>
-            </div>
-                        <div class="col-md-1">
-                <img src="/images/img1.png" width="80px" />
-            </div>
-        </div>
-    </div>
-</footer>
+			</div>
+		</div>
+		<!-- footer widget end -->
+		<hr>
+		<!-- footer credit -->
+		<div class="copyright-area">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="copyright-text text-left">
+							<p>
+								Designed by <a href="https://foxmaya.com/about/">Grupo 30</a>
+							</p>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="footer-menus text-right">
+							<ul>
+								<li><a href="#">Politica de Privacidad</a></li>
+								<li><a href="#">Terminos y Condiciones</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- footer credit end -->
+	</footer>
 
-<!--Archivo javascript referencia -->
+	<!--Archivo javascript referencia -->
 	<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 
 </body>

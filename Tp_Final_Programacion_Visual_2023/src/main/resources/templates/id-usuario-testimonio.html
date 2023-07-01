@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<!--Especificacion de viewport -->
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<title>Id del Usuario - Bienestar en Accion</title>
+	<!-- Bootstrap referencia  -->
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+	<!-- Css referencia-->
+	<link th:rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+	<div class="container">
+		<header th:replace="~{layouts/header :: header}"></header>
+		<nav th:replace="~{layouts/nav :: nav}"></nav>
+		<div class="row">
+				<h2 class="my-4">Id de Usuario</h2>
+			</div>
+		<div class="mb-3">
+	    <label for="idUsuario" class="form-label">Ingrese Id de Usuario</label>
+	    <input type="number"  name="idUsuario" class="form-control" id="idUsuario">
+	        <div class="text-danger" th:text="${existeUsuario}?'':'No esta registrado el usuario'" ></div>
+	
+	  	</div>
+	 	 <button type="submit" class="btn btn-primary">Agregar Testimonio</button>
+	 	 <footer th:replace="~{layouts/footer :: footer}"></footer>
+	</div>
+	<!-- Configuracion para usar bootstrap js -->
+	<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
