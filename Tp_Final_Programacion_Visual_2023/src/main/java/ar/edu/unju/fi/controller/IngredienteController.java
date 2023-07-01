@@ -25,6 +25,13 @@ public class IngredienteController {
 	private IIngredienteService ingredienteService;
 	
 	
+	@GetMapping("/gestion")
+	public ModelAndView obtenerPaginaGestionIngrediente() {
+		ModelAndView modelAndView = new ModelAndView("gestion_datos_ingrediente");
+		modelAndView.addObject("ingredientes", ingredienteService.obtenerIngredientes());
+		return modelAndView;
+	}
+	
 	@GetMapping("/nuevo")
 	public String getNuevoIngredientePage(Model model) {
 		boolean edicion=false;
@@ -35,7 +42,7 @@ public class IngredienteController {
 	
 	@PostMapping("/guardar")
 	public ModelAndView postGuardarIngredientePage(@Valid @ModelAttribute("ingrediente") Ingrediente ingrediente, BindingResult bindingResult ) {
-		ModelAndView mav = new ModelAndView("ingredientes");
+		ModelAndView mav = new ModelAndView("redirect:/ingrediente/gestion");
 		
 		if (bindingResult.hasErrors()) {
 			mav.setViewName("nuevo_ingrediente");
@@ -44,7 +51,7 @@ public class IngredienteController {
 		}
 		
 		ingredienteService.guardarIngrediente(ingrediente);
-		mav.setViewName("redirect:/ingrediente/listado");
+		mav.setViewName("redirect:/ingrediente/gestion");
 		return mav;
 	}
 	
@@ -59,20 +66,21 @@ public class IngredienteController {
 	}
 	
 	@PostMapping("/modificar/{id}")
-	public String modificarIngrediente(@Valid @ModelAttribute("ingrediente") Ingrediente ingredienteModificado, BindingResult bindingResult) {
-		if (bindingResult.hasErrors()) {
+	public String modificarIngrediente(@Valid @ModelAttribute("ingrediente") Ingrediente ingredienteModificado, BindingResult resultado,Model model) {
+		if (resultado.hasErrors()) {
+			model.addAttribute("ingrediente",  ingredienteModificado);
 			return "nuevo_ingrediente";
 		}
 		ingredienteService.modificarIngrediente(ingredienteModificado);
-		return "redirect:/ingrediente/listado";
+		return "redirect:/ingrediente/gestion";
 		
 	}
 	
-	@GetMapping("/eliminar{id}")
+	@GetMapping("/eliminar/{id}")
 	public String eliminarIngrediente(@PathVariable(value="id")Long id) {
 		Ingrediente ingredienteEncontrado= ingredienteService.buscarIngrediente(id);
 		ingredienteService.eliminarIngrediente(ingredienteEncontrado);
-		return "";
+		return "redirect:/ingrediente/gestion";
 	}
 	
 	@GetMapping("/listado")
@@ -82,8 +90,9 @@ public class IngredienteController {
 	}
 	
 
+	
 
-
+	
 
 }
 

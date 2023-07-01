@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<!--Especificacion de viewport -->
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<!-- Bootstrap referencia  -->
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+	<!-- Css referencia-->
+	<link th:rel="stylesheet" th:href="@{/css/estilos.css}">
+	<title>Igredientes - Bienestar en Accion</title>
+
+</head>
+
+<body>
+
+	<div class="container">
+		<!--Uso del fragmento header -->
+		<header th:replace="~{layouts/header :: header}"></header>
+		<a th:href="@{/receta/gestion}" class="btn btn-primary btn-consejos">Volver Gestion Producto</a>
+
+
+
+
+		<div class="card">
+			<h1 class="card-title text-center">Gestion de Ingredientes</h1>
+			<div class="row justify-content-md-center">
+				<div class="col">
+					<a th:href="@{/ingrediente/nuevo}" class="btn btn-success fw-bolder py-3">Nuevo Ingrediente</a>
+				</div>
+			</div>
+			<div class="card-body">
+				<div class="table-responsive">
+
+					<!--Tabla de sucursales-->
+					<table class="table-sm table table-striped table-bordered table-hover">
+						<thead class="bg-secondary text-white">
+							<tr>
+								<th>Codigo</th>
+								<th>Nombre</th>
+								<th>Acciones</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="ingrediente: ${ingredientes}">
+								<td th:text="${ingrediente.id}"></td>
+								<td th:text="${ingrediente.nombre}"></td>
+								<td>
+									<a class="btn btn-info btn-sm"
+										th:href="@{/ingrediente/modificar/}+${ingrediente.id}">Modificar</a>
+									<a class="btn btn-danger btn-sm"
+										th:href="@{/ingrediente/eliminar/}+${ingrediente.id}">Eliminar</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+
+		<!--Uso del fragmento footer -->
+		<footer th:replace="~{layouts/footer :: footer}"></footer>
+
+
+	</div>
+	<!-- Configuracion para usar bootstrap js -->
+	<script type="text/javascript"
+		th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+</body>
+
+</html>

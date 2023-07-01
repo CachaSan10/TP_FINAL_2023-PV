@@ -36,6 +36,7 @@ public class IngredienteServiceMysqlImp implements IIngredienteService {
 
 	@Override
 	public void modificarIngrediente(Ingrediente ingredienteModificado) {
+		ingredienteModificado.setEstado(true);
 		ingredienteRepository.save(ingredienteModificado);
 	}
 

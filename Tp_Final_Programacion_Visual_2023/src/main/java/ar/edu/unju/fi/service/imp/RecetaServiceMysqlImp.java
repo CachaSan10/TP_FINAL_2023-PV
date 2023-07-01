@@ -49,6 +49,7 @@ public class RecetaServiceMysqlImp implements IRecetaService {
 
 	@Override
 	public void modificarReceta(Receta recetaModificada) {
+		recetaModificada.setEstado(true);
 		recetaRepository.save(recetaModificada);
 	}
 
