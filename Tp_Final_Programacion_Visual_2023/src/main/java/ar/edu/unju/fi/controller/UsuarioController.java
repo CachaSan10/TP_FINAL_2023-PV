@@ -72,12 +72,12 @@ public class UsuarioController {
 		return "redirect:/usuario/listado";
 	}
 	
-	@GetMapping("/eliminar{id}")
+	@GetMapping("/eliminar/{id}")
 	public String eliminarUsuario(@PathVariable(value="id")Long id) {
 		Usuario usuarioEncontrado = usuarioService.buscarUsuario(id);
 		usuarioService.eliminarUsuario(usuarioEncontrado);
 		
-		return "";
+		return "redirect:/usuario/listado";
 	}
 
 	@GetMapping("/listado")

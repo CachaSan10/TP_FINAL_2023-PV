@@ -26,7 +26,8 @@
 
 		<!--Uso del fragmento nav -->
 		<header th:replace="~{layouts/nav :: nav}"></header>
-		
+		<a class="btn btn-primary btn-consejos" th:href="@{/gestion/datos}">Volver
+			a Menú Principal</a>
 			<div class="row">
 				<h2 class="my-4">Lista Usuarios</h2>
 			</div>
@@ -48,6 +49,7 @@
 							<th>Fecha de Nacimiento</th>
 							<th>Email</th>
 							<th>Telefono</th>
+							<th>Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -60,6 +62,10 @@
 								th:text="${#temporals.format(usuario.fechaNacimiento, 'dd/MM/yyyy')}"></td>
 							<td th:text="${usuario.email}"></td>
 							<td th:text="${usuario.telefono}"></td>
+							<td><a class="btn btn-info btn-sm"
+								th:href="@{/usuario/modificar/}+${usuario.id}">Modificar</a> <a
+								class="btn btn-danger btn-sm"
+								th:href="@{/usuario/eliminar/}+${usuario.id}">Eliminar</a></td>
 						</tr>
 					</tbody>
 				</table>
