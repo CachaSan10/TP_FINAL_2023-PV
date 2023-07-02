@@ -163,7 +163,7 @@ public class IndiceMasaCorporal {
 	public String calcularImc() {
 		double imc =  peso / Math.pow(usuario.getEstatura(), 2);
 		String tipoPeso;
-		DecimalFormat format1 = new DecimalFormat("#,#0");
+		DecimalFormat format1 = new DecimalFormat("#,##0");
 		if(imc < 18.5) {
 			tipoPeso = "Está por debajo de su peso ideal";
 		} else if(imc >= 18.5 && imc <=25) {

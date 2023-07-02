@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -37,7 +36,7 @@ public class IndiceMasaCorporalController {
 		return "calculadora-imc";
 	}
 	
-	@PostMapping("/calcular-imc")
+	@GetMapping("/calcular-imc")
 	public ModelAndView calcularImc(@Valid @ModelAttribute("indiceMasaCorporal")IndiceMasaCorporal imc ,Long idUsuario,BindingResult result) {
 		ModelAndView modelAndView = new ModelAndView("resultado-imc");
 		boolean existeUsuario;
@@ -72,7 +71,7 @@ public class IndiceMasaCorporalController {
 		return "registros-imc";
 	}
 	
-	@PostMapping("/obtener-registros-imc")
+	@GetMapping("/obtener-registros-imc")
 	public String obtenerRegistrosImc(Model model, Long idUsuario) {
 		boolean existeUsuario;
 		if(usuarioService.existeUsuario(idUsuario)) {
@@ -100,7 +99,7 @@ public class IndiceMasaCorporalController {
 		return "buscador-peso-ideal";
 	}
 	
-	@PostMapping("/buscar-peso-ideal")
+	@GetMapping("/buscar-peso-ideal")
 	public ModelAndView buscarPesoIdeal(Long idUsuario) {
 		boolean existeUsuario=true;
 		ModelAndView modelAndView = new ModelAndView();
