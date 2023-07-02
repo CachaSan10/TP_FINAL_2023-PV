@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -25,9 +24,10 @@ public class GestionDatosController {
         return "autenticacion";
     }
     
-    @PostMapping("/autenticacion")
-    public String postAutenticacion(@ModelAttribute("usuario") Usuario usuario, Model model) {
-        if (usuarioService.existeUsuario(usuario.getId())&& usuario.getId() == 1) {
+    @PostMapping("/autenticar")
+    public String postAutenticacion(Long id,Model model) {
+        if (usuarioService.existeUsuario(id) && usuarioService.buscarUsuario(id).isAdministrador()==true) {
+        	
             return "gestion_datos";
         } else {
             model.addAttribute("error", "El ID no corresponde al admin.");

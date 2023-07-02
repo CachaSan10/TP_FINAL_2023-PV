@@ -95,9 +95,8 @@ public class Usuario {
 	private Testimonio testimonio;
 	
 	/* Representa rol del usuario */
-	@NotEmpty(message="Este campo no puede estar vacio")
 	@Column(name="usu_administrador")
-	private String administrador;
+	private boolean administrador;
 	
 	public Usuario() {
 		
@@ -107,11 +106,30 @@ public class Usuario {
 	
 
 	/**
-	 * Constructor parametrizado usando los atributos
+	 * Constructor parametrizado 
+	 * @param id
+	 * @param nombre
+	 * @param apellido
+	 * @param email
+	 * @param fechaNacimiento
+	 * @param telefono
+	 * @param sexo
+	 * @param estatura
+	 * @param estado
+	 * @param indicesMasaCorporal
+	 * @param testimonio
+	 * @param administrador
 	 */
-	public Usuario(Long id, String nombre, String apellido, String email, LocalDate fechaNacimiento, String telefono,
-			String sexo, Double estatura, boolean estado, String administrador) {
-		super();
+	public Usuario(Long id,
+			@NotEmpty(message = "El nombre del usuario no puede estar vacio") @Size(min = 5, max = 50, message = "El nombre de usuario debe tener entre 5 y 50 caracteres") String nombre,
+			@NotEmpty(message = "El apellido del usuario no puede estar vacio") @Size(min = 5, max = 50, message = "El nombre de usuario debe tener entre 5 y 50 caracteres") String apellido,
+			@Email(message = "Ingrese un mail valido") @NotEmpty(message = "El mail del usuario no puede estar vacio") String email,
+			@NotNull @Past(message = "La fecha de nacimiento debe ser anterior a la fecha actual") LocalDate fechaNacimiento,
+			@Pattern(regexp = "\\d+", message = "Ingrese un número de teléfono válido solo numeros\t\t\t") @NotEmpty(message = "Este campo no puede estar vacio") @Size(min = 10, max = 10, message = "Ingrese un numero de telefono valido de 10 digitos. ") String telefono,
+			@NotEmpty(message = "Este campo no puede estar vacio") String sexo,
+			@NotNull(message = "La estatura no puede estar vacía") @DecimalMin(value = "1.20", inclusive = true, message = "La estatura mínima permitida es 1.20 metros") @DecimalMax(value = "2.20", inclusive = true, message = "La estatura máxima permitida es 2.20 metros") Double estatura,
+			boolean estado, List<IndiceMasaCorporal> indicesMasaCorporal, Testimonio testimonio,
+			 boolean administrador) {
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -121,8 +139,11 @@ public class Usuario {
 		this.sexo = sexo;
 		this.estatura = estatura;
 		this.estado = estado;
-		this.administrador= administrador;
+		this.indicesMasaCorporal = indicesMasaCorporal;
+		this.testimonio = testimonio;
+		this.administrador = administrador;
 	}
+	
 
 
 	/**
@@ -255,22 +276,21 @@ public class Usuario {
 	}
 
 	
-	
-
 
 
 	/**
 	 * @return the administrador
 	 */
-	public String getAdministrador() {
+	public boolean isAdministrador() {
 		return administrador;
 	}
+
 
 
 	/**
 	 * @param administrador the administrador to set
 	 */
-	public void setAdministrador(String administrador) {
+	public void setAdministrador(boolean administrador) {
 		this.administrador = administrador;
 	}
 
@@ -287,14 +307,17 @@ public class Usuario {
 		anioPersona = (byte) (periodo.getYears());
 		return anioPersona;
 	}
-	
+
+
+
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", fechaNacimiento="
-				+ fechaNacimiento + ", telefono=" + telefono + ", sexo=" + sexo + ", estatura=" + estatura + ", estado=" + estado
-				+ "]";
+		return "Usuario [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email
+				+ ", fechaNacimiento=" + fechaNacimiento + ", telefono=" + telefono + ", sexo=" + sexo + ", estatura="
+				+ estatura + ", estado=" + estado + ", administrador=" + administrador + "]";
 	}
 	
+
 	
 	
 	

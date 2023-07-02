@@ -41,7 +41,8 @@ public class UsuarioController {
 	        mav.addObject("edicion", false);
 	        return mav;
 	    }
-
+	    
+	    
 
 	    ModelAndView mav = new ModelAndView("agradecimiento");
 	    usuarioService.guardarUsuario(usuario);

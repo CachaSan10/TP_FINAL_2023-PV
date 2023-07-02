@@ -53,7 +53,6 @@ public class UsuarioServiceMysqlImp implements IUsuarioService {
 
 	@Override
 	public Usuario buscarUsuario(Long id) {
-		
 		return usuarioRepository.findById(id).get();
 	}
 
