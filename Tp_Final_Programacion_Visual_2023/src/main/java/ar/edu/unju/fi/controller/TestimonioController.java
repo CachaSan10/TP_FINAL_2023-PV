@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.entity.Testimonio;
+import ar.edu.unju.fi.entity.Usuario;
 import ar.edu.unju.fi.service.ITestimonioService;
 import ar.edu.unju.fi.service.IUsuarioService;
 import ar.edu.unju.fi.util.UploadFile;
@@ -56,12 +57,13 @@ public class TestimonioController {
 	}
 	
 	@GetMapping("/nuevo-testimonio")
-	public ModelAndView obtenerFormularioTestimonioPage(Long idUsuLong) {
+	public ModelAndView obtenerFormularioTestimonioPage(Long idUsuLong, Usuario nombre) {
 		boolean existeUsuario;
 		ModelAndView modelAndView = new ModelAndView();
 		if (usuarioService.existeUsuario(idUsuLong)) {
 			modelAndView.setViewName("nuevo_testimonio");
 			modelAndView.addObject("testimonio", new Testimonio());
+			modelAndView.addObject("nombre", usuarioService.obtenerUsuario());
 			modelAndView.addObject("usuario", usuarioService.buscarUsuario(idUsuLong));
 		} else {
 			existeUsuario = false;
@@ -70,11 +72,19 @@ public class TestimonioController {
 		}
 		return modelAndView;
 	}
+	
+	@GetMapping("/nuevo")
+	public String getNuevoTestimonio(Model model) {
+		boolean edicion=false;
+		model.addAttribute("testimonio", new Testimonio());
+		model.addAttribute("edicion", edicion);
+		return "nuevo_testimonio";
+	}
 
 	@PostMapping("/guardar")
 	public ModelAndView agregarTestimonio(@Valid @ModelAttribute("testimonio") Testimonio testimonio,
 			BindingResult result, @RequestParam("file") MultipartFile imagen) throws IOException {
-		ModelAndView modelAndView = new ModelAndView("gestion_testimonio");
+		ModelAndView modelAndView = new ModelAndView("gestion_dato_testimonio");
 		if (result.hasErrors()) {
 			modelAndView.setViewName("nuevo_testimonio");
 			modelAndView.addObject("edicion", false);
@@ -112,19 +122,19 @@ public class TestimonioController {
 	public String modificarTestimonio(@Valid @ModelAttribute("testimonio") Testimonio testimonioModificado,
 			@RequestParam("file") MultipartFile imagen) throws IOException {
 		testimonioService.actualizarTestimonio(testimonioModificado, imagen);
-		return "redirect:/testimonio/gestion";
+		return "redirect:/testimonio/datos";
 	}
 
 	@GetMapping("/eliminar/{id}")
 	public String eliminarTestimonio(@PathVariable(value = "id") Long id) {
 		testimonioService.eliminarTestimonio(id);
-		return "redirect:/testimonio/gestion";
+		return "redirect:/testimonio/datos";
 	}
 
 	@GetMapping("/gestion")
 	public String getGestionTestimonioPage(Model model) {
 		model.addAttribute("testimonios", testimonioService.obtenerTodosLosTestimonios());
-		return "gestion_testimonios";
+		return "gestion_dato_testimonio";
 	}
 
 	@GetMapping("/{id}")
@@ -132,6 +142,16 @@ public class TestimonioController {
 		modelAndView.addObject("testimonio", testimonioService.obtenerTestimonioEncontrado(id));
 		modelAndView.setViewName("testimonio");
 		return modelAndView;
+	}
+	
+	@GetMapping("/nombre-de-ususario")
+	public String getNuevoUsuarioPage(Model model) {
+	    boolean edicion=false;
+	    Usuario usuario = usuarioService.obtenerUsuario();
+	    model.addAttribute("usuario", usuario);
+	    model.addAttribute("edicion", edicion);
+	    model.addAttribute("nombreUsuario", usuario.getNombre());
+	    return "nuevo_usuario";
 	}
 
 }

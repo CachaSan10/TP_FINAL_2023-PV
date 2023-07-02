@@ -17,19 +17,15 @@
 		<!--Uso del fragmento header -->
 		<header th:replace="~{layouts/header :: header}"></header>
 		<nav th:replace="~{layouts/nav :: nav}"></nav>
-		<div class="form-register-testimonio">
+		<h1 th:each="usuario: ${testimonio.usuario}" th:text="${usuario.nombre}"></h1>
+		<div class="card">
+			<div class="form-register-testimonio">
 			<form
 				th:action="${edicion}?@{/testimonio/modificar/}+${testimonio.id}:@{/testimonio/guardar}"
 				th:object="${testimonio}" method="post"
 				enctype="multipart/form-data">
 				<h3 th:text="${edicion}?'Modificar Testimonio':'Agregar Testimonio'"></h3>
-				<div class="mb-3">
-					<label for="idUsuario" class="form-label">Usuario</label> <input
-						th:field="*{usuario}" type="text" class="form-control controls"
-						name="usuario" id="idUsuario" aria-describedby="UsuarioConsejo">
-					<div class="text-danger" th:if="${#fields.hasErrors('usuario')}"
-						th:errors="*{usuario}"></div>
-				</div>
+				
 				<label for="idcomentario" class="form-label">Comentario</label>
 				<textarea th:field="*{comentario}" class="form-control"
 					id="idcomentario" rows="15" cols="5" name="comentario"></textarea>
@@ -42,11 +38,12 @@
 
 				</div>
 				<a class="btn btn-primary btn-testimonio"
-					th:href="@{/testimonio}">Cancelar</a>
+					th:href="@{/testimonio/id-usuario-testimonio}">Cancelar</a>
 
 				<button type="submit" th:text="${edicion}?'Modificar':'Agregar'"
 					class="btn btn-success btn-nuevo-testimonio"></button>
 			</form>
+		</div>
 		</div>
 		<!--Uso del fragmento footer -->
 		<footer th:replace="~{layouts/footer :: footer}"></footer>
