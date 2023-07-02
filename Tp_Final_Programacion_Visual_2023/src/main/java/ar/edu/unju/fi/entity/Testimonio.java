@@ -2,6 +2,7 @@ package ar.edu.unju.fi.entity;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import jakarta.persistence.Column;
@@ -12,7 +13,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -34,13 +34,13 @@ public class Testimonio {
 	
 	private Long id;
 
-	@FutureOrPresent(message = "La fecha del testimonio debe ser posterior o igual a la fecha actual")
-	@NotNull(message = "La fecha del testimonio es requerida")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Column(name = "fecha_publicacion")
 	private LocalDate fecha;
 
 	@NotNull(message = "El usuario del testimonio es requerido")
-	@OneToOne()
-	@JoinColumn(name="usu_id")
+	@JoinColumn(name="usuario_id")
+	@OneToOne
 	private Usuario usuario;
 
 	@Size(min = 1, max = 200, message = "El comentario debe tener entre 1 y 200 caracteres")
@@ -54,8 +54,7 @@ public class Testimonio {
 
 	}
 
-	public Testimonio(Long id,
-			@FutureOrPresent(message = "La fecha del testimonio debe ser posterior o igual a la fecha actual") @NotNull(message = "La fecha del testimonio es requerida") LocalDate fecha,
+	public Testimonio(Long id, LocalDate fecha,
 			@NotNull(message = "El usuario del testimonio es requerido") Usuario usuario,
 			@Size(min = 1, max = 200, message = "El comentario debe tener entre 1 y 200 caracteres") String comentario,
 			String imagen, boolean estado) {
@@ -83,7 +82,7 @@ public class Testimonio {
 		this.fecha = fecha;
 	}
 
-	public Usuario getUsuario() {
+	public  Usuario getUsuario() {
 		return usuario;
 	}
 

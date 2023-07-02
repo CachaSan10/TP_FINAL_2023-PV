@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<!--Especificacion de viewport -->
+<meta name="viewport"
+	content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+<title>Bienestar en Accion</title>
+<!-- Bootstrap referencia  -->
+<link th:rel="stylesheet"
+	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+<!-- Cdn para cargar estilos de Font Awesome-->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+	integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<!-- Css referencia-->
+<link th:rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<div class="container">
+	<!--Uso del fragmento header -->
+		<header th:replace="~{layouts/header :: header}"></header>
+
+		<!--Uso del fragmento nav -->
+		<header th:replace="~{layouts/nav :: nav}"></header>
+		
+		<a th:href="@{/gestion/datos}" class="btn btn-primary">Volver al menu Principal</a>
+		 <a  th:href="@{/testimonio/nuevo}" class="btn  btn-success"  >Agregar</a>
+		
+		<div class="card">
+			<h1 class="card-title">Gestion de Testimonios</h1>
+			<div class="card-body">
+		<table class="table table-success table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Ususario</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="testimonio : ${testimonio}">
+      <th scope="row"  th:text="${testimonio.id}"></th>
+      <td  th:text="${testimonio.usuario}">Mark</td>
+      <td>
+       <div class="contenedor-boton">
+   <a th:href="@{/testimonio/modificar/}+${testimonio.id}" class="btn btn-warning" >Modificar</a>
+   <a th:href="@{/testimonio/eliminar/}+${testimonio.id}" class="btn btn-danger">Eliminar</a>
+      <a th:href="@{/consejo/}+${testimonio.id}" class="btn btn-light">Ver</a>
+   
+</div>
+      </td>
+    </tr>
+  
+  </tbody>
+</table>
+		</div>
+			
+		</div>
+		
+		<!--Uso del fragmento footer -->
+	<footer th:replace="~{layouts/footer :: footer}"></footer>
+	</div>
+	<!-- Configuracion para usar bootstrap js -->
+	<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

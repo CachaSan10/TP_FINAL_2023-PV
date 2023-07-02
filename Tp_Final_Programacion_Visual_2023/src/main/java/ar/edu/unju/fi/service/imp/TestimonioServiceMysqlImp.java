@@ -5,12 +5,15 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import ar.edu.unju.fi.entity.Testimonio;
+import ar.edu.unju.fi.entity.Usuario;
 import ar.edu.unju.fi.repository.ITestimonioRepository;
 import ar.edu.unju.fi.service.ITestimonioService;
+import ar.edu.unju.fi.service.IUsuarioService;
 import ar.edu.unju.fi.util.UploadFile;
 
 
@@ -25,6 +28,10 @@ public class TestimonioServiceMysqlImp implements ITestimonioService{
 	
 	@Autowired
 	private Testimonio testimonio;
+	
+	@Autowired
+	@Qualifier("usuarioServiceMysqlImp")
+	private IUsuarioService usuarioService;
 	
 	@Override
 	public List<Testimonio> obtenerTodosLosTestimonios() {
