@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.entity.Testimonio;
 import ar.edu.unju.fi.service.ITestimonioService;
+import ar.edu.unju.fi.service.IUsuarioService;
 import ar.edu.unju.fi.util.UploadFile;
 import io.github.classgraph.Resource;
 import jakarta.validation.Valid;
@@ -33,6 +34,10 @@ public class TestimonioController {
 	@Autowired
 	@Qualifier("testimonioServiceMysqlImp")
 	private ITestimonioService testimonioService;
+	
+	@Autowired
+	@Qualifier("usuarioServiceMysqlImp")
+	private IUsuarioService usuarioService;
 
 	@Autowired
 	private UploadFile uploadFile;
@@ -42,13 +47,28 @@ public class TestimonioController {
 		model.addAttribute("testimonio", testimonioService.obtenerTodosLosTestimonios());
 		return "testimonio";
 	}
-
-	@GetMapping("/nuevo")
-	public String getAgregarTestimonioPage(Model model) {
-		boolean edicion = false;
-		model.addAttribute("testimonio", new Testimonio());
-		model.addAttribute("edicion", edicion);
-		return "nuevo_testimonio";
+	
+	@GetMapping("/id-usuario-testimonio")
+	public String getIngresarIdUsuarioTestimonio(Model model) {
+		boolean existeUsuario=true;
+		model.addAttribute("existeUsuario", existeUsuario);
+		return"id-usuario-testimonio";
+	}
+	
+	@GetMapping("/nuevo-testimonio")
+	public ModelAndView obtenerFormularioTestimonioPage(Long idUsuLong) {
+		boolean existeUsuario;
+		ModelAndView modelAndView = new ModelAndView();
+		if (usuarioService.existeUsuario(idUsuLong)) {
+			modelAndView.setViewName("nuevo_testimonio");
+			modelAndView.addObject("testimonio", new Testimonio());
+			modelAndView.addObject("usuario", usuarioService.buscarUsuario(idUsuLong));
+		} else {
+			existeUsuario = false;
+			modelAndView.addObject("existeUsuario", existeUsuario);
+			modelAndView.setViewName("id-usuario-testimonio");
+		}
+		return modelAndView;
 	}
 
 	@PostMapping("/guardar")

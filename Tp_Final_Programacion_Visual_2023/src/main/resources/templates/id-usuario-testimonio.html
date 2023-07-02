@@ -14,16 +14,21 @@
 	<div class="container">
 		<header th:replace="~{layouts/header :: header}"></header>
 		<nav th:replace="~{layouts/nav :: nav}"></nav>
-		<div class="row">
-				<h2 class="my-4">Id de Usuario</h2>
-			</div>
-		<div class="mb-3">
-	    <label for="idUsuario" class="form-label">Ingrese Id de Usuario</label>
-	    <input type="number"  name="idUsuario" class="form-control" id="idUsuario">
-	        <div class="text-danger" th:text="${existeUsuario}?'':'No esta registrado el usuario'" ></div>
-	
-	  	</div>
-	 	 <button type="submit" class="btn btn-primary">Agregar Testimonio</button>
+		<div class="card">
+			<form th:action="@{/testimonio/nuevo-testimonio}" method="get">
+		  		<div class="mb-3">
+			    	<label for="idUsuLong" class="form-label">Ingrese Id de Usuario</label>
+			    	<input type="number"  name="idUsuLong" class="form-control" id="idUsuLong">
+			        <div class="text-danger" th:text="${existeUsuario}?'':'Usuario no encontrado o ID de usuario inválido'" ></div>
+		
+		 		</div>
+	  			<button type="submit" class="btn btn-primary">Agregar nuevo testimonio</button>
+	  			<a class="btn btn-primary btn-testimonio"
+					th:href="@{/testimonio/listado}">Volver</a>
+	  		</form>
+  		</div>
+
+		
 	 	 <footer th:replace="~{layouts/footer :: footer}"></footer>
 	</div>
 	<!-- Configuracion para usar bootstrap js -->
