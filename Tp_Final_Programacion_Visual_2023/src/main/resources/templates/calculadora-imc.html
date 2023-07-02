@@ -38,7 +38,7 @@
   <img src="..." class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">Calculadora IMC</h5>
-    <form th:action="@{/imc/calcular-imc}" th:object="${indiceMasaCorporal}" method="post">
+    <form th:action="@{/imc/calcular-imc}" th:object="${indiceMasaCorporal}" method="get">
   <div class="mb-3">
     <label for="idUsuario" class="form-label">Ingrese Id de Usuario</label>
     <input type="number"  name="idUsuario" class="form-control" id="idUsuario">

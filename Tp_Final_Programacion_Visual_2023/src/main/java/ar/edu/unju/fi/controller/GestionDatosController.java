@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import ar.edu.unju.fi.entity.Usuario;
@@ -24,7 +23,7 @@ public class GestionDatosController {
         return "autenticacion";
     }
     
-    @PostMapping("/autenticar")
+    @GetMapping("/autenticar")
     public String postAutenticacion(Long id,Model model) {
         if (usuarioService.existeUsuario(id) && usuarioService.buscarUsuario(id).isAdministrador()==true) {
         	

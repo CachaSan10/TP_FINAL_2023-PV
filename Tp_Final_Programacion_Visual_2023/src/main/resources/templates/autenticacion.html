@@ -26,7 +26,7 @@
 					<h3  class="text-center mb-3">Autenticacion</h3>
 					<div class="card-body">
 						<!--Formulario de autenticacion admin -->
-						<form  th:action="@{/gestion/autenticar}"   method="post">
+						<form  th:action="@{/gestion/autenticar}"   method="get">
 							<div class="form-group">
 								<label for="idUsuario" class="form-label">Ingrese ID de Admin : </label>
 								<input  class="form-control" type="number" name="id" id="id" placeholder="ID" >
