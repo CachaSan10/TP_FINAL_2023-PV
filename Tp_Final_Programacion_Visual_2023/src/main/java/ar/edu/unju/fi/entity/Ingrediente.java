@@ -27,23 +27,31 @@ import jakarta.validation.constraints.Size;
 @Table(name = "ingredientes")
 public class Ingrediente {
 	
-	/* Representa el id del ingrediente*/
+	/**
+	 * Representa el id del ingrediente
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ingre_id")
 	private Long id;
 	
-	/* Representa el nombre del ingrediente*/
+	/**
+	 * Representa el nombre del ingrediente
+	 */
 	@NotEmpty()
 	@Size(min=6, max=30)
 	@Column(name = "ingre_nombre")
 	private String nombre;
 	
-	/* Representa la receta que entan vinculdos los ingredientes*/
+	/**
+	 * Representa la lista receta que entan vinculado con el ingrediente
+	 */
 	@ManyToMany(mappedBy = "ingredientes")
 	private List<Receta> recetas;
 
-	/* Representa la disponibilidad del ingrediente */
+	/**
+	 * Representa la disponibilidad del ingrediente en la base de datos
+	 */
 	private boolean estado;
 	
 	/**

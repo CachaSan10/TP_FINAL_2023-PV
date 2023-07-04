@@ -24,8 +24,8 @@
 						<h3 th:text="${edicion}?'Modificar Receta':'Agregar Receta'" class="text-center mb-3"></h3>
 						<div class="card-body">
 							<!--Formulario de alta/edicion ingredientes -->
-							<form th:action="${edicion}?@{/receta/modificar/}+${receta.id}:@{/receta/guardar}"
-								th:object="${receta}" method="post">
+							<form th:action="${edicion}?@{/receta/modificar/}+${receta.id}:@{/receta/guardar}" th:object="${receta}"
+								method="post" enctype="multipart/form-data">
 								<div class="form-group">
 									<label for="nombre" class="form-label">Nombre de Receta : </label>
 									<input th:field="*{nombre}" class="form-control" type="text" name="nombres"
@@ -34,20 +34,22 @@
 										th:errors="*{nombre}"></div>
 								</div>
 
-
-
-								<div class="form-check" th:each="ingrediente: ${ingredientes}">
+								
+								<div class="form-check" >
+									<label class="form-check-label" 
+										>
 									<input class="form-check-input" type="checkbox" th:value="${ingrediente.id}"
-										id="idIngrediente" th:field="*{ingredientes}">
-									<label class="form-check-label" for="idIngrediente" th:text="${ingrediente.nombre}">
-									</label>
+										 th:field="${receta.ingredientes}" th:each="ingrediente: ${ingredientes}" th:text="${ingrediente.nombre}">
+										</label>
 								</div>
+								
+
+
 
 								<div class="form-group">
 									<label for="idPreparacion" class="form-label">Preparacion de Receta : </label>
-									<textarea th:field="*{preparacion}" class="form-control" 
-										name="preparacion" id="idPreparacion" rows="15" cols="5"
-										placeholder="preparacion">
+									<textarea th:field="*{preparacion}" class="form-control" name="preparacion"
+										id="idPreparacion" rows="15" cols="5" placeholder="preparacion">
 									</textarea>
 
 									<div class="text-danger" th:if="${#fields.hasErrors('preparacion')}"
@@ -62,12 +64,32 @@
 										th:errors="*{resumen}"></div>
 								</div>
 
-								<div class="form-group">
-									<label for="idCategoria" class="form-label">Categoria de Receta : </label>
-									<input th:field="*{categoria}" class="form-control" type="text" name="resumen"
-										id="idCategoria" placeholder="categoria">
-									<div class="text-danger" th:if="${#fields.hasErrors('categoria')}"
-										th:errors="*{categoria}"></div>
+								<div class="mb-2 row">
+									<label for="idCategoria" class="col-sm-12 col-lg-3 col-form-label">Seleccione
+										categoria de comida:</label>
+									<div class="col-sm-12 col-lg-9">
+										<select class="form-select" id="idCategoria" th:field="*{categoria}"
+											name="categoria">
+											<option value="0" selected>Seleccione una opción...</option>
+											<option value="Carnes">Carnes</option>
+											<option value="Bebidas">Bebidas</option>
+											<option value="Dulces">Dulces</option>
+											<option value="Ensaladas">Ensaladas</option>
+											<option value="Legumbres y Cereales">Legumbres y Cereales</option>
+											<option value="Pescados">Pescados</option>
+											<option value="Pan">Pan</option>
+											<option value="Sopas y Cremas">Sopas y Cremas</option>
+										</select>
+										<div class="text-danger" th:if="${#fields.hasErrors('categoria')}"
+											th:errors="*{categoria}"></div>
+									</div>
+								</div>
+
+
+								<div class="input-group mb-3">
+									<input type="file" class="form-control" id="file" name="file"
+										th:text="${receta.imagen}">
+									<label class="input-group-text" for="file">Subir Imagen</label>
 								</div>
 
 								<br>

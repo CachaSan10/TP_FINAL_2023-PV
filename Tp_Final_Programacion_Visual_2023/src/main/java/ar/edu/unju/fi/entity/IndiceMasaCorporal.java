@@ -26,28 +26,39 @@ import jakarta.validation.constraints.PastOrPresent;
 @Table(name = "indices_masa_corporal")
 public class IndiceMasaCorporal {
 	
-	/* Representa el id de indices de masa corporal */
+	
+	/**
+	 * Representa el id del indice de masa corporal
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "imc_id")
 	private Long id;
 	
-	/* Representa la fecha de indice de masa corporal que registro el usuario */
+	/**
+	 *  Representa la fecha de indice de masa corporal que registro el usuario
+	 */
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@PastOrPresent(message = "La fecha de registro de Imc debe ser anterior o actual a la fecha actual")
 	@Column(name = "imc_fecha")
 	private LocalDate fechaImc;
 	
-	/* Representa el usuario al cual pertenece el indice de masa corporal */
+	/**
+	 * Representa el usuario al cual pertenece el indice de masa corporal 
+	 */
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "usu_id")
 	private Usuario usuario;
 	
-	/* Representa la disponibilidad del indice de masa corporal en la base de datos */
+	/**
+	 * Representa la disponibilidad del indice de masa corporal en la base de datos
+	 */
 	@Column(name = "imc_estado")
 	private boolean estado;
 	
-	/* Representa el peso del usuario*/
+	/**
+	 * Representa el peso del usuario
+	 */
 	@Column(name = "imc_peso")
 	private double peso;
 
@@ -66,13 +77,15 @@ public class IndiceMasaCorporal {
 	 * @param usuario representa el usuario que pertenece al indice de masa corporal.
 	 * @param estado  representa la disponibilidad del indice de masa corporal en la base de datos.
 	 */
-	public IndiceMasaCorporal(Long id, LocalDate fechaImc, Usuario usuario, boolean estado) {
+	public IndiceMasaCorporal(Long id,
+			@PastOrPresent(message = "La fecha de registro de Imc debe ser anterior o actual a la fecha actual") LocalDate fechaImc,
+			Usuario usuario, boolean estado, double peso) {
 		this.id = id;
 		this.fechaImc = fechaImc;
 		this.usuario = usuario;
 		this.estado = estado;
+		this.peso = peso;
 	}
-
 
 	/**
 	 * @return the id
@@ -80,6 +93,7 @@ public class IndiceMasaCorporal {
 	public Long getId() {
 		return id;
 	}
+
 
 
 	/**
@@ -157,7 +171,6 @@ public class IndiceMasaCorporal {
 
 	/**
 	 * Metodo que calcula el indice de masa corporal
-	 * @param peso representa el peso que ingresa el usuario
 	 * @return el resultado del indice de masa corporal
 	 */
 	public String calcularImc() {
