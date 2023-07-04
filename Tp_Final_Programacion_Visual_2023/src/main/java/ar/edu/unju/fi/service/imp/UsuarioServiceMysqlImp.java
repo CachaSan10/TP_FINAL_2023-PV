@@ -25,7 +25,8 @@ public class UsuarioServiceMysqlImp implements IUsuarioService {
 	private Usuario usuario;
 	
 	/**
-	 * Metodo que retorna objeto usuario
+	 * Metodo que retorna objeto usuario.
+	 * @return objeto de tipo usuario.
 	 */
 	@Override
 	public Usuario obtenerUsuario() {
@@ -34,7 +35,8 @@ public class UsuarioServiceMysqlImp implements IUsuarioService {
 	}
 
 	/**
-	 * Metodo para guardar un usuario
+	 * Metodo para guardar un usuario en la base de datos.
+	 * @param usuario representa un usuario.
 	 */
 	@Override
 	public void guardarUsuario(Usuario usuario) {
@@ -44,7 +46,8 @@ public class UsuarioServiceMysqlImp implements IUsuarioService {
 	}
 
 	/**
-	 * Metodo para modificar usuario
+	 * Metodo para modificar usuario.
+	 * @param usuario representa un usuario.
 	 */
 	@Override
 	public void modificarUsuario(Usuario usuario) {
@@ -55,7 +58,8 @@ public class UsuarioServiceMysqlImp implements IUsuarioService {
 
 	/**
 	 * Eliminacion logica de usuario
-	 * cambiando el atributo  estado a falso
+	 * cambiando el atributo  estado a falso.
+	 * @param usuario representa a un usuario.
 	 */
 	@Override
 	public void eliminarUsuario(Usuario usuario) {
@@ -66,7 +70,8 @@ public class UsuarioServiceMysqlImp implements IUsuarioService {
 	
 	/**
 	 * Metodo para obtener la lista de usuarios
-	 * cuyo estado sea true (activo)
+	 * cuyo estado sea true (activo).
+	 * @return la lista de usuarios.
 	 */
 	@Override
 	public List<Usuario> obtenerLista() {
@@ -75,7 +80,9 @@ public class UsuarioServiceMysqlImp implements IUsuarioService {
 	}
 
 	/**
-	 * Metodo que retorna  usuario por id
+	 * Metodo que retorna  usuario por id.
+	 * @param id representa el id de un usuario.
+	 * @return un usuario cuyo id es el solicitado.
 	 */
 	@Override
 	public Usuario buscarUsuario(Long id) {
@@ -84,7 +91,9 @@ public class UsuarioServiceMysqlImp implements IUsuarioService {
 
 	/**
 	 * Metodo que verifica la existencia
-	 * de un usuario
+	 * de un usuario.
+	 * @param id representa el id de un usuario.
+	 * @return un valor booleano true si existe un usuario.
 	 */
 	@Override
 	public boolean existeUsuario(Long id) {

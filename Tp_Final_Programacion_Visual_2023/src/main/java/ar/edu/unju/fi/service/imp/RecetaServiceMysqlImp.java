@@ -25,7 +25,8 @@ public class RecetaServiceMysqlImp implements IRecetaService {
 	private IRecetaRepository recetaRepository;
 	
 	/**
-	 * Metodo que retorna objeto receta
+	 * Metodo que retorna objeto receta.
+	 * @return un objeto de tipo usuario.
 	 */
 	@Override
 	public Receta obtenerReceta() {
@@ -34,6 +35,7 @@ public class RecetaServiceMysqlImp implements IRecetaService {
 
 	/**
 	 * Metodo para guardar un receta
+	 * @param receta representa  objeto de tipo receta
 	 */
 	@Override
 	public void guardarReceta(Receta receta) {
@@ -43,7 +45,8 @@ public class RecetaServiceMysqlImp implements IRecetaService {
 
 	/**
 	 * Metodo para obtener la lista de recetas
-	 * cuyo estado sea true (activo)
+	 * cuyo estado sea true (activo).
+	 * @return la lista de recetas cuyo estado sea true.
 	 */
 	@Override
 	public List<Receta> obtenerRecetas() {
@@ -52,7 +55,8 @@ public class RecetaServiceMysqlImp implements IRecetaService {
 
 	/**
 	 * Eliminacion logica de receta
-	 * cambiando el atributo  estado a falso
+	 * cambiando el atributo  estado a falso.
+	 * @param id representa el id de una receta.
 	 */
 	@Override
 	public void eliminarReceta(Long id) {
@@ -64,6 +68,8 @@ public class RecetaServiceMysqlImp implements IRecetaService {
 
 	/**
 	 * Metodo que retorna  receta por id
+	 * @param id representa el id de una receta a buscar.
+	 * @return la receta encontrada.
 	 */
 	@Override
 	public Receta buscarReceta(Long id) {
@@ -72,6 +78,7 @@ public class RecetaServiceMysqlImp implements IRecetaService {
 
 	/**
 	 * Metodo para modificar usuario
+	 * @param recetaModificada representa una receta a modificar.
 	 */
 	@Override
 	public void modificarReceta(Receta recetaModificada) {
@@ -81,6 +88,8 @@ public class RecetaServiceMysqlImp implements IRecetaService {
 
 	/**
 	 * Metodo que filtra recetas por su categoria
+	 * @param categoria representa la categoria de una receta.
+	 * @return la categoria de una receta.
 	 */
 	@Override
 	public List<Receta> filtrarRecetaCategoria(String categoria) {
