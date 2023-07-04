@@ -1,6 +1,5 @@
 package ar.edu.unju.fi.controller;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import org.springframework.http.HttpHeaders;
 
@@ -18,13 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.core.io.Resource;
 
 import ar.edu.unju.fi.entity.Testimonio;
 import ar.edu.unju.fi.entity.Usuario;
 import ar.edu.unju.fi.service.ITestimonioService;
 import ar.edu.unju.fi.service.IUsuarioService;
 import ar.edu.unju.fi.util.UploadFile;
-import io.github.classgraph.Resource;
 import jakarta.validation.Valid;
 
 @Controller
@@ -33,9 +32,15 @@ import jakarta.validation.Valid;
 public class TestimonioController {
 
 	@Autowired
+	private Testimonio unTestimonio;
+
+	@Autowired
+	private Usuario unUsuario;
+
+	@Autowired
 	@Qualifier("testimonioServiceMysqlImp")
 	private ITestimonioService testimonioService;
-	
+
 	@Autowired
 	@Qualifier("usuarioServiceMysqlImp")
 	private IUsuarioService usuarioService;
@@ -43,115 +48,87 @@ public class TestimonioController {
 	@Autowired
 	private UploadFile uploadFile;
 
-	@GetMapping("/listado")
-	public String getListaTestimonio(Model model) {
-		model.addAttribute("testimonio", testimonioService.obtenerTodosLosTestimonios());
-		return "testimonio";
+	@GetMapping("/lista")
+	public ModelAndView  getPageTestimonios(Model model) {
+		ModelAndView mav= new ModelAndView("gestion_dato_testimonio");
+		mav.addObject("testimonios", testimonioService.obtenerTodosLosTestimonios());
+		return mav;
 	}
-	
-	@GetMapping("/id-usuario-testimonio")
-	public String getIngresarIdUsuarioTestimonio(Model model) {
-		boolean existeUsuario=true;
-		model.addAttribute("existeUsuario", existeUsuario);
-		return"id-usuario-testimonio";
-	}
-	
-	@GetMapping("/nuevo-testimonio")
-	public ModelAndView obtenerFormularioTestimonioPage(Long idUsuLong, Usuario nombre) {
-		boolean existeUsuario;
-		ModelAndView modelAndView = new ModelAndView();
-		if (usuarioService.existeUsuario(idUsuLong)) {
-			modelAndView.setViewName("nuevo_testimonio");
-			modelAndView.addObject("testimonio", new Testimonio());
-			modelAndView.addObject("nombre", usuarioService.obtenerUsuario());
-			modelAndView.addObject("usuario", usuarioService.buscarUsuario(idUsuLong));
-		} else {
-			existeUsuario = false;
-			modelAndView.addObject("existeUsuario", existeUsuario);
-			modelAndView.setViewName("id-usuario-testimonio");
-		}
-		return modelAndView;
-	}
-	
-	@GetMapping("/nuevo")
-	public String getNuevoTestimonio(Model model) {
-		boolean edicion=false;
-		model.addAttribute("testimonio", new Testimonio());
-		model.addAttribute("edicion", edicion);
-		return "nuevo_testimonio";
+
+	@GetMapping("/formulario")
+	public ModelAndView getPageFormTestimonio() {
+		
+		unTestimonio= new Testimonio();
+		ModelAndView mav= new ModelAndView("nuevo_testimonio");
+		mav.addObject("unTestimonio", unTestimonio);
+		mav.addObject("usuarios",usuarioService.obtenerLista());
+		return mav;
 	}
 
 	@PostMapping("/guardar")
-	public ModelAndView agregarTestimonio(@Valid @ModelAttribute("testimonio") Testimonio testimonio,
-			BindingResult result, @RequestParam("file") MultipartFile imagen) throws IOException {
-		ModelAndView modelAndView = new ModelAndView("gestion_dato_testimonio");
+	public ModelAndView postPageSaveTestimonio(@Valid @ModelAttribute("unTestimonio") Testimonio testimonio,
+			BindingResult result, @RequestParam("file") MultipartFile image) throws Exception {
+		ModelAndView mav;
 		if (result.hasErrors()) {
-			modelAndView.setViewName("nuevo_testimonio");
-			modelAndView.addObject("edicion", false);
-			return modelAndView;
+			mav = new ModelAndView("nuevo_testimonio");
+			mav.addObject("usuarios", usuarioService.obtenerLista());
+		} else {
+			unUsuario = usuarioService.buscarUsuario(testimonio.getUsuario().getId());
+			testimonio.setUsuario(unUsuario);
+			if (testimonio.getId() > 0) {
+				unTestimonio = testimonioService.findTestimonioById(testimonio.getId());
+				if (!image.isEmpty()) {
+					if (unTestimonio.getImagen() != null && unTestimonio.getImagen().length() > 0)
+						uploadFile.delete(unTestimonio.getImagen());
+					String uniqueFileName = uploadFile.copy(image);
+					testimonio.setImagen(uniqueFileName);
+				} else {
+					if (unTestimonio.getImagen() != null)
+						testimonio.setImagen(unTestimonio.getImagen());
+				}
+			} else {
+				if (!image.isEmpty()) {
+					String uniqueFileName = uploadFile.copy(image);
+					testimonio.setImagen(uniqueFileName);
+				}
+			}
+			testimonioService.agregarTestimonio(testimonio);
+			mav = new ModelAndView("gestion_dato_testimonio");
+			mav.addObject("testimonios", testimonioService.obtenerTodosLosTestimonios());
 		}
-
-		testimonioService.agregarTestimonio(testimonio, imagen);
-		modelAndView.addObject("testimonio", testimonioService.obtenerTodosLosTestimonios());
-
-		return modelAndView;
-	}
-
-	@GetMapping("/cargar/{imagen}")
-	public ResponseEntity<Resource> goImage(@PathVariable String imagen) {
-		Resource resource = null;
-		try {
-			resource = (Resource) uploadFile.load(imagen);
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
-		return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + imagen + "\"")
-				.body(resource);
+		return mav;
 	}
 
 	@GetMapping("/modificar/{id}")
-	public String getModificarTestimonioPage(Model model, @PathVariable(value = "id") Long id) {
-		boolean edicion = true;
-		model.addAttribute("testimonio", testimonioService.obtenerTestimonioEncontrado(id));
-		model.addAttribute("edicion", edicion);
-
-		return "nuevo_testimonio";
+	public ModelAndView getPageEditTestimonio(@PathVariable("id") Long id) {
+		unTestimonio = testimonioService.findTestimonioById(id);
+		ModelAndView mav = new ModelAndView("nuevo_testimonio");
+		mav.addObject("unTestimonio", unTestimonio);
+		mav.addObject("usuarios", usuarioService.obtenerLista());
+		return mav;
 	}
 
-	@PostMapping("/modificar/{id}")
-	public String modificarTestimonio(@Valid @ModelAttribute("testimonio") Testimonio testimonioModificado,
-			@RequestParam("file") MultipartFile imagen) throws IOException {
-		testimonioService.actualizarTestimonio(testimonioModificado, imagen);
-		return "redirect:/testimonio/datos";
+	@GetMapping("/detalle/{id}")
+	public ModelAndView getPageMostrarTestimonio(@PathVariable("id") Long id) {
+		ModelAndView mav = new ModelAndView("detalleTestimonio");
+		unTestimonio = testimonioService.findTestimonioById(id);
+		mav.addObject("comentario", "MUESTRA DE TESTIMONIO" + unTestimonio.getComentario());
+		mav.addObject("filename", unTestimonio.getImagen());
+		return mav;
 	}
 
-	@GetMapping("/eliminar/{id}")
-	public String eliminarTestimonio(@PathVariable(value = "id") Long id) {
-		testimonioService.eliminarTestimonio(id);
-		return "redirect:/testimonio/datos";
+	@GetMapping("/uploads/{filename}")
+	public ResponseEntity<Resource> goImage(@PathVariable String filename) {
+		Resource resource = null;
+		try {
+			resource = (Resource) uploadFile.load(filename);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" +  resource.getFilename() + "\"")
+				.body(resource);
 	}
 
-	@GetMapping("/gestion")
-	public String getGestionTestimonioPage(Model model) {
-		model.addAttribute("testimonios", testimonioService.obtenerTodosLosTestimonios());
-		return "gestion_dato_testimonio";
-	}
-
-	@GetMapping("/{id}")
-	public ModelAndView getTestimonioPage(ModelAndView modelAndView, @PathVariable(value = "id") Long id) {
-		modelAndView.addObject("testimonio", testimonioService.obtenerTestimonioEncontrado(id));
-		modelAndView.setViewName("testimonio");
-		return modelAndView;
-	}
-	
-	@GetMapping("/nombre-de-ususario")
-	public String getNuevoUsuarioPage(Model model) {
-	    boolean edicion=false;
-	    Usuario usuario = usuarioService.obtenerUsuario();
-	    model.addAttribute("usuario", usuario);
-	    model.addAttribute("edicion", edicion);
-	    model.addAttribute("nombreUsuario", usuario.getNombre());
-	    return "nuevo_usuario";
-	}
 
 }

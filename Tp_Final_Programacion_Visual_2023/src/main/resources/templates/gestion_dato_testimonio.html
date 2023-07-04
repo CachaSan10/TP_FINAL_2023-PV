@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
 <meta charset="UTF-8">
 <!--Especificacion de viewport -->
@@ -27,7 +27,7 @@
 		<header th:replace="~{layouts/nav :: nav}"></header>
 		
 		<a th:href="@{/gestion/datos}" class="btn btn-primary">Volver al menu Principal</a>
-		 <a  th:href="@{/testimonio/nuevo}" class="btn  btn-success"  >Agregar</a>
+		 <a  th:href="@{/testimonio/formulario}" class="btn  btn-success"  >Nuevo Formulario</a>
 		
 		<div class="card">
 			<h1 class="card-title">Gestion de Testimonios</h1>
@@ -42,13 +42,16 @@
   </thead>
   <tbody>
     <tr th:each="testimonio : ${testimonio}">
-      <th scope="row"  th:text="${testimonio.id}"></th>
-      <td  th:text="${testimonio.usuario}">Mark</td>
+		<td th:text="${testimonio.id}"></td>
+		<td th:text="${receta.id}"></td>
+		
+		<td></td>
+		<td></td>	     	
       <td>
        <div class="contenedor-boton">
    <a th:href="@{/testimonio/modificar/}+${testimonio.id}" class="btn btn-warning" >Modificar</a>
    <a th:href="@{/testimonio/eliminar/}+${testimonio.id}" class="btn btn-danger">Eliminar</a>
-      <a th:href="@{/consejo/}+${testimonio.id}" class="btn btn-light">Ver</a>
+      <a th:href="@{/testimonio/}+${testimonio.id}" class="btn btn-light">Ver</a>
    
 </div>
       </td>
