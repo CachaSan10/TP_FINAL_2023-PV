@@ -58,7 +58,7 @@ public class Receta {
 	/**
 	 * Representa la lista de ingredientes que contiene la receta
 	 */
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ingre_id")
 	private List<Ingrediente> ingredientes;
 	
