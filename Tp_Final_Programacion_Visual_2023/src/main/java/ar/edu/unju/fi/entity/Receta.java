@@ -30,48 +30,64 @@ import jakarta.validation.constraints.Size;
 @Table(name = "recetas")
 public class Receta {
 	
-	/* Representa el id de la receta */
+	/**
+	 * Representa el id de la receta
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "rec_id")
 	private Long id;
 	
-	/* Representa el nombre de la receta */
+	/**
+	 * Representa el nombre de la receta
+	 */
 	@NotEmpty()
 	@Size(min=6, max=20)
 	@Pattern(regexp="[a-z A-ZÀ-ÿ\\u00f1\\u00d1]*")
 	@Column(name = "rec_nombre")
 	private String nombre;
 	
-	/* Representa la categoria de la receta */
+	/**
+	 * Representa la categoria de la receta
+	 */
 	@NotEmpty()
 	@Size(min=6)
 	@Pattern(regexp="[a-z A-ZÀ-ÿ\\u00f1\\u00d1]*")
 	@Column(name = "rec_categoria")
 	private String categoria;
 	
-	/* Representa la lista de ingredientes que contiene la receta*/
+	/**
+	 * Representa la lista de ingredientes que contiene la receta
+	 */
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ingre_id")
 	private List<Ingrediente> ingredientes;
 	
-	/* Representa la preparacion de la receta */
+	/**
+	 * Representa la preparacion de la receta
+	 */
 	@NotEmpty()
 	@Size(min=10)
 	@Column(name = "rec_preparacion")
 	private String preparacion;
 	
-	/* Representa el resumen de la receta */
+	/**
+	 * Representa el resumen de la receta
+	 */
 	@NotEmpty()
 	@Size(min=10, max=100)
 	@Column(name = "rec_resumen")
 	private String resumen;
 	
-	/* Representa la imagen de la receta */
+	/**
+	 * Representa la imagen de la receta
+	 */
 	@Column(name = "rec_imagen")
 	private String imagen;
 
-	/*Representa la disponibilidad de la receta*/
+	/**
+	 * Representa la disponibilidad de la receta
+	 */
 	private boolean estado;
 	
 	/**
