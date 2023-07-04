@@ -2,11 +2,14 @@ package ar.edu.unju.fi.entity;
 
 import java.time.LocalDate;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,32 +26,32 @@ import jakarta.validation.constraints.Size;
 
 @Component
 @Entity
-@Table(name = "testimonio")
+@Table(name = "TESTIMONIOS")
 
 public class Testimonio {
 	
 	// Representa el id de testimonio
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "tes_id")
 	
 	private Long id;
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "fecha_publicacion")
 	private LocalDate fecha;
-
+	
+	@Autowired
 	@NotNull(message = "El usuario del testimonio es requerido")
-	@JoinColumn(name="usuario_id")
-	@OneToOne
+	@JoinColumn(name="usu_id")
+	@OneToOne(cascade = CascadeType.ALL , fetch = FetchType.LAZY)
 	private Usuario usuario;
 
 	@Size(min = 1, max = 200, message = "El comentario debe tener entre 1 y 200 caracteres")
 	private String comentario;
 	
+	@Column(name = "tes_imagen")
 	private String imagen;
-	
-	private boolean estado;
 
 	public Testimonio() {
 
@@ -63,7 +66,6 @@ public class Testimonio {
 		this.usuario = usuario;
 		this.comentario = comentario;
 		this.imagen = imagen;
-		this.estado = estado;
 	}
 	
 	public Long getId() {
@@ -105,20 +107,12 @@ public class Testimonio {
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
 	}
-	
-	public boolean isEstado() {
-		return estado;
-	}
-	
-	public void setEstado(boolean estado) {
-		this.estado = estado;
-	}
-
 
 	@Override
 	public String toString() {
-		return "Testimonio [id=" + id + ", fecha=" + fecha + ", usuario=" + usuario + ", comentario=" + comentario
-				+ ", imagen=" + imagen + ", estado=" + estado + "]";
+		return "Testimonio [id=" + id + ", fecha=" + fecha + ", usuario=" + usuario +", comentario=" + comentario
+				+ ", imagen=" + imagen + "]";
 	}
+
 
 }

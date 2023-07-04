@@ -17,33 +17,54 @@
 		<!--Uso del fragmento header -->
 		<header th:replace="~{layouts/header :: header}"></header>
 		<nav th:replace="~{layouts/nav :: nav}"></nav>
-		<h1 th:each="usuario: ${testimonio.usuario}" th:text="${usuario.nombre}"></h1>
 		<div class="card">
-			<div class="form-register-testimonio">
 			<form
-				th:action="${edicion}?@{/testimonio/modificar/}+${testimonio.id}:@{/testimonio/guardar}"
-				th:object="${testimonio}" method="post"
+				th:action="@{/testimonio/guardar}"
+				th:object="${unTestimonio}" method="post"
 				enctype="multipart/form-data">
-				<h3 th:text="${edicion}?'Modificar Testimonio':'Agregar Testimonio'"></h3>
+				
+				<div class="mb-3">
+				<input type="hidden" class="form-control" id="id" th:field="*{id}">
+				</div>
+				<div class="mb-3">
+					<label for="usuario" class="form-label">Usuario</label>
+ 					<select class="form-select" id="usuario" th:field="*{usuario.id}" name="usuario" 
+ 						th:classappend="${#fields.hasErrors('usuario')}? 'is-invalid' : ''">
+					<option value="0" disabled selected>SELECCIONAR</option>
+					<option th:each="u: ${usuarios}"th:value="${u.id}"
+					th:text="${u.nombre}+'-'+${u.apellido}"></option></select>
+					<p class="form-text text-danger"
+					 th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}"></p>
+				</div>
 				
 				<label for="idcomentario" class="form-label">Comentario</label>
 				<textarea th:field="*{comentario}" class="form-control"
 					id="idcomentario" rows="15" cols="5" name="comentario"></textarea>
 				<div class="text-danger" th:if="${#fields.hasErrors('comentario')}"
 					th:errors="*{comentario}"></div>
+				
 				<div class="mb-3">
-					<label for="file" class="form-label">Imagen de la
-						publicacion de Testimonio</label> <input class="form-control" type="file"
-						id="file" name="file" th:text="${testimonio.imagen}">
-
+	 				<label for="fecha" class="form-label">Año de Publicación</label>
+	 				<input type="date" class="form-control" id="fecha" th:field="*{fecha}"
+						th:classappend="${#fields.hasErrors('fecha')} ? 'isinvalid' : ''">
+					 <p class="form-text text-danger"
+					 th:if="${#fields.hasErrors('fecha')}"
+					 th:errors="*{fecha}"></p>
 				</div>
+						
+				<div class="mb-3">
+					 <label for="file" class=form-label>Imagen de Usuario</label>
+					 <input type="file" name="file" id="file" class="form-control"
+						th:text="${unTestimonio.imagen}"/> <br>
+				</div>
+				
 				<a class="btn btn-primary btn-testimonio"
-					th:href="@{/testimonio/id-usuario-testimonio}">Cancelar</a>
-
-				<button type="submit" th:text="${edicion}?'Modificar':'Agregar'"
-					class="btn btn-success btn-nuevo-testimonio"></button>
+					th:href="@{/testimonio/lista}">Cancelar</a>
+					
+				<div class="mb-3 d-flex justify-content-center">
+ 					<button type="submit" class="btn btn-success">GUARDAR</button>
+				</div>	
 			</form>
-		</div>
 		</div>
 		<!--Uso del fragmento footer -->
 		<footer th:replace="~{layouts/footer :: footer}"></footer>
