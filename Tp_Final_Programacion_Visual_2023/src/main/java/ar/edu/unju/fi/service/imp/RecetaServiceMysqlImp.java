@@ -1,12 +1,15 @@
 package ar.edu.unju.fi.service.imp;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import ar.edu.unju.fi.entity.Ingrediente;
 import ar.edu.unju.fi.entity.Receta;
 import ar.edu.unju.fi.repository.IRecetaRepository;
 import ar.edu.unju.fi.service.IRecetaService;
@@ -30,6 +33,10 @@ public class RecetaServiceMysqlImp implements IRecetaService {
 	@Autowired
 	private IRecetaRepository recetaRepository;
 	
+	@Autowired
+	@Qualifier("ingredienteServiceMysqlImp")
+	private IngredienteServiceMysqlImp ingredienteService;
+	
 	/**
 	 * Metodo que retorna objeto receta
 	 */
@@ -42,10 +49,22 @@ public class RecetaServiceMysqlImp implements IRecetaService {
 	 * Metodo para guardar un receta
 	 */
 	@Override
-	public void guardarReceta(Receta receta, MultipartFile imagen) throws IOException {
+	public void guardarReceta(Receta receta, MultipartFile imagen,Long[] idIngredientes) throws IOException {
+		List<Ingrediente> listaIngrediente = new ArrayList<Ingrediente>();
+		
+		if(idIngredientes.length==0) {
+		listaIngrediente=null;	
+		}else {
+			for(int i=0;i<idIngredientes.length;i++) {
+				listaIngrediente.add(ingredienteService.buscarIngrediente(idIngredientes[i]));
+			}
+		}
+		
+		
 		String nombreImagen = uploadFile.copy(imagen);
 		receta.setImagen(nombreImagen);
 		receta.setEstado(true);
+		receta.setIngredientes(listaIngrediente);
 		recetaRepository.save(receta);
 	}
 
@@ -82,9 +101,21 @@ public class RecetaServiceMysqlImp implements IRecetaService {
 	 * Metodo para modificar usuario
 	 */
 	@Override
-	public void modificarReceta(Receta recetaModificada, MultipartFile imagenModificada) throws IOException {
+	public void modificarReceta(Receta recetaModificada, MultipartFile imagenModificada,Long[] idIngredientes) throws IOException {
 		recetaModificada.setEstado(true);
 		
+			List<Ingrediente> listaIngrediente = new ArrayList<Ingrediente>();
+		
+		if(idIngredientes.length==0) {
+		listaIngrediente=buscarReceta(recetaModificada.getId()).getIngredientes();	
+		}else {
+			for(int i=0;i<idIngredientes.length;i++) {
+				System.out.println("id: "+idIngredientes[i]);
+				listaIngrediente.add(ingredienteService.buscarIngrediente(idIngredientes[i]));
+			}
+		}
+		
+		recetaModificada.setIngredientes(listaIngrediente);
 		if (!imagenModificada.isEmpty()) {
 			String imagenString = imagenModificada.getOriginalFilename();
 
