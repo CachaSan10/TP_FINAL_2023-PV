@@ -32,72 +32,100 @@ import jakarta.validation.constraints.Size;
 @Table(name="usuarios")
 public class Usuario {
 	
-	/* Representa el id del usuario */
+	/**
+	 * Representa el id del usuario
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="usu_id")
 	private Long id;
 	
-	/* Representa nombre del usuario */
+	/**
+	 * Representa nombre del usuario
+	 */
 	@NotEmpty(message="El nombre del usuario no puede estar vacio")
 	@Size(min=5, max=50,message="El nombre de usuario debe tener entre 5 y 50 caracteres")
 	@Column(name="usu_nombre")
 	private String nombre;
 	
-	/* Representa apellido del usuario */
+	/**
+	 * Representa apellido del usuario
+	 */
 	@NotEmpty(message="El apellido del usuario no puede estar vacio")
 	@Size(min=5, max=50,message="El nombre de usuario debe tener entre 5 y 50 caracteres")
 	@Column(name="usu_apellido")
 	private String apellido;
 	
-	/* Representa email del usuario */
+	/**
+	 * Representa email del usuario
+	 */
 	@Email(message = "Ingrese un mail valido")
 	@NotEmpty(message="El mail del usuario no puede estar vacio")	
 	@Column(name="usu_email")
 	private String email;
 	
-	/* Representa fecha de nacimiento del usuario */
+	/**
+	 * Representa fecha de nacimiento del usuario
+	 */
 	@NotNull
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Past(message = "La fecha de nacimiento debe ser anterior a la fecha actual")
 	@Column(name="usu_fecha_nacimiento")
 	private LocalDate fechaNacimiento;
 	
-	/* Representa telefono del usuario */
+	/**
+	 * Representa telefono del usuario
+	 */
 	@Pattern(regexp = "\\d+", message = "Ingrese un número de teléfono válido solo numeros			")
 	@NotEmpty(message="Este campo no puede estar vacio")
 	@Size(min=10, max=10,message="Ingrese un numero de telefono valido de 10 digitos. ")
 	@Column(name="usu_telefono")
 	private String telefono;
 	
-	/* Representa genero del usuario */
+	/**
+	 * Representa genero del usuario
+	 */
 	@NotEmpty(message="Este campo no puede estar vacio")
 	@Column(name="usu_sexo")
 	private String sexo;
 	
-	/* Representa altura del usuario */
+	/**
+	 * Representa altura del usuario
+	 */
 	@NotNull(message = "La estatura no puede estar vacía")
 	@DecimalMin(value = "1.20", inclusive = true, message = "La estatura mínima permitida es 1.20 metros")
 	@DecimalMax(value = "2.20", inclusive = true, message = "La estatura máxima permitida es 2.20 metros")
 	@Column(name="usu_estatura")
 	private Double estatura;
 	
-	/*Representa la disponibilidad del usuario*/
+	/**
+	 * Representa la disponibilidad del usuario
+	 */
 	@Column(name="usu_estado")
 	private boolean estado;
 	
-	/* Representa la lista de indice de masa corporal que le pertenecen al usuario*/
-	@OneToMany(mappedBy = "usuario") // Un usuario puede tener almacenada muchos indice de masa corporal
+	/**
+	 * Un usuario puede tener almacenada muchos indice de masa corporal
+	 */
+	@OneToMany(mappedBy = "usuario")
+	/**
+	 * Representa la lista de indice de masa corporal que le pertenecen al usuario
+	 */
 	private List<IndiceMasaCorporal> indicesMasaCorporal;
 	
 
 	@OneToOne(mappedBy = "usuario")
 	private Testimonio testimonio;
 	
-	/* Representa rol del usuario */
+	/**
+	 * Representa rol del usuario
+	 */
 	@Column(name="usu_administrador")
 	private boolean administrador;
 	
+	/**
+	 * Constructor por defecto
+	 */
 	public Usuario() {
 		
 		
@@ -182,8 +210,9 @@ public class Usuario {
 	}
 
 	/**
-	 * @param nombre the apellido to set
+	 * @param apellido the apellido to set
 	 */
+
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
@@ -196,7 +225,7 @@ public class Usuario {
 	}
 
 	/**
-	 * @param nombre the email to set
+	 * @param email the email to set
 	 */
 	public void setEmail(String email) {
 		this.email = email;
@@ -210,7 +239,7 @@ public class Usuario {
 	}
 
 	/**
-	 * @param nombre the fechaNacimiento to set
+	 * @param fechaNacimiento the fechaNacimiento to set
 	 */
 	public void setFechaNacimiento(LocalDate fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
@@ -224,7 +253,7 @@ public class Usuario {
 	}
 
 	/**
-	 * @param nombre the telefono to set
+	 * @param telefono the telefono to set
 	 */
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
@@ -238,7 +267,7 @@ public class Usuario {
 	}
 
 	/**
-	 * @param nombre the sexo to set
+	 * @param sexo the sexo to set
 	 */
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
@@ -255,7 +284,7 @@ public class Usuario {
 	}
 
 	/**
-	 * @param nombre the estatura to set
+	 * @param estatura the estatura to set
 	 */
 	public void setEstatura(Double estatura) {
 		this.estatura = estatura;

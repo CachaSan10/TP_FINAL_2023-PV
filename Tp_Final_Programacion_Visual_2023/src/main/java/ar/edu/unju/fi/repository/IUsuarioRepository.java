@@ -10,5 +10,10 @@ import ar.edu.unju.fi.entity.Usuario;
 @Repository
 public interface IUsuarioRepository extends CrudRepository<Usuario, Long> {
 
+	/**
+	 * Metodo para obtener todos los usuarios por el estado
+	 * @param estado
+	 * @return
+	 */
 	public List<Usuario> findByEstado (boolean estado);
 }
