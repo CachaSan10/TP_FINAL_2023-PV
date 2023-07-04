@@ -16,6 +16,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -50,10 +51,8 @@ public class Receta {
 	/**
 	 * Representa la categoria de la receta
 	 */
-	@NotEmpty()
-	@Size(min=6)
-	@Pattern(regexp="[a-z A-ZÀ-ÿ\\u00f1\\u00d1]*")
-	@Column(name = "rec_categoria")
+	@NotBlank(message="Debe seleccionar un día")
+	@Column(name = "rec_categoria", nullable = false)
 	private String categoria;
 	
 	/**

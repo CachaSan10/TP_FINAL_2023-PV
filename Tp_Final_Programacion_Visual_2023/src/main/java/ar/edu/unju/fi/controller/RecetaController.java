@@ -1,8 +1,14 @@
 package ar.edu.unju.fi.controller;
 
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,11 +17,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.entity.Receta;
 import ar.edu.unju.fi.service.IIngredienteService;
 import ar.edu.unju.fi.service.IRecetaService;
+import ar.edu.unju.fi.util.UploadFile;
 import jakarta.validation.Valid;
 
 @Controller
@@ -29,6 +38,9 @@ public class RecetaController {
 	@Autowired
 	@Qualifier("ingredienteServiceMysqlImp")
 	private IIngredienteService ingredienteService;
+	
+	@Autowired
+	private UploadFile uploadFile;
 	
 	@GetMapping("/gestion")
 	public String obtenerPaginaGestionDatosReceta(Model model) {
@@ -46,7 +58,8 @@ public class RecetaController {
 	}
 	
 	@PostMapping("/guardar")
-	public ModelAndView postGuardarIngredientePage(@Valid @ModelAttribute("receta") Receta receta, BindingResult result) {
+	public ModelAndView postGuardarIngredientePage(@Valid @ModelAttribute("receta") Receta receta, BindingResult result,
+			@RequestParam("file")MultipartFile imagen) throws IOException {
 		ModelAndView mav = new ModelAndView("redirect:/receta/gestion");
 		
 		if (result.hasErrors()) {
@@ -55,7 +68,7 @@ public class RecetaController {
 			mav.addObject("edicion", false);
 			return mav;
 		}
-		recetaService.guardarReceta(receta);
+		recetaService.guardarReceta(receta,imagen);
 		return mav;
 	}
 	
@@ -63,16 +76,22 @@ public class RecetaController {
 	public String getModificarIngredientePage(Model model, @PathVariable(value = "id")Long id) {
 		boolean edicion=true;
 		model.addAttribute("receta", recetaService.buscarReceta(id));
+		model.addAttribute("ingredientes",ingredienteService.obtenerIngredientes());
+
 		model.addAttribute("edicion", edicion);
 		return "nueva_receta";
 	}
 	
 	@PostMapping("/modificar/{id}")
-	public String modificarIngrediente(@Valid @ModelAttribute("receta") Receta recetaModificada, BindingResult result) {
+	public String modificarIngrediente(@Valid @ModelAttribute("receta")Receta recetaModificada, BindingResult result,
+			@RequestParam("file")MultipartFile imagen,Model  model) throws IOException {
 		if (result.hasErrors()) {
+			model.addAttribute("receta", recetaModificada);
+			model.addAttribute("ingredientes", ingredienteService.obtenerIngredientes());
+
 			return "nueva_receta";
 		}
-		recetaService.modificarReceta(recetaModificada);
+		recetaService.modificarReceta(recetaModificada,imagen);
 		return "redirect:/receta/gestion";
 	}
 	
@@ -80,6 +99,20 @@ public class RecetaController {
 	public String eliminarIngrediente(@PathVariable(value="id")Long id) {
 		recetaService.eliminarReceta(id);
 		return "redirect:/receta/gestion";
+	}
+	
+	@GetMapping("/cargar/{imagen}")
+	 public ResponseEntity<Resource> goImage(@PathVariable String imagen){
+		Resource resource = null;
+		try {
+			resource = uploadFile.load(imagen);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; imagen=\""+resource.getFilename()+"\"")
+				.body(resource);
+		
 	}
 	
 	@GetMapping("/ver/{id}")
