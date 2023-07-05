@@ -30,11 +30,12 @@ import jakarta.validation.constraints.Size;
 
 public class Testimonio {
 	
-	// Representa el id de testimonio
+	/**
+	 * Representa el id de testimonio
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "tes_id")
-	
 	private Long id;
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
@@ -58,6 +59,16 @@ public class Testimonio {
 	public Testimonio() {
 
 	}
+	
+	/**
+	 * Constructor parametrizado
+	 * @param id
+	 * @param fecha
+	 * @param usuario
+	 * @param comentario
+	 * @param imagen
+	 * @param estado
+	 */
 
 	public Testimonio(Long id, LocalDate fecha,
 			@NotNull(message = "El usuario del testimonio es requerido") Usuario usuario,
