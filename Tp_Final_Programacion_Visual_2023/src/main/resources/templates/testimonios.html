@@ -20,23 +20,15 @@
 		
 		<a th:href="@{/testimonio/id-usuario-testimonio}" class="btn btn-primary">Ingrese Id de Usuario</a>
 		
-		<div class="col-md-12 col-xl-12">
-			<div class="row row-cols-1 row-cols-md-1 row-cols-lg-1 g-4" >
-				 <h1 class="titulo-principal">Testimonio de los Usuarios</h1>
-				 <div class="col" th:each="testimonio : ${testimonios}">
-				 	<div class="card">
-				 		<div class="card-header">
-				 			<p> Fecha de Publicacion: <Strong th:text="${#temporals.format(testimonio.fecha,'dd-MM-yyyy')}"></Strong></p>
-				 			<div class="card-body">
-				    			<h2 class="card-title text-center"  th:text="${testimonio.usuario}"></h2>
-				    			<img th:src="@{/testimonio/cargar/}+${testimonio.imagen}" class="card-img-top" alt="...">
-				    
-				    			<p class="card-text" th:text="${testimonio.comentario}"></p>
-				  
-				  </div>
-				 		</div>
-				 	</div>
-				 </div>
+		<div class="row gy-3 my-3">
+
+			<div class="col-sm-6 col-md-4 col-lg-3"
+				th:each="testimo: ${testimonios}">
+				<div class="card">
+					<div class="card-body">
+						<p th:text="${testimo.comentario}" class="card-title"></p>
+					</div>
+				</div>
 			</div>
 		</div>
 		

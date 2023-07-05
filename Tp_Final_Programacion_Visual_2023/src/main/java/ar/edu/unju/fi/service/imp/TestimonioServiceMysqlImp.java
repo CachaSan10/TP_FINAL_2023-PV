@@ -19,17 +19,41 @@ public class TestimonioServiceMysqlImp implements ITestimonioService{
 	
 	@Autowired
 	private Testimonio testimonio;
-
+	
+	
 	@Override
-	public void agregarTestimonio(Testimonio testimonio) {
+	public List<Testimonio> obtenerListaTestimonio() {
+		return testimonioRepository.findByEstado(true);
+	}
+	
+	@Override
+	public void guardarTestimonio(Testimonio testimonio) {
+		// TODO Auto-generated method stub
+		testimonio.setEstado(true);
 		testimonioRepository.save(testimonio);
-		
 	}
 
 	@Override
-	public List<Testimonio> obtenerTodosLosTestimonios() {
-		List<Testimonio> testimonios = (List<Testimonio>) testimonioRepository.findAll();
-		return testimonios;
+	public void modificarTestimonio(Testimonio testimonioModificado) {
+		// TODO Auto-generated method stub
+		testimonioModificado.setEstado(true);
+		testimonioRepository.save(testimonioModificado);
+		
+	}
+	
+	@Override
+	public void eliminarTestimonio(Long id) {
+		// TODO Auto-generated method stub
+		Testimonio unTestimonio = new Testimonio();
+		unTestimonio = buscarTestimonio(id);
+		unTestimonio.setEstado(false);
+		testimonioRepository.save(unTestimonio);
+	}
+	
+	@Override
+	public Testimonio buscarTestimonio(Long id) {
+		return testimonioRepository.findById(id).get();
+		
 	}
 
 	@Override
@@ -37,7 +61,11 @@ public class TestimonioServiceMysqlImp implements ITestimonioService{
 		testimonio = testimonioRepository.findById(id).get();
 		return testimonio;
 	}
-	
-	
+
+	@Override
+	public Testimonio obtenerTestimonio() {
+		// TODO Auto-generated method stub
+		return testimonio;
+	}
 	
 }
