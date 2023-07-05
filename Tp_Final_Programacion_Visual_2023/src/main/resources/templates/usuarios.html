@@ -9,73 +9,76 @@
 <!-- Bootstrap referencia  -->
 <link th:rel="stylesheet"
 	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
-<!-- Cdn para cargar estilos de Font Awesome-->
+<!-- Cdn para cargar estilos de Font Awesome -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 	integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<!-- Css referencia-->
+<!-- Css referencia -->
 <link th:rel="stylesheet" th:href="@{/css/estilos.css}">
 </head>
 <body>
-<div class="container">
+	<div class="container">
 		<!--Uso del fragmento header -->
 		<header th:replace="~{layouts/header :: header}"></header>
 
 
 		<!--Uso del fragmento nav -->
 		<header th:replace="~{layouts/nav :: nav}"></header>
-		
+
+		<div class="row">
+			<h2 class="my-4">Lista Usuarios</h2>
+		</div>
+
+		<br>
+
+
+
+		<div class="table-responsive form-container">
+			<a class="btn btn-primary btn-consejos" th:href="@{/gestion/datos}" style="margin-bottom: 20px;">Volver
+				a Menú Principal</a>
+
 			<div class="row">
-				<h2 class="my-4">Lista Usuarios</h2>
-			</div>
-
-			<br>
-
-
-			<div class="table-responsive form-container">
-<a class="btn btn-primary btn-consejos" th:href="@{/gestion/datos}">Volver
-			a Menú Principal</a>
-				<!--Tabla de usuarios-->
-				<table
-					class="table-sm table table-striped table-bordered table-hover">
-					<thead class="bg-secondary text-white">
-						<tr>
-							<th>Nombre</th>
-							<th>Apellido</th>
-							<th>Administrador</th>
-							<th>Sexo</th>
-							<th>Estatura</th>
-							<th>Fecha de Nacimiento</th>
-							<th>Email</th>
-							<th>Telefono</th>
-							<th>Acciones</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="usuario: ${usuarios}">
-							<td th:text="${usuario.nombre}"></td>
-							<td th:text="${usuario.apellido}"></td>
-							<td th:text="${usuario.administrador}"></td>
-							<td th:text="${usuario.sexo}"></td>
-							<td th:text="${usuario.estatura}"></td>
-							<td
-								th:text="${#temporals.format(usuario.fechaNacimiento, 'dd/MM/yyyy')}"></td>
-							<td th:text="${usuario.email}"></td>
-							<td th:text="${usuario.telefono}"></td>
-							<td><a class="btn btn-info btn-sm"
+				<div class="col-md-4" th:each="usuario: ${usuarios}">
+					<div class="card mb-4">
+						<div class="card-body">
+							<h5 class="card-title"
+								th:text="${usuario.nombre + ' ' + usuario.apellido}"></h5>
+							<p class="card-text">
+								Administrador: <span th:text="${usuario.administrador}"></span>
+							</p>
+							<p class="card-text">
+								Sexo: <span th:text="${usuario.sexo}"></span>
+							</p>
+							<p class="card-text">
+								Estatura: <span th:text="${usuario.estatura}"></span>
+							</p>
+							<p class="card-text">
+								Fecha de Nacimiento: <span
+									th:text="${#temporals.format(usuario.fechaNacimiento, 'dd/MM/yyyy')}"></span>
+							</p>
+							<p class="card-text">
+								Email: <span th:text="${usuario.email}"></span>
+							</p>
+							<p class="card-text">
+								Teléfono: <span th:text="${usuario.telefono}"></span>
+							</p>
+							<a class="btn btn-info btn-sm"
 								th:href="@{/usuario/modificar/}+${usuario.id}">Modificar</a> <a
 								class="btn btn-danger btn-sm"
-								th:href="@{/usuario/eliminar/}+${usuario.id}">Eliminar</a></td>
-						</tr>
-					</tbody>
-				</table>
+								th:href="@{/usuario/eliminar/}+${usuario.id}">Eliminar</a>
+						</div>
+					</div>
+				</div>
 			</div>
-	<!--Uso del fragmento footer -->
-	<footer th:replace="~{layouts/footer :: footer}"></footer>
+		</div>
+
+		<!--Uso del fragmento footer -->
+		<footer th:replace="~{layouts/footer :: footer}"></footer>
 	</div>
 	<!-- Configuracion para usar bootstrap js -->
-	<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	<script type="text/javascript"
+		th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>
