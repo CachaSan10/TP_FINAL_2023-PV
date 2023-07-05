@@ -52,6 +52,7 @@ public class Ingrediente {
 	/**
 	 * Representa la disponibilidad del ingrediente en la base de datos
 	 */
+	@Column(name = "ingre_estado")
 	private boolean estado;
 	
 	/**

@@ -24,6 +24,9 @@ public class RecetaServiceMysqlImp implements IRecetaService {
 	@Autowired
 	private Receta receta;
 	
+	/**
+	 * Inyeccion del objeto UploadFile
+	 */
 	@Autowired
 	private UploadFile uploadFile;
 	
@@ -33,6 +36,9 @@ public class RecetaServiceMysqlImp implements IRecetaService {
 	@Autowired
 	private IRecetaRepository recetaRepository;
 	
+	/**
+	 * Inyeccion del service Ingrediente
+	 */
 	@Autowired
 	@Qualifier("ingredienteServiceMysqlImp")
 	private IngredienteServiceMysqlImp ingredienteService;
@@ -47,8 +53,10 @@ public class RecetaServiceMysqlImp implements IRecetaService {
 	}
 
 	/**
-	 * Metodo para guardar un receta
+	 * Metodo que guarda receta
 	 * @param receta representa  objeto de tipo receta
+	 * @param imagen representa la imagen de la receta
+	 * @param idIngredientes representa la lista de ingredientes que se vincula con la receta
 	 */
 	@Override
 	public void guardarReceta(Receta receta, MultipartFile imagen,Long[] idIngredientes) throws IOException {
@@ -106,6 +114,8 @@ public class RecetaServiceMysqlImp implements IRecetaService {
 	/**
 	 * Metodo para modificar usuario
 	 * @param recetaModificada representa una receta a modificar.
+	 * @param imagen representa la imagen de la receta que se va modificar
+	 * @param idIngredientes representa la lista de ingredientes que se vincula con la receta
 	 */
 	@Override
 	public void modificarReceta(Receta recetaModificada, MultipartFile imagenModificada,Long[] idIngredientes) throws IOException {
