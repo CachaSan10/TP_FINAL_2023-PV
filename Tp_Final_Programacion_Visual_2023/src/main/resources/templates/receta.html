@@ -19,7 +19,11 @@
 		<!--Uso del fragmento header -->
 		<header th:replace="~{layouts/header :: header}"></header>
 
-		<a th:href="@{/receta/gestion}" class="btn btn-primary ">Volver a gestion de Receta</a>
+		<a  th:if="${gestion != false}" th:href="${gestion}?@{/receta/gestion}" class="btn btn-primary"
+		th:text="${edicion}?'Volver a gestion de Receta':'  '"></a>
+		
+		<a th:if="${listaReceta != false}"  th:href="${listaReceta}?@{/receta/lista}" class="btn btn-primary"
+		th:text="${listaReceta}?'Volver a lista receta':'  '"></a>
 			
 				<div class="card">
 	<h1 class="card-title text-center">Ver Receta</h1>
