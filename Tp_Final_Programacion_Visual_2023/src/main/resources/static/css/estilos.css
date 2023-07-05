@@ -169,6 +169,67 @@ Formulario usuario
 	margin-top: 60px;
 	margin-bottom: 100px;
 }
+    
+    
+/*
+ Aside
+ */
+
+aside {
+  width: 300px;
+  background-color: #F2F2F2;
+  padding: 20px;
+}
+
+.aside-content {
+  margin-bottom: 20px;
+}
+
+.aside-content h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.aside-content p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.aside-content {
+  margin-bottom: 1rem;
+}
+
+.card {
+  margin-bottom: 1rem;
+}
+
+.aside {
+  position: sticky;
+  top: 0;
+  width: 300px;
+  background-color: #F2F2F2;
+  padding: 20px;
+}
+
+.col-9 {
+  min-height: 500px; /* Ajusta la altura mínima según tus necesidades */
+}
+
+@media (max-width: 767.98px) {
+  .aside {
+    position: static;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+
+
 /*
 Agradecimiento
 
