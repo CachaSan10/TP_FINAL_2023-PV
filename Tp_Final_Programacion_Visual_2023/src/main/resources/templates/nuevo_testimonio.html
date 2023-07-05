@@ -19,9 +19,8 @@
 		<nav th:replace="~{layouts/nav :: nav}"></nav>
 		<div class="card">
 			<form
-				th:action="@{/testimonio/guardar}"
-				th:object="${unTestimonio}" method="post"
-				enctype="multipart/form-data">
+				th:action="${edicion}?@{/testimonio/modificar/}+${testimonio.id}:@{/testimonio/guardar}"
+				th:object="${testimonio}" method="post">
 				
 				<div class="mb-3">
 				<input type="hidden" class="form-control" id="id" th:field="*{id}">
@@ -51,18 +50,13 @@
 					 th:if="${#fields.hasErrors('fecha')}"
 					 th:errors="*{fecha}"></p>
 				</div>
-						
-				<div class="mb-3">
-					 <label for="file" class=form-label>Imagen de Usuario</label>
-					 <input type="file" name="file" id="file" class="form-control"
-						th:text="${unTestimonio.imagen}"/> <br>
-				</div>
 				
 				<a class="btn btn-primary btn-testimonio"
-					th:href="@{/testimonio/lista}">Cancelar</a>
+					th:href="@{/testimonio/id-usuario-testimonio}">Cancelar</a>
 					
 				<div class="mb-3 d-flex justify-content-center">
- 					<button type="submit" class="btn btn-success">GUARDAR</button>
+ 					<button type="submit" class="btn btn-success w-100 mb-1 fw-bolder"
+						th:text="${edicion}?'Modificar':'Agregar'"></button>
 				</div>	
 			</form>
 		</div>

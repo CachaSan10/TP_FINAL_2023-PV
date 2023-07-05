@@ -6,10 +6,18 @@ import ar.edu.unju.fi.entity.Testimonio;
 
 public interface ITestimonioService {
 	
-	public void agregarTestimonio(Testimonio testimonio);
-	
-	public List<Testimonio> obtenerTodosLosTestimonios();
-	
 	public Testimonio findTestimonioById(Long id);
+
+	List<Testimonio> obtenerListaTestimonio();
+	
+	public void guardarTestimonio(Testimonio testimonio);
+	
+	public void modificarTestimonio(Testimonio testimonioModificado);
+	
+	public void eliminarTestimonio(Long id);
+	
+	public Testimonio buscarTestimonio(Long id);
+	
+	public Testimonio obtenerTestimonio();
 	
 }
