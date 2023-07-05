@@ -237,7 +237,24 @@ aside {
   }
 }
 
+.aside-content ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
 
+.aside-content ul li {
+  margin-bottom: 5px;
+}
+
+.aside-content ul li a {
+  color: #000;
+  text-decoration: none;
+}
+
+.aside-content ul li a:hover {
+  text-decoration: underline;
+}
 
 /*
 Agradecimiento
