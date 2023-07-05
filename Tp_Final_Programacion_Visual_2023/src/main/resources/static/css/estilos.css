@@ -174,7 +174,9 @@ Formulario usuario
 /*
  Aside
  */
-
+.stretched-card {
+  width: 100%;
+}
 aside {
   width: 300px;
   background-color: #F2F2F2;
@@ -217,7 +219,14 @@ aside {
 }
 
 .col-9 {
-  min-height: 500px; /* Ajusta la altura mínima según tus necesidades */
+  min-height: 500px; /* Ajusta la altura mínima  */
+}
+
+.cardR{
+	transition: all 0.3s;
+}
+.cardR:hover{
+	transform: scale(1.15);
 }
 
 @media (max-width: 767.98px) {
