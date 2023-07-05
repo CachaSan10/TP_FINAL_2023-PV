@@ -257,6 +257,30 @@ aside {
 }
 
 /*
+body
+*/
+.card-info {
+  height: 100%;
+}
+
+.card-img-info {
+  object-fit: cover;
+  height: 200px; 
+}
+.main-container {
+  min-height: 100vh; 
+}
+
+body {
+  background-image: url(/images/muro3.jpg);
+  background-size: cover; 
+  background-repeat: no-repeat;
+  background-position: center; 
+  background-attachment: fixed;
+}
+
+
+/*
 Agradecimiento
 
 */
