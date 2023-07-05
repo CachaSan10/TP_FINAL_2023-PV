@@ -26,7 +26,7 @@ import jakarta.validation.constraints.Size;
 
 @Component
 @Entity
-@Table(name = "TESTIMONIOS")
+@Table(name = "testimonios")
 
 public class Testimonio {
 	
@@ -35,25 +35,27 @@ public class Testimonio {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "tes_id")
+	@Column(name = "testimonio_id")
 	private Long id;
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@Column(name = "fecha_publicacion")
+	@Column(name = "fecha")
 	private LocalDate fecha;
 	
 	@Autowired
 	@NotNull(message = "El usuario del testimonio es requerido")
-	@JoinColumn(name="usu_id")
+	@JoinColumn(name="usuario_id")
 	@OneToOne(cascade = CascadeType.ALL , fetch = FetchType.LAZY)
 	private Usuario usuario;
 
 	@Size(min = 1, max = 200, message = "El comentario debe tener entre 1 y 200 caracteres")
+	@Column(name = "testimonio_comentario")
 	private String comentario;
 	
-	@Column(name = "tes_imagen")
+	@Column(name = "testimonio_imagen")
 	private String imagen;
 	
+	@Column(name = "estado")
 	private boolean estado;
 
 	public Testimonio() {

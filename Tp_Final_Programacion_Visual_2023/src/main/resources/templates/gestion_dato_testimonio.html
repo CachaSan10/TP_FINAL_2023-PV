@@ -46,7 +46,7 @@
 						<tbody>
 							<tr th:each="testimonio: ${testimonios}">
 								<td th:text="${testimonio.id}"></td>
-								<td th:text="${testimonio.usuario.nombre}"></td>
+								<td th:text="${testimonio.usuario.nombre}+' '+${testimonio.usuario.apellido}"></td>
 
 								<td><a class="btn btn-info btn-sm"
 									th:href="@{/testimonio/modificar/}+${testimonio.id}">Modificar</a>
