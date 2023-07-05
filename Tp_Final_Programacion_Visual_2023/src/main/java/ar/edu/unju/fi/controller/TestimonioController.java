@@ -70,7 +70,6 @@ public class TestimonioController {
 		return modelAndView;
 	}
 
-	//modelatt unUsuario
 	@PostMapping("/guardar")
 	public ModelAndView getGuardarTestimonioPage(@Valid @ModelAttribute("testimonio") Testimonio testimonio, BindingResult result) {
 		ModelAndView  modelAndView = new ModelAndView("redirect:/testimonio/gestion");
@@ -129,11 +128,4 @@ public class TestimonioController {
 				.body(resource);
 	}
 	
-	//validar usuario
-	//crear un metodo usuario para recibir el id
-	//para enviar el id al fomulario
-	//con el post buscar el usuario
-	
-
-
 }
