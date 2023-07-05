@@ -2,191 +2,166 @@
 <html>
 <head>
 <meta charset="UTF-8">
-		<!--Especificacion de viewport -->
-		<meta name="viewport"
-			content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
-		<title>index - Bienestar en Accion</title>
-		<!-- Bootstrap referencia  -->
-		<link th:rel="stylesheet"
-			th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
-		
-		<!-- Cdn para cargar estilos de Font Awesome-->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-			
-		<!-- Css referencia-->
-		<link th:rel="stylesheet" th:href="@{/css/estilos.css}">
+<!--Especificacion de viewport -->
+<meta name="viewport"
+	content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+<title>index - Bienestar en Accion</title>
+<!-- Bootstrap referencia  -->
+<link th:rel="stylesheet"
+	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+
+<!-- Cdn para cargar estilos de Font Awesome-->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+	integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<!-- Css referencia-->
+<link th:rel="stylesheet" th:href="@{/css/estilos.css}">
 </head>
-<body >
+<body>
 	<div class="container">
 		<!--Uso del fragmento header -->
-	<header th:replace="~{layouts/header :: header}"></header>
-	<nav th:replace="~{layouts/nav :: nav}"></nav>
+		<header th:replace="~{layouts/header :: header}"></header>
+		<nav th:replace="~{layouts/nav :: nav}"></nav>
 
-<div class="row form-container ">
-  <aside class="col-3 h-100">
-    <div class="aside-content">
-      <h2>Noticia</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id nibh non ligula pellentesque gravida at ut nisi. Integer in ultrices lectus. Curabitur vestibulum blandit dui, nec vulputate orci porta in.</p>
-    </div>
+		<div class="row form-container ">
+			<aside class="col-3 h-100">
+				<div class="aside-content">
+					<h2>Noticia</h2>
+					<p>En Argentina se fuma un 50% más que en el resto de EE.UU.</p>
+				</div>
 
-    <div class="aside-content">
-      <h2>Consejo del día</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id nibh non ligula pellentesque gravida at ut nisi. Integer in ultrices lectus. Curabitur vestibulum blandit dui, nec vulputate orci porta in.</p>
-    </div>
-  </aside>
+				<div class="aside-content">
+					<h2>Consejo del día</h2>
+					<p>Exposición al sol, el cáncer de piel es el cáncer más común
+						. Reduzca su riesgo al permanecer en la sombra y al vestir ropa
+						protectora, lentes de sol y protector solar todo el año</p>
+				</div>
+				<div class="aside-content">
+					<h2>Sitios Relevantes</h2>
+					<ul>
+						<li><a href="#">Establecimientos - Hospitales y Centros
+								de Salud</a></li>
+						<li><a href="#">Ministerio de Salud - Argentina.gob.ar</a></li>
+						<li><a href="#">Servicios de Salud Integrales - Encontrá
+								el plan ideal</a></li>
+						<li><a href="#">Sistema Para Médicos - Cotización
+								Inmediata</a></li>
+						<li><a href="#">Clínica de Salud - Clínicas en San
+								Salvador.</a></li>
+						<li><a href="#">Centros de salud: MedlinePlus en español</a></li>
+					</ul>
+				</div>
+			</aside>
 
-  <div class="col-9">
-    <h2 class="text-center my-4">Información</h2>
+			<div class="col-9">
+				<h2 class="text-center my-4">Información</h2>
 
-    <div class="row">
-      <div class="col-12">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Título</h5>
-            <p class="card-text">Texto</p>
-            <a href="#" class="btn btn-primary">Leer más</a>
-          </div>
-        </div>
-      </div>
+				<div class="row">
+					<div class="col-12 mb-4">
+						<div class="card cardR">
+							<div class="card-body">
+								<h5 class="card-title">Temas de salud</h5>
+								<p class="card-text">Infórmese sobre temas de salud,
+									bienestar, enfermedades y trastornos</p>
+								<img src="/images/salud2.jpg" class="card-img-top"
+									alt="imagen tarjeta"> <br> <a href="#"
+									class="btn btn-primary mt-3">Leer más</a>
+							</div>
+						</div>
+					</div>
 
-      <div class="col-12">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Título</h5>
-            <p class="card-text">Texto </p>
-            <a href="#" class="btn btn-primary">Leer más</a>
-          </div>
-        </div>
-      </div>
+					<div class="col-12 mb-4">
+						<div class="card cardR">
+							<div class="card-body">
+								<h5 class="card-title">Medicinas y suplementos</h5>
+								<p class="card-text">Conozca sobre medicamentos de receta,
+									venta libre y suplementos</p>
+								<img src="/images/medicina3.jfif" class="card-img-top"
+									alt="imagen tarjeta"> <a href="#"
+									class="btn btn-primary mt-3">Leer más</a>
+							</div>
+						</div>
+					</div>
 
-      <div class="col-12">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Título</h5>
-            <p class="card-text">Texto</p>
-            <a href="#" class="btn btn-primary">Leer más</a>
-          </div>
-        </div>
-      </div>
+					<div class="col-12 mb-4">
+						<div class="card cardR">
+							<div class="card-body">
+								<h5 class="card-title">Pruebas médicas</h5>
+								<p class="card-text">Conozca por qué se realizan ciertas
+									pruebas y qué significan los resultados</p>
+								<img src="/images/im1.png" class="card-img-top"
+									alt="imagen tarjeta"> <a href="#"
+									class="btn btn-primary mt-3">Leer más</a>
+							</div>
+						</div>
+					</div>
 
-      <div class="col-12">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Título</h5>
-            <p class="card-text">Texto</p>
-            <a href="#" class="btn btn-primary">Leer más</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-  <div class="row mx-5 mt-3 form-container ">
-    <div class="col">
-      <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5>Tratamientos y medicamentos</h5>
-          <p>Hay medicamentos antivirales disponibles para el tratamiento del COVID-19 leve a moderado. Debe iniciar el tratamiento tan pronto como presente síntomas.</p>
-        </div>
-        <img src="/images/tratamiento.jpg" class="card-img-top" alt="imagen tarjeta">
-      </div>
-    </div>
-
-    <div class="col">
-      <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5>Vacunas</h5>
-          <p>Las vacunas contra el COVID-19 son seguras y efectivas, y gratis. Manténgase al día con las vacunas contra el COVID-19.</p>
-        </div>
-        <img src="/images/vacunas.png" class="card-img-top" alt="imagen tarjeta">
-      </div>
-    </div>
-
-    <div class="col">
-      <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5>Tratamientos y medicamentos</h5>
-          <p>Hay medicamentos antivirales disponibles para el tratamiento del COVID-19 leve a moderado. Debe iniciar el tratamiento tan pronto como presente síntomas.</p>
-        </div>
-        <img src="/images/estable.png" class="card-img-top" alt="imagen tarjeta">
-      </div>
-    </div>
-  </div>
+					<div class="col-12 mb-4 ">
+						<div class="card cardR">
+							<div class="card-body">
+								<h5 class="card-title">Genética</h5>
+								<p class="card-text">Una introducción a temas fundamentales
+									sobre la genética humana</p>
+								<img src="/images/genetica.png" class="card-img-top"
+									alt="imagen tarjeta"> <a href="#"
+									class="btn btn-primary mt-3">Leer más</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 
-<!-- 		<aside class="form-container"> -->
-<!-- 			<div class="aside-content"> -->
-<!-- 				<h2>Noticia</h2> -->
-<!-- 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. -->
-<!-- 					Vestibulum id nibh non ligula pellentesque gravida at ut nisi. -->
-<!-- 					Integer in ultrices lectus. Curabitur vestibulum blandit dui, nec -->
-<!-- 					vulputate orci porta in.</p> -->
-<!-- 			</div> -->
+		<div class="row mx-5 mt-3 form-container ">
+			<div class="col">
+				<div class="card cardR" style="width: 18rem;">
+					<div class="card-body">
+						<h5>Tratamientos y medicamentos</h5>
+						<p>Hay medicamentos antivirales disponibles para el
+							tratamiento del COVID-19 leve a moderado. Debe iniciar el
+							tratamiento tan pronto como presente síntomas.</p>
+					</div>
+					<img src="/images/tratamiento.jpg" class="card-img-top"
+						alt="imagen tarjeta">
+				</div>
+			</div>
 
-<!-- 			<div class="aside-content"> -->
-<!-- 				<h2>Consejo del día</h2> -->
-<!-- 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. -->
-<!-- 					Vestibulum id nibh non ligula pellentesque gravida at ut nisi. -->
-<!-- 					Integer in ultrices lectus. Curabitur vestibulum blandit dui, nec -->
-<!-- 					vulputate orci porta in.</p> -->
-<!-- 			</div> -->
-<!-- 		</aside> -->
+			<div class="col">
+				<div class="card cardR" style="width: 18rem;">
+					<div class="card-body">
+						<h5>Vacunas</h5>
+						<p>Las vacunas contra el COVID-19 son seguras y efectivas, y
+							gratis. Manténgase al día con las vacunas contra el COVID-19.</p>
+					</div>
+					<img src="/images/vacunas.png" class="card-img-top"
+						alt="imagen tarjeta">
+				</div>
+			</div>
 
-
-<!-- 		<div class="row mx-5 form-container"> -->
-<!-- 			<div class="col ml-5"> -->
-<!-- 				<div class="card" style="width: 18rem;"> -->
-
-<!-- 					<div class="card-body"> -->
-<!-- 						<h5>Tratamientos y medicamentos</h5> -->
-<!-- 						<p>Hay medicamentos antivirales disponibles para el -->
-<!-- 							tratamiento del COVID-19 leve a moderado. Debe iniciar el -->
-<!-- 							tratamiento tan pronto como presente síntomas.</p> -->
-<!-- 					</div> -->
-<!-- 					<img src="/images/tratamiento.jpg" class="card-img-top" -->
-<!-- 						alt="imagen targeta"> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-
-<!-- 			<div class="col ml-5"> -->
-<!-- 				<div class="card" style="width: 18rem;"> -->
-
-<!-- 					<div class="card-body"> -->
-<!-- 						<h5>Vacunas</h5> -->
-<!-- 						<p>Las vacunas contra el COVID-19 son seguras y efectivas, y gratis.  -->
-<!-- 						Manténgase al día con las vacunas contra el COVID-19.</p> -->
-<!-- 					</div> -->
-<!-- 					<img src="/images/vacunas.png" class="card-img-top" -->
-<!-- 						alt="imagen targeta"> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
+			<div class="col">
+				<div class="card cardR" style="width: 18rem;">
+					<div class="card-body">
+						<h5>Tratamientos y medicamentos</h5>
+						<p>Hay medicamentos antivirales disponibles para el
+							tratamiento del COVID-19 leve a moderado. Debe iniciar el
+							tratamiento tan pronto como presente síntomas.</p>
+					</div>
+					<img src="/images/estable.png" class="card-img-top"
+						alt="imagen tarjeta">
+				</div>
+			</div>
+		</div>
 
 
-<!-- 			<div class="col ml-5"> -->
-<!-- 				<div class="card" style="width: 18rem;"> -->
+		<!--Uso del fragmento footer -->
+		<footer th:replace="~{layouts/footer :: footer}"></footer>
 
-<!-- 					<div class="card-body"> -->
-<!-- 						<h5>Tratamientos y medicamentos</h5> -->
-<!-- 						<p>Hay medicamentos antivirales disponibles para el -->
-<!-- 							tratamiento del COVID-19 leve a moderado. Debe iniciar el -->
-<!-- 							tratamiento tan pronto como presente síntomas.</p> -->
-<!-- 					</div> -->
-<!-- 					<img src="/images/estable.png" class="card-img-top" -->
-<!-- 						alt="imagen targeta"> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-			
-			
-	
-		
-				<!--Uso del fragmento footer -->
-			<footer th:replace="~{layouts/footer :: footer}"></footer>
-			
 	</div>
-		<!-- Configuracion para usar bootstrap js -->
-	<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	<!-- Configuracion para usar bootstrap js -->
+	<script type="text/javascript"
+		th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

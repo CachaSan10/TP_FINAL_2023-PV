@@ -65,3 +65,10 @@ insert into recetas_ingredientes (ingredientes_ingre_id, recetas_rec_id) values(
 insert into recetas_ingredientes (ingredientes_ingre_id, recetas_rec_id) values(11,3);
 
 
+insert into usuarios (usu_id, usu_nombre, usu_apellido, usu_email, usu_fecha_nacimiento, usu_telefono, usu_sexo, usu_estatura, usu_estado, usu_administrador) values(1, 'Francisco', 'Franco', 'franco@gmail.com','1999-08-05', '4244667890', 'Masculino', 1.9, 1, 1 );
+insert into usuarios (usu_id, usu_nombre, usu_apellido, usu_email, usu_fecha_nacimiento, usu_telefono, usu_sexo, usu_estatura, usu_estado, usu_administrador) values(2, 'Maria', 'Lopez', 'lopez@gmail.com','2000-03-02', '4249967000', 'Femenino', 1.6, 1, 1 );
+insert into usuarios (usu_id, usu_nombre, usu_apellido, usu_email, usu_fecha_nacimiento, usu_telefono, usu_sexo, usu_estatura, usu_estado, usu_administrador) values(3, 'Carlos', 'Rodriguez', 'rodriguez@gmail.com','1997-09-03', '4233007890', 'Masculino', 1.8, 1, 0 );
+insert into usuarios (usu_id, usu_nombre, usu_apellido, usu_email, usu_fecha_nacimiento, usu_telefono, usu_sexo, usu_estatura, usu_estado, usu_administrador) values(4, 'Patricia', 'Vidal', 'vidal@gmail.com','2003-01-10', '4211777890', 'Femenino', 1.7, 1, 0 );
+insert into usuarios (usu_id, usu_nombre, usu_apellido, usu_email, usu_fecha_nacimiento, usu_telefono, usu_sexo, usu_estatura, usu_estado, usu_administrador) values(5, 'Mauricio', 'Larreta', 'larreta@gmail.com','1997-10-11', '4211487890', 'Masculino', 1.8, 1, 0 );
+insert into usuarios (usu_id, usu_nombre, usu_apellido, usu_email, usu_fecha_nacimiento, usu_telefono, usu_sexo, usu_estatura, usu_estado, usu_administrador) values(6, 'Eugenia', 'Fernandez', 'fernandez@gmail.com','1995-03-12', '4204223881', 'Femenino', 1.5, 1, 0 );
+

@@ -27,39 +27,36 @@
 		<header th:replace="~{layouts/nav :: nav}"></header>
 		
 		<a th:href="@{/gestion/datos}" class="btn btn-primary">Volver al menu Principal</a>
-		 <a  th:href="@{/testimonio/formulario}" class="btn  btn-success"  >Nuevo Formulario</a>
 		
 		<div class="card">
 			<h1 class="card-title">Gestion de Testimonios</h1>
+			
 			<div class="card-body">
-		<table class="table table-success table-bordered">
-  <thead>
-    <tr>
-      <th scope="col">Id</th>
-      <th scope="col">Ususario</th>
-      <th scope="col">Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr th:each="testimonio : ${testimonio}">
-		<td th:text="${testimonio.id}"></td>
-		<td th:text="${receta.id}"></td>
-		
-		<td></td>
-		<td></td>	     	
-      <td>
-       <div class="contenedor-boton">
-   <a th:href="@{/testimonio/modificar/}+${testimonio.id}" class="btn btn-warning" >Modificar</a>
-   <a th:href="@{/testimonio/eliminar/}+${testimonio.id}" class="btn btn-danger">Eliminar</a>
-      <a th:href="@{/testimonio/}+${testimonio.id}" class="btn btn-light">Ver</a>
-   
-</div>
-      </td>
-    </tr>
-  
-  </tbody>
-</table>
-		</div>
+				<div class="table-responsive">
+
+					<table
+						class="table-sm table table-striped table-bordered table-hover">
+						<thead class="bg-secondary text-white">
+							<tr>
+								<th>Codigo</th>
+								<th>Usuario</th>
+								<th>Acciones</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="testimonio: ${testimonios}">
+								<td th:text="${testimonio.id}"></td>
+								<td th:text="${testimonio.usuario.nombre}"></td>
+
+								<td><a class="btn btn-info btn-sm"
+									th:href="@{/testimonio/modificar/}+${testimonio.id}">Modificar</a>
+									<a class="btn btn-danger btn-sm"
+									th:href="@{/testimonio/eliminar/}+${testimonio.id}">Eliminar</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
 			
 		</div>
 		

@@ -52,6 +52,8 @@ public class Testimonio {
 	
 	@Column(name = "tes_imagen")
 	private String imagen;
+	
+	private boolean estado;
 
 	public Testimonio() {
 
@@ -66,6 +68,7 @@ public class Testimonio {
 		this.usuario = usuario;
 		this.comentario = comentario;
 		this.imagen = imagen;
+		this.estado = estado;
 	}
 	
 	public Long getId() {
@@ -107,12 +110,22 @@ public class Testimonio {
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
 	}
+	
+	public boolean isEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
 
 	@Override
 	public String toString() {
 		return "Testimonio [id=" + id + ", fecha=" + fecha + ", usuario=" + usuario +", comentario=" + comentario
-				+ ", imagen=" + imagen + "]";
+				+ ", imagen=" + imagen +",estado="+estado+ "]";
 	}
+
+	
 
 
 }
