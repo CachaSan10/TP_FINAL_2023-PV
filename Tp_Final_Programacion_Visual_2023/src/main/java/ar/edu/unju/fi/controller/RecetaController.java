@@ -122,13 +122,25 @@ public class RecetaController {
 	public ModelAndView mostrarReceta(@PathVariable(value = "id")Long id){
 		ModelAndView modelAndView = new ModelAndView("receta");
 		modelAndView.addObject("receta", recetaService.buscarReceta(id));
+		modelAndView.addObject("gestion", true);
+		modelAndView.addObject("listaReceta", false);
+
 		return modelAndView;
 	}
 	
-	@GetMapping("/recetas")
+	@GetMapping("/lista")
 	public String mostrarRecetas(Model model) {
 		model.addAttribute("recetas", recetaService.obtenerRecetas());
 		return "recetas";
+	}
+	
+	@GetMapping("/visualizar/{id}")
+	public ModelAndView verReceta(@PathVariable(value = "id")Long id){
+		ModelAndView modelAndView = new ModelAndView("receta");
+		modelAndView.addObject("receta", recetaService.buscarReceta(id));
+		modelAndView.addObject("gestion", false);
+		modelAndView.addObject("listaReceta", true);
+		return modelAndView;
 	}
 	
 }
