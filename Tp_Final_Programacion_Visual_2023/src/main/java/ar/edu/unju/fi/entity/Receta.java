@@ -43,7 +43,7 @@ public class Receta {
 	 * Representa el nombre de la receta
 	 */
 	@NotEmpty()
-	@Size(min=6, max=20)
+	@Size(min=6)
 	@Pattern(regexp="[a-z A-ZÀ-ÿ\\u00f1\\u00d1]*")
 	@Column(name = "rec_nombre")
 	private String nombre;
@@ -51,7 +51,7 @@ public class Receta {
 	/**
 	 * Representa la categoria de la receta
 	 */
-	@NotBlank(message="Debe seleccionar un día")
+	@NotBlank(message="Debe seleccionar una categoria")
 	@Column(name = "rec_categoria", nullable = false)
 	private String categoria;
 	
@@ -87,6 +87,7 @@ public class Receta {
 	/**
 	 * Representa la disponibilidad de la receta
 	 */
+	@Column(name = "rec_estado")
 	private boolean estado;
 	
 	/**
