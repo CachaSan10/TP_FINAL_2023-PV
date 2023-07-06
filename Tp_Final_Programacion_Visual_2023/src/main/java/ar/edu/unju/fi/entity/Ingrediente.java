@@ -39,7 +39,7 @@ public class Ingrediente {
 	 * Representa el nombre del ingrediente
 	 */
 	@NotEmpty()
-	@Size(min=6, max=30)
+	@Size(min=6, max=60)
 	@Column(name = "ingre_nombre")
 	private String nombre;
 	
