@@ -27,6 +27,8 @@
 				<div class="card">
 					<div class="card-body">
 						<p th:text="${testimo.comentario}" class="card-title"></p>
+						<img th:src="@{/testimonio/cargar/}+${testimo.imagen}" alt="..." class="imagen-usuario img-thumbnail">
+						<h3 th:text="${testimo.usuario.nombre}+' '+${testimo.usuario.apellido}"></h3>
 					</div>
 				</div>
 			</div>

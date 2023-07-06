@@ -19,7 +19,8 @@
 		  		<div class="mb-3">
 			    	<label for="idUsuLong" class="form-label">Ingrese Id de Usuario</label>
 			    	<input type="number"  name="idUsuLong" class="form-control" id="idUsuLong">
-			        <div class="text-danger" th:text="${existeUsuario}?'':'Usuario no encontrado o ID de usuario inválido'" ></div>
+			        <div class="text-danger" th:text="${existeUsuario}?'':'Usuario no encontrado o '" ></div>
+			        <div class="text-danger" th:text="${existeTestimonio}?'existe un testimonio registrado'" ></div>
 		
 		 		</div>
 	  			<button type="submit" class="btn btn-primary">Agregar nuevo testimonio</button>

@@ -1,5 +1,6 @@
 package ar.edu.unju.fi.controller;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import org.springframework.http.HttpHeaders;
 
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.core.io.Resource;
 
@@ -56,12 +59,17 @@ public class TestimonioController {
 	@GetMapping("/nuevo")
 	public ModelAndView getObtenerNuevoTestimonioPage(Long idUsuLong, Usuario usuario) {
 		boolean existeUsuario;
+		boolean existeTestimonio = true;
 		ModelAndView modelAndView = new ModelAndView();
 		if (usuarioService.existeUsuario(idUsuLong)) {
+			if(testimonioService.existeTestimonio(idUsuLong)) {
+				modelAndView.addObject("existeTestimonio", existeTestimonio);
+				modelAndView.setViewName("id-usuario-testimonio");
+			} else {
 			modelAndView.setViewName("nuevo_testimonio");
 			modelAndView.addObject("testimonio", testimonioService.obtenerTestimonio());
-			modelAndView.addObject("usuarios", usuarioService.obtenerLista());
 			modelAndView.addObject("usuario", usuarioService.buscarUsuario(idUsuLong));
+			}
 		} else {
 			existeUsuario = false;
 			modelAndView.addObject("existeUsuario", existeUsuario);
@@ -70,17 +78,18 @@ public class TestimonioController {
 		return modelAndView;
 	}
 
-	@PostMapping("/guardar")
-	public ModelAndView getGuardarTestimonioPage(@Valid @ModelAttribute("testimonio") Testimonio testimonio, BindingResult result) {
-		ModelAndView  modelAndView = new ModelAndView("redirect:/testimonio/gestion");
-		
+	@PostMapping("/guardar/{usuario-id}")
+	public ModelAndView getGuardarTestimonioPage(@Valid @ModelAttribute("testimonio") Testimonio testimonio, BindingResult result, @PathVariable(value="usuario-id") Long id, 
+			@RequestParam("file") MultipartFile imagen)throws IOException {
+		ModelAndView  modelAndView = new ModelAndView("redirect:/testimonio/listado");
 		if(result.hasErrors()) {
 			modelAndView.setViewName("nuevo_testimonio");
-			modelAndView.addObject("usuarios", usuarioService.obtenerLista());
+			modelAndView.addObject("usuario", usuarioService.buscarUsuario(id));
 			modelAndView.addObject("testimonio", testimonio);
 			return modelAndView;
 		}
-		testimonioService.guardarTestimonio(testimonio);
+		testimonio.setUsuario(usuarioService.buscarUsuario(id));
+		testimonioService.guardarTestimonio(testimonio, imagen);
 		modelAndView.addObject("testimonios", testimonioService.obtenerListaTestimonio());
 
 		return modelAndView;
@@ -89,7 +98,7 @@ public class TestimonioController {
 	@GetMapping("/modificar/{id}")
 	public String getModificarTestimonioPage(Model model, @PathVariable(value="id") Long id){
 		boolean edicion=true;
-		model.addAttribute("usuarios", usuarioService.obtenerLista());
+		model.addAttribute("usuario", usuarioService.buscarUsuario(id));
 		model.addAttribute("testimonio", testimonioService.buscarTestimonio(id));
 		model.addAttribute("edicion", edicion);
 		
@@ -97,8 +106,11 @@ public class TestimonioController {
 	}
 	
 	@PostMapping("/modificar/{id}")
-	public String modificarTestimonio(@ModelAttribute("testimonio") Testimonio testimonioModificado) {
-		testimonioService.modificarTestimonio(testimonioModificado);
+	public String modificarTestimonio(@ModelAttribute("testimonio") Testimonio testimonioModificado, BindingResult bindingResult, MultipartFile imagen) throws IOException {
+		if ( bindingResult.hasErrors() ) {
+			return "nuevo_testimonio";
+		}
+		testimonioService.modificarTestimonio(testimonioModificado, imagen);
 		return "redirect:/testimonio/gestion";
 	}
 	
@@ -115,16 +127,16 @@ public class TestimonioController {
 		return "gestion_dato_testimonio";
 	}
 	
-	@GetMapping("/uploads/{filename}")
-	public ResponseEntity<Resource> goImage(@PathVariable String filename) {
+	@GetMapping("/cargar/{imagen}")
+	public ResponseEntity<Resource> goImage(@PathVariable String imagen) {
 		Resource resource = null;
 		try {
-			resource = (Resource) uploadFile.load(filename);
+			resource = uploadFile.load(imagen);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
 		return ResponseEntity.ok()
-				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" +  resource.getFilename() + "\"")
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; imagen=\"" +  resource.getFilename() + "\"")
 				.body(resource);
 	}
 	

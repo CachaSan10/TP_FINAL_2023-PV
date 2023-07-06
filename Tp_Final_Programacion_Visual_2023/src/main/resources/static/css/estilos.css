@@ -321,3 +321,16 @@ Agradecimiento
 	justify-content: space-between;
 	margin-top: 20px;
 }
+
+/*
+Testimonio
+
+*/
+.imagen-usuario{
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	
+}
+
+
