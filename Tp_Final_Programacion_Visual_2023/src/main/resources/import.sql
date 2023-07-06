@@ -78,6 +78,10 @@ insert into indices_masa_corporal (imc_id, imc_fecha, imc_estado, imc_peso,usu_i
 insert into indices_masa_corporal (imc_id, imc_fecha, imc_estado, imc_peso,usu_id) values(3,'2022-12-6', 1, 85,1);
 insert into indices_masa_corporal (imc_id, imc_fecha, imc_estado, imc_peso,usu_id) values(4,'2023-01-9', 1, 82,1);
 
+insert into indices_masa_corporal (imc_id, imc_fecha, imc_estado, imc_peso,usu_id) values(5,'2022-03-10', 1, 52,2);
+insert into indices_masa_corporal (imc_id, imc_fecha, imc_estado, imc_peso,usu_id) values(6,'2022-08-19', 1, 62,2);
+insert into indices_masa_corporal (imc_id, imc_fecha, imc_estado, imc_peso,usu_id) values(7,'2023-04-14', 1, 73,2);
+insert into indices_masa_corporal (imc_id, imc_fecha, imc_estado, imc_peso,usu_id) values(8,'2023-05-23', 1, 66,2);
 
 
 

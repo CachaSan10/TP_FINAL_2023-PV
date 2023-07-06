@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -50,6 +51,7 @@ public class IndiceMasaCorporalController {
 			}else {
 			indiceMasaCorporalService.guardarIndiceMasaCorporal(imc, idUsuario);
 			modelAndView.addObject("existeUsuario", existeUsuario);
+			modelAndView.addObject("usuario", imc.getUsuario());
 			modelAndView.addObject("resultado", indiceMasaCorporalService.calcularImc(imc));
 			}
 		}else {
@@ -60,15 +62,14 @@ public class IndiceMasaCorporalController {
 		return modelAndView;
 	}
 	
-	@GetMapping("/resultado-imc")
-	public String obtenerPaginaResultado() {
-		return "resultado-imc";
-	}
+
  	
 	@GetMapping("/registros")
 	public String obtenerPaginaRegistroImc(Model model) {
 		boolean existeUsuario=true;
+		boolean bandDatos = false;
 		model.addAttribute("existeUsuario", existeUsuario);
+		model.addAttribute("mostrarDatos", bandDatos);
 		return "registros-imc";
 	}
 	
@@ -79,10 +80,15 @@ public class IndiceMasaCorporalController {
 			existeUsuario = true;
 			model.addAttribute("existeUsuario", existeUsuario);
 			model.addAttribute("indicesMasaMuscular", indiceMasaCorporalService.obtenerFechasImcDescreciente(idUsuario));
+			model.addAttribute("usuario", usuarioService.buscarUsuario(idUsuario));
+			model.addAttribute("mostrarDatos", true);
+
 
 		}else {
 			existeUsuario=false;
 			model.addAttribute("existeUsuario", existeUsuario);
+			model.addAttribute("mostrarDatos", false);
+			model.addAttribute("usuario", null);
 			model.addAttribute("indicesMasaMuscular", null);
 		}
 		return "registros-imc";
@@ -124,4 +130,9 @@ public class IndiceMasaCorporalController {
 		return "gestion_datos_imc";
 	}
 	
+	@GetMapping("/eliminar/{id}")
+	public String eliminarIngrediente(@PathVariable(value="id")Long id) {
+		indiceMasaCorporalService.eliminarIndiceMasaCorporal(id);
+		return "redirect:/imc/gestion";
+	}
 }

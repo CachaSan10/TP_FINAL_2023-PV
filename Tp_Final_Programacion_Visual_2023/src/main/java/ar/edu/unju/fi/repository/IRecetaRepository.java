@@ -23,5 +23,7 @@ public interface IRecetaRepository extends CrudRepository<Receta, Long> {
    * @return
    */
   public List<Receta> findByCategoria(String categoria);
+  
+
 	
 }

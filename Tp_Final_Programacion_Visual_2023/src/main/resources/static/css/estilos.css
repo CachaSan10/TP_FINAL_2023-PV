@@ -298,6 +298,16 @@ pagina de receta
     padding: 20px;
 }
 
+/*Pagina de recetas*/
+.recetas{
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
+
+.recetas h1 {
+	margin-bottom: 30px;
+}
+
 
 /*
 Agradecimiento

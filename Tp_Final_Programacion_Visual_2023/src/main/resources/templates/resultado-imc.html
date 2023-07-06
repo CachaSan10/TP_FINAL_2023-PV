@@ -23,6 +23,7 @@
     Resultado del calculo de Imc
   </div>
   <div class="card-body">
+	      <h2 class="card-title" ><span th:text="'Usuario: ' + ${usuario.nombre}+ '  '+${usuario.apellido}"></span></h2>
     <h5 class="card-title" ><span th:text="${resultado}"></span></h5>
     <a th:href="@{/imc/calculadora}" class="btn btn-primary">Aceptar</a>
   </div>
