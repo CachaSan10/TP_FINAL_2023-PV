@@ -2,7 +2,6 @@ package ar.edu.unju.fi.entity;
 
 import java.time.LocalDate;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
@@ -42,8 +41,6 @@ public class Testimonio {
 	@Column(name = "fecha")
 	private LocalDate fecha;
 	
-	@Autowired
-	@NotNull(message = "El usuario del testimonio es requerido")
 	@JoinColumn(name="usuario_id")
 	@OneToOne(cascade = CascadeType.ALL , fetch = FetchType.LAZY)
 	private Usuario usuario;

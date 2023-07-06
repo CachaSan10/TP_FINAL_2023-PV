@@ -18,23 +18,14 @@
 		<header th:replace="~{layouts/header :: header}"></header>
 		<nav th:replace="~{layouts/nav :: nav}"></nav>
 		<div class="card">
-			<form
-				th:action="${edicion}?@{/testimonio/modificar/}+${testimonio.id}:@{/testimonio/guardar}"
-				th:object="${testimonio}" method="post">
+			<div th:text="${usuario.nombre}+' '+${usuario.apellido}">
 				
-				<div class="mb-3">
-				<input type="hidden" class="form-control" id="id" th:field="*{id}">
-				</div>
-				<div class="mb-3">
-					<label for="usuario" class="form-label">Usuario</label>
- 					<select class="form-select" id="usuario" th:field="*{usuario.id}" name="usuario" 
- 						th:classappend="${#fields.hasErrors('usuario')}? 'is-invalid' : ''">
-					<option value="0" disabled selected>SELECCIONAR</option>
-					<option th:each="u: ${usuarios}"th:value="${u.id}"
-					th:text="${u.nombre}+'-'+${u.apellido}"></option></select>
-					<p class="form-text text-danger"
-					 th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}"></p>
-				</div>
+			</div>
+			<form
+				th:action="${edicion}?@{/testimonio/modificar/}+${testimonio.id}:@{/testimonio/guardar/}+${usuario.id}"
+				th:object="${testimonio}" enctype="multipart/form-data" method="post">
+				
+				
 				
 				<label for="idcomentario" class="form-label">Comentario</label>
 				<textarea th:field="*{comentario}" class="form-control"
@@ -49,6 +40,11 @@
 					 <p class="form-text text-danger"
 					 th:if="${#fields.hasErrors('fecha')}"
 					 th:errors="*{fecha}"></p>
+				</div>
+				
+				<div class="input-group mb-3">
+					<input type="file" class="form-control" id="file" name="file" th:text="${testimonio.imagen}">
+					<label class="input-group-text" for="file">Subir Imagen</label>
 				</div>
 				
 				<a class="btn btn-primary btn-testimonio"
