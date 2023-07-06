@@ -288,6 +288,16 @@ card lista IMC receta gestion_ingredientes
     padding: 20px;
 }
 
+/*
+pagina de receta
+*/
+#card-receta{
+	max-width: 600px;
+    margin: 0 auto;
+    margin-bottom: 40px;
+    padding: 20px;
+}
+
 
 /*
 Agradecimiento

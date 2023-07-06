@@ -25,18 +25,18 @@
 		<a th:if="${listaReceta != false}"  th:href="${listaReceta}?@{/receta/lista}" class="btn btn-primary"
 		th:text="${listaReceta}?'Volver a lista receta':'  '"></a>
 			
-				<div class="card">
+				
 	<h1 class="card-title text-center">Ver Receta</h1>
 	
-		<div class="card" style="width: 18rem;" th:object="${receta}">
+		<div class="card"  th:object="${receta}" id="card-receta">
   <img th:src="@{/receta/cargar/}+${receta.imagen}" class="card-img-top" alt="...">
   <div class="card-body">
-    <h4 class="card-title" th:text="*{nombre}"></h4>
+    <h4 class="card-title text-center" th:text="*{nombre}"></h4>
     <p class="card-text" th:text="*{resumen}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
     <h5 class="card-title">Ingredientes:</h5>
 
-		<ul class="list-group list-group-flush">
-  <li class="list-group-item" th:each="ingrediente: ${receta.ingredientes}" th:text="${ingrediente.nombre}">An item</li>
+		<ul style="list-style-type:disc">
+  <li th:each="ingrediente: ${receta.ingredientes}" th:text="${ingrediente.nombre}"></li>
 </ul>
 
     <h5 class="card-title">Preparacion</h5>
@@ -47,7 +47,7 @@
   
 </div>
 	
-	</div>
+	
 	<!--Uso del fragmento footer -->
 	<footer th:replace="~{layouts/footer :: footer}"></footer>
 		</div>

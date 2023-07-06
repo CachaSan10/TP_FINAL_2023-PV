@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package ar.edu.unju.fi.entity;
 
 import java.util.List;
