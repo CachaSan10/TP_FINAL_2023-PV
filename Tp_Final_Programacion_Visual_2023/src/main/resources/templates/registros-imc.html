@@ -43,9 +43,14 @@
   <button type="submit" class="btn btn-primary">Obtener Registros de indice de Masa Corporal</button>
 </form>
 	  
+	  <div  style="width: 18rem;" th:if="${mostrarDatos != false}">
+  <div class="card-body">
+    <h5 class="card-title" th:text="'Usuario: '+${usuario.nombre}+ '  ' + ${usuario.apellido}"></h5>
+    <h6 class="card-title text-center " th:text="'Id: '+${usuario.id}" ></h6>
+  </div>
+</div>
 	  
-	  
-   <table class="table table-bordered">
+   <table class="table table-bordered" th:if="${mostrarDatos != false}">
   <thead class="table-dark">
     <tr>
       <th scope="col">Fecha</th>

@@ -37,9 +37,8 @@
 								
 								<div class="form-check" th:each="ingrediente: ${ingredientes}">
 									
-									<input  class="form-check-input" type="checkbox" name="ingrediente" 
-										 th:value="${ingrediente.id}" 
-										  >
+									<input  class="form-check-input" type="checkbox" name="ingredientes" 
+										 th:value="${ingrediente.id}" >
 										<label class="form-check-label" th:text="${ingrediente.nombre}"></label>
 								</div>
 								

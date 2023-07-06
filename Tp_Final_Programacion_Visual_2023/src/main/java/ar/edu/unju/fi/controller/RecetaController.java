@@ -4,6 +4,7 @@ package ar.edu.unju.fi.controller;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.Resource;
@@ -60,7 +61,7 @@ public class RecetaController {
 	@PostMapping("/guardar")
 	public ModelAndView postGuardarIngredientePage(@Valid @ModelAttribute("receta") Receta receta, BindingResult result,
 			@RequestParam("file")MultipartFile imagen,
-			@RequestParam("ingrediente") Long[] idIngredientes) throws IOException {
+			@RequestParam("ingredientes") Long[] idIngredientes) throws IOException {
 		ModelAndView mav = new ModelAndView("redirect:/receta/gestion");
 		System.out.println(idIngredientes[0]);
 		if (result.hasErrors()) {
@@ -76,6 +77,7 @@ public class RecetaController {
 	@GetMapping("/modificar/{id}")
 	public String getModificarIngredientePage(Model model, @PathVariable(value = "id")Long id) {
 		boolean edicion=true;
+
 		model.addAttribute("receta", recetaService.buscarReceta(id));
 		model.addAttribute("ingredientes",ingredienteService.obtenerIngredientes());
 
@@ -86,7 +88,7 @@ public class RecetaController {
 	@PostMapping("/modificar/{id}")
 	public String modificarIngrediente(@Valid @ModelAttribute("receta")Receta recetaModificada, BindingResult result,
 			@RequestParam("file")MultipartFile imagen,Model  model,
-			@RequestParam("ingrediente") Long[] idIngredientes) throws IOException {
+			@RequestParam("ingredientes") Long[] idIngredientes) throws IOException {
 		System.out.println("id del array: " + idIngredientes[0]);
 
 		if (result.hasErrors()) {
