@@ -72,3 +72,13 @@ insert into usuarios (usu_id, usu_nombre, usu_apellido, usu_email, usu_fecha_nac
 insert into usuarios (usu_id, usu_nombre, usu_apellido, usu_email, usu_fecha_nacimiento, usu_telefono, usu_sexo, usu_estatura, usu_estado, usu_administrador) values(5, 'Mauricio', 'Larreta', 'larreta@gmail.com','1997-10-11', '4211487890', 'Masculino', 1.8, 1, 0 );
 insert into usuarios (usu_id, usu_nombre, usu_apellido, usu_email, usu_fecha_nacimiento, usu_telefono, usu_sexo, usu_estatura, usu_estado, usu_administrador) values(6, 'Eugenia', 'Fernandez', 'fernandez@gmail.com','1995-03-12', '4204223881', 'Femenino', 1.5, 1, 0 );
 
+
+insert into indices_masa_corporal (imc_id, imc_fecha, imc_estado, imc_peso,usu_id) values(1,'2022-06-14', 1, 80.5,1);
+insert into indices_masa_corporal (imc_id, imc_fecha, imc_estado, imc_peso,usu_id) values(2,'2022-09-21', 1, 90,1);
+insert into indices_masa_corporal (imc_id, imc_fecha, imc_estado, imc_peso,usu_id) values(3,'2022-12-6', 1, 85,1);
+insert into indices_masa_corporal (imc_id, imc_fecha, imc_estado, imc_peso,usu_id) values(4,'2023-01-9', 1, 82,1);
+
+
+
+
+
