@@ -28,6 +28,8 @@ public class IndiceMasaCorporalServiceMysqlImp implements IIndiceMasaCorporalSer
 	private IUsuarioService usuarioService;
 	
 
+	
+	
 	/**
 	 * Metodo que retorna el indice de masa coroporal
 	 * @return el indice de masa corporal
@@ -123,6 +125,15 @@ public class IndiceMasaCorporalServiceMysqlImp implements IIndiceMasaCorporalSer
 	@Override
 	public String calcularImc(IndiceMasaCorporal imc) {
 	 return indiceMasaCorporalRepository.findById(imc.getId()).get().calcularImc();	
+	}
+
+	/**
+	 * Metodo que devuelve la lista de indice de masa corporal 
+	 * @return la lista de indice de masa corporal
+	 */
+	@Override
+	public List<IndiceMasaCorporal> obtenerIndicesMasaCorporal() {
+		return indiceMasaCorporalRepository.findByEstado(true);
 	}
 
 

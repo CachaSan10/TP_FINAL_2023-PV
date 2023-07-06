@@ -15,7 +15,6 @@ public interface IIndiceMasaCorporalRepository extends CrudRepository<IndiceMasa
 	
 	
 	public List<IndiceMasaCorporal> findByUsuarioAndEstado(Usuario usuario, boolean estado);
-	public IndiceMasaCorporal findByFechaImc(LocalDate fechaImc);
 	public List<IndiceMasaCorporal> findByUsuario(Usuario usuario);
-
+	public List<IndiceMasaCorporal> findByEstado(boolean estado);
 }

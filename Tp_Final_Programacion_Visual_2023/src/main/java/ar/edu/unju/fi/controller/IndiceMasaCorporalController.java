@@ -118,4 +118,10 @@ public class IndiceMasaCorporalController {
 		return modelAndView;
 	}
 	
+	@GetMapping("/gestion")
+	public String obtenerPaginaGestionIndiceMasaCorporal(Model model) {
+		model.addAttribute("indicesMasaCorporal",indiceMasaCorporalService.obtenerIndicesMasaCorporal());
+		return "gestion_datos_imc";
+	}
+	
 }
