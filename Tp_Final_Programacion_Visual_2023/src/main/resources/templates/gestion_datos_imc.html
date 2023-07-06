@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<!--Especificacion de viewport -->
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<!-- Bootstrap referencia  -->
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+	<!-- Css referencia-->
+	<link th:rel="stylesheet" th:href="@{/css/estilos.css}">
+	<title>Imc - Bienestar en Accion</title>
+
+</head>
+
+<body>
+
+	<div class="container">
+		<!--Uso del fragmento header -->
+		<header th:replace="~{layouts/header :: header}"></header>
+		<a th:href="@{/gestion/datos}" class="btn btn-primary">Volver a Menu de Gestion</a>
+
+
+
+
+		<div class="card">
+			<h1 class="card-title text-center">Gestion de Indice de Masa Corporal</h1>
+
+			<div class="card-body">
+				<div class="table-responsive">
+
+					<!--Tabla de sucursales-->
+					<table class="table-sm table table-striped table-bordered table-hover">
+						<thead class="bg-secondary text-white">
+							<tr>
+								<th>Codigo</th>
+								<th>Nombre</th>
+								<th>Peso</th>
+								<th>Imc Calculado</th>
+								<th>Acciones </th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="imc: ${indicesMasaCorporal}">
+								<td th:text="${imc.id}"></td>
+								<td th:text="${imc.usuario.nombre}"></td>
+								<td th:text="${imc.peso}"></td>
+								<td th:text="${imc.calcularImc()}"></td>
+
+
+								<td>
+									<a class="btn btn-info btn-sm" th:href="@{/imc/modificar/}+${imc.id}">Modificar</a>
+									<a class="btn btn-danger btn-sm" th:href="@{/imc/eliminar/}+${imc.id}">Eliminar</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+
+		<!--Uso del fragmento footer -->
+		<footer th:replace="~{layouts/footer :: footer}"></footer>
+
+
+	</div>
+	<!-- Configuracion para usar bootstrap js -->
+	<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+</body>
+
+</html>
