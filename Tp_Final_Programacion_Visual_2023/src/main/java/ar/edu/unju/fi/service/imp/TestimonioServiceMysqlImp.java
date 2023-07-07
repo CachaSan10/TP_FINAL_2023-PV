@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import ar.edu.unju.fi.entity.Testimonio;
+import ar.edu.unju.fi.entity.Usuario;
 import ar.edu.unju.fi.repository.ITestimonioRepository;
 import ar.edu.unju.fi.service.ITestimonioService;
 import ar.edu.unju.fi.util.UploadFile;
@@ -25,6 +26,10 @@ public class TestimonioServiceMysqlImp implements ITestimonioService{
 	
 	@Autowired
 	private UploadFile uploadFile;
+	
+	@Autowired
+	
+	private Usuario usuario;
 	
 	
 	@Override
@@ -45,16 +50,31 @@ public class TestimonioServiceMysqlImp implements ITestimonioService{
 	public void modificarTestimonio(Testimonio testimonioModificado, MultipartFile imagen) throws IOException {
 		// TODO Auto-generated method stub
 		testimonioModificado.setEstado(true);
+		
+		/*
+		if (!imagen.isEmpty()) {
+			String imagenString = imagen.getOriginalFilename();
+
+			if (imagenString.compareTo(buscarTestimonio(testimonioModificado.getId()).getImagen()) != 0) {
+				uploadFile.delete(buscarTestimonio(testimonioModificado.getId()).getImagen());
+				imagenString = uploadFile.copy(imagen);
+				testimonioModificado.setImagen(imagenString);
+			}
+		}else {
+			testimonioModificado.setImagen(buscarTestimonio(testimonioModificado.getId()).getImagen());
+		}
+		*/
+		
 		testimonioRepository.save(testimonioModificado);
 		
 	}
 	
 	@Override
 	public void eliminarTestimonio(Long id) {
-		// TODO Auto-generated method stub
 		Testimonio unTestimonio = new Testimonio();
 		unTestimonio = buscarTestimonio(id);
 		unTestimonio.setEstado(false);
+		uploadFile.delete(unTestimonio.getImagen());
 		testimonioRepository.save(unTestimonio);
 	}
 	
