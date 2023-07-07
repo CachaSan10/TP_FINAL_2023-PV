@@ -12,7 +12,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
@@ -44,10 +46,11 @@ public class Ingrediente {
 	private String nombre;
 	
 	/**
-	 * Representa la lista receta que entan vinculado con el ingrediente
+	 * Representa la  receta que enta vinculado con el ingrediente
 	 */
-	@ManyToMany(mappedBy = "ingredientes")
-	private List<Receta> recetas;
+	@ManyToOne
+	@JoinColumn(name = "rec_id")
+	private Receta receta;
 
 	/**
 	 * Representa la disponibilidad del ingrediente en la base de datos
@@ -78,10 +81,10 @@ public class Ingrediente {
 	 */
 	public Ingrediente(Long id,
 			@NotEmpty @Size(min = 6, max = 20) @Pattern(regexp = "[a-z A-ZÀ-ÿ\\u00f1\\u00d1]*") String nombre,
-			List<Receta> recetas, boolean estado) {
+			Receta receta, boolean estado) {
 		this.id = id;
 		this.nombre = nombre;
-		this.recetas = recetas;
+		this.receta = receta;
 		this.estado = estado;
 	}
 
@@ -108,19 +111,16 @@ public class Ingrediente {
 	}
 
 
-	/**
-	 * @return the recetas
-	 */
-	public List<Receta> getRecetas() {
-		return recetas;
+
+
+
+	public Receta getReceta() {
+		return receta;
 	}
 
 
-	/**
-	 * @param recetas the recetas to set
-	 */
-	public void setRecetas(List<Receta> recetas) {
-		this.recetas = recetas;
+	public void setReceta(Receta receta) {
+		this.receta = receta;
 	}
 
 
@@ -140,10 +140,7 @@ public class Ingrediente {
 	}
 
 
-	@Override
-	public String toString() {
-		return "Ingrediente [id=" + id + ", nombre=" + nombre + ", recetas=" + recetas + ", estado=" + estado + "]";
-	}
+
 
 
 	
