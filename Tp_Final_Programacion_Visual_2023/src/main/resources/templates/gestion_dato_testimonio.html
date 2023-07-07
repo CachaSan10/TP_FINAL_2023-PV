@@ -40,6 +40,7 @@
 							<tr>
 								<th>Codigo</th>
 								<th>Usuario</th>
+								<th>Fecha de Publicación</th>
 								<th>Acciones</th>
 							</tr>
 						</thead>
@@ -47,7 +48,7 @@
 							<tr th:each="testimonio: ${testimonios}">
 								<td th:text="${testimonio.id}"></td>
 								<td th:text="${testimonio.usuario.nombre}+' '+${testimonio.usuario.apellido}"></td>
-
+								<td th:text="${#temporals.format(testimonio.fecha,'dd-MM-yyyy')}"></td>
 								<td><a class="btn btn-info btn-sm"
 									th:href="@{/testimonio/modificar/}+${testimonio.id}">Modificar</a>
 									<a class="btn btn-danger btn-sm"
