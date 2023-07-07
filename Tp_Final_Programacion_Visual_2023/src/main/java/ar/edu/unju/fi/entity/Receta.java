@@ -13,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -56,8 +57,7 @@ public class Receta {
 	/**
 	 * Representa la lista de ingredientes que contiene la receta
 	 */
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinColumn(name = "ingre_id")
+	@OneToMany(mappedBy = "receta")
 	private List<Ingrediente> ingredientes;
 	
 	/**

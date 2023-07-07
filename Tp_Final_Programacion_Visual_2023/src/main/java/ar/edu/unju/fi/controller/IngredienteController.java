@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.entity.Ingrediente;
 import ar.edu.unju.fi.service.IIngredienteService;
+import ar.edu.unju.fi.service.imp.RecetaServiceMysqlImp;
 import jakarta.validation.Valid;
 
 @Controller
@@ -23,6 +24,9 @@ public class IngredienteController {
 	@Autowired
 	@Qualifier("ingredienteServiceMysqlImp")
 	private IIngredienteService ingredienteService;
+	
+	@Autowired
+	private RecetaServiceMysqlImp recetaService;
 	
 	
 	@GetMapping("/gestion")
@@ -36,6 +40,7 @@ public class IngredienteController {
 	public String getNuevoIngredientePage(Model model) {
 		boolean edicion=false;
 		model.addAttribute("ingrediente", ingredienteService.obtenerIngrediente());
+		model.addAttribute("recetas", recetaService.obtenerRecetas());
 		model.addAttribute("edicion", edicion);
 		return "nuevo_ingrediente";
 	}
