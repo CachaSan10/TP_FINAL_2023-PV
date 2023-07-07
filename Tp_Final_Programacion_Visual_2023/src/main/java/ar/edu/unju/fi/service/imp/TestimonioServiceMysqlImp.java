@@ -51,19 +51,23 @@ public class TestimonioServiceMysqlImp implements ITestimonioService{
 		// TODO Auto-generated method stub
 		testimonioModificado.setEstado(true);
 		
-		/*
-		if (!imagen.isEmpty()) {
-			String imagenString = imagen.getOriginalFilename();
+		
+		 if (imagen != null && !imagen.isEmpty()) {
+		        String imagenString = imagen.getOriginalFilename();
 
-			if (imagenString.compareTo(buscarTestimonio(testimonioModificado.getId()).getImagen()) != 0) {
-				uploadFile.delete(buscarTestimonio(testimonioModificado.getId()).getImagen());
-				imagenString = uploadFile.copy(imagen);
-				testimonioModificado.setImagen(imagenString);
-			}
-		}else {
-			testimonioModificado.setImagen(buscarTestimonio(testimonioModificado.getId()).getImagen());
-		}
-		*/
+		        Testimonio testimonioExistente = buscarTestimonio(testimonioModificado.getId());
+		        if (testimonioExistente != null && !imagenString.equals(testimonioExistente.getImagen())) {
+		            uploadFile.delete(testimonioExistente.getImagen());
+		            imagenString = uploadFile.copy(imagen);
+		            testimonioModificado.setImagen(imagenString);
+		        }
+		    } else {
+		        Testimonio testimonioExistente = buscarTestimonio(testimonioModificado.getId());
+		        if (testimonioExistente != null) {
+		            testimonioModificado.setImagen(testimonioExistente.getImagen());
+		        }
+		    }
+		
 		
 		testimonioRepository.save(testimonioModificado);
 		
@@ -92,7 +96,6 @@ public class TestimonioServiceMysqlImp implements ITestimonioService{
 
 	@Override
 	public Testimonio obtenerTestimonio() {
-		// TODO Auto-generated method stub
 		return testimonio;
 	}
 

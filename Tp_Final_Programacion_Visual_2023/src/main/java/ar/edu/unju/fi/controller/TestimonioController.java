@@ -106,12 +106,23 @@ public class TestimonioController {
 	}
 	
 	@PostMapping("/modificar/{id}")
-	public String modificarTestimonio(@ModelAttribute("testimonio") Testimonio testimonioModificado, BindingResult bindingResult, MultipartFile imagen) throws IOException {
-		if ( bindingResult.hasErrors() ) {
-			return "nuevo_testimonio";
-		}
-		testimonioService.modificarTestimonio(testimonioModificado, imagen);
-		return "redirect:/testimonio/gestion";
+	public String modificarTestimonio(@PathVariable(value="id") Long id,@ModelAttribute("testimonio") Testimonio testimonioModificado, 
+			BindingResult bindingResult, MultipartFile imagen, Testimonio testimonio) throws IOException {
+		if (bindingResult.hasErrors()) {
+	        return "nuevo_testimonio";
+	    }
+
+	    Testimonio testimonioExistente = testimonioService.buscarTestimonio(testimonioModificado.getId());
+	    if (testimonioExistente == null) {
+	        return "redirect:/testimonio/gestion";
+	    }
+
+	    // Establecer el usuario del testimonio
+	    testimonioModificado.setUsuario(usuarioService.buscarUsuario(id));
+
+	    // Modificar el testimonio
+	    testimonioService.modificarTestimonio(testimonioModificado, imagen);
+	    return "redirect:/testimonio/gestion";
 	}
 	
 	@GetMapping("/eliminar/{id}")
