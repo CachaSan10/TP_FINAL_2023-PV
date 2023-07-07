@@ -34,17 +34,6 @@
 										th:errors="*{nombre}"></div>
 								</div>
 
-								
-								<div class="form-check" th:each="ingrediente: ${ingredientes}">
-									
-									<input  class="form-check-input" type="checkbox" name="ingredientes" 
-										 th:value="${ingrediente.id}" >
-										<label class="form-check-label" th:text="${ingrediente.nombre}"></label>
-								</div>
-								
-
-
-
 								<div class="form-group">
 									<label for="idPreparacion" class="form-label">Preparacion de Receta : </label>
 									<textarea th:field="*{preparacion}" class="form-control" name="preparacion"

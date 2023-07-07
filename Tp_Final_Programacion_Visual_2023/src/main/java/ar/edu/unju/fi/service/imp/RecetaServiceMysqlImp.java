@@ -59,16 +59,9 @@ public class RecetaServiceMysqlImp implements IRecetaService {
 	 * @param idIngredientes representa la lista de ingredientes que se vincula con la receta
 	 */
 	@Override
-	public void guardarReceta(Receta receta, MultipartFile imagen,Long[] idIngredientes) throws IOException {
+	public void guardarReceta(Receta receta, MultipartFile imagen) throws IOException {
 		List<Ingrediente> listaIngrediente = new ArrayList<Ingrediente>();
 		
-		if(idIngredientes.length==0) {
-		listaIngrediente=null;	
-		}else {
-			for(int i=0;i<idIngredientes.length;i++) {
-				listaIngrediente.add(ingredienteService.buscarIngrediente(idIngredientes[i]));
-			}
-		}
 		
 		
 		String nombreImagen = uploadFile.copy(imagen);
@@ -118,21 +111,9 @@ public class RecetaServiceMysqlImp implements IRecetaService {
 	 * @param idIngredientes representa la lista de ingredientes que se vincula con la receta
 	 */
 	@Override
-	public void modificarReceta(Receta recetaModificada, MultipartFile imagenModificada,Long[] idIngredientes) throws IOException {
+	public void modificarReceta(Receta recetaModificada, MultipartFile imagenModificada) throws IOException {
 		recetaModificada.setEstado(true);
-		
-			List<Ingrediente> listaIngrediente = new ArrayList<Ingrediente>();
-		
-		if(idIngredientes.length==0) {
-		listaIngrediente=buscarReceta(recetaModificada.getId()).getIngredientes();	
-		}else {
-			for(int i=0;i<idIngredientes.length;i++) {
-				System.out.println("id: "+idIngredientes[i]);
-				listaIngrediente.add(ingredienteService.buscarIngrediente(idIngredientes[i]));
-			}
-		}
-		
-		recetaModificada.setIngredientes(listaIngrediente);
+
 		if (!imagenModificada.isEmpty()) {
 			String imagenString = imagenModificada.getOriginalFilename();
 
