@@ -2,6 +2,7 @@
 Colores de mi sitio web
 
 */
+
 .img322{
 	height: 300px;
 	width: 1200px;
@@ -272,7 +273,7 @@ body
 }
 
 body {
-  background-image: url(/images/muro3.jpg);
+  background-image: url(/images/muro1.png);
   background-size: cover; 
   background-repeat: no-repeat;
   background-position: center; 
@@ -349,4 +350,9 @@ Testimonio
 	
 }
 
-
+/*
+puntos
+*/
+.puntos li::before {
+  content: "• ";
+}
