@@ -39,12 +39,14 @@ public class IndiceMasaCorporalController {
 	}
 	
 	@PostMapping("/calcular-imc")
-	public ModelAndView calcularImc(@Valid @ModelAttribute("indiceMasaCorporal")IndiceMasaCorporal imc ,Long idUsuario,BindingResult result) {
+	public ModelAndView calcularImc(@Valid @ModelAttribute("indiceMasaCorporal") IndiceMasaCorporal imc ,BindingResult result,
+			Long idUsuario) {
 		ModelAndView modelAndView = new ModelAndView("resultado-imc");
 		boolean existeUsuario;
 		if(usuarioService.existeUsuario(idUsuario)) {
 			existeUsuario = true;
 			if(result.hasErrors()) {
+				modelAndView.addObject("existeUsuario", existeUsuario);
 				modelAndView.setViewName("calculadora-imc");
 				modelAndView.addObject("indiceMasaCorporal", imc);
 				return modelAndView;
@@ -56,9 +58,21 @@ public class IndiceMasaCorporalController {
 			}
 		}else {
 			existeUsuario=false;
+			if(result.hasErrors()) {
+				modelAndView.addObject("existeUsuario", existeUsuario);
+				modelAndView.setViewName("calculadora-imc");
+				modelAndView.addObject("indiceMasaCorporal", imc);
+				return modelAndView;
+			}
 		modelAndView.addObject("existeUsuario", existeUsuario);
 		modelAndView.setViewName("calculadora-imc");
 		}
+		/**
+		if(result.hasErrors()) {
+			modelAndView.setViewName("calculadora-imc");
+			modelAndView.addObject("indiceMasaCorporal", imc);
+			return modelAndView;
+		}**/
 		return modelAndView;
 	}
 	

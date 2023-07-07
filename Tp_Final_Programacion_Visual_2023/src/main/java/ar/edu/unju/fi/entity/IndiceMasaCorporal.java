@@ -15,7 +15,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Positive;
 
 /**
  * @author Nahuel Alberto Cachambi
@@ -39,6 +42,7 @@ public class IndiceMasaCorporal {
 	 *  Representa la fecha de indice de masa corporal que registro el usuario
 	 */
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@NotNull(message = "No debe estar vacio la fecha. Debe Ingresar una fecha")
 	@PastOrPresent(message = "La fecha de registro de Imc debe ser anterior o actual a la fecha actual")
 	@Column(name = "imc_fecha")
 	private LocalDate fechaImc;
@@ -60,6 +64,8 @@ public class IndiceMasaCorporal {
 	 * Representa el peso del usuario
 	 */
 	@Column(name = "imc_peso")
+	@Positive(message = "Debe ingresar un valor mayor cero")
+	@Min(value = 30, message = "Debe ser mayor a 30 el peso")
 	private double peso;
 
 
@@ -76,10 +82,11 @@ public class IndiceMasaCorporal {
 	 * @param fechaImc representa la fecha del indice de masa corporal el cual se registro.
 	 * @param usuario representa el usuario que pertenece al indice de masa corporal.
 	 * @param estado  representa la disponibilidad del indice de masa corporal en la base de datos.
+	 * @param peso representa el peso del indice de la masa corporal
 	 */
 	public IndiceMasaCorporal(Long id,
 			@PastOrPresent(message = "La fecha de registro de Imc debe ser anterior o actual a la fecha actual") LocalDate fechaImc,
-			Usuario usuario, boolean estado, double peso) {
+			Usuario usuario, boolean estado, @Positive(message = "Debe ingresar un valor mayor cero") double peso) {
 		this.id = id;
 		this.fechaImc = fechaImc;
 		this.usuario = usuario;
@@ -87,6 +94,8 @@ public class IndiceMasaCorporal {
 		this.peso = peso;
 	}
 
+	
+	
 	/**
 	 * @return the id
 	 */
@@ -187,14 +196,16 @@ public class IndiceMasaCorporal {
 		return "Su Imc es " + format1.format(imc) + " - "+ tipoPeso;
 	}
 
-	
-	
-	
+
 	@Override
 	public String toString() {
 		return "IndiceMasaCorporal [id=" + id + ", fechaImc=" + fechaImc + ", usuario=" + usuario + ", estado=" + estado
-				+ "]";
+				+ ", peso=" + peso + "]";
 	}
+
+	
+	
+	
 	
 	
 	
