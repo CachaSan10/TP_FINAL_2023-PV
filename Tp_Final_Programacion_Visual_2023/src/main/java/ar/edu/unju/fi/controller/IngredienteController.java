@@ -51,6 +51,7 @@ public class IngredienteController {
 		
 		if (bindingResult.hasErrors()) {
 			mav.setViewName("nuevo_ingrediente");
+			mav.addObject("recetas", recetaService.obtenerRecetas());
 			mav.addObject("edicion", false);
 			return mav;
 		}
@@ -64,7 +65,8 @@ public class IngredienteController {
 	public String getModificarIngredientePage(Model model, @PathVariable(value = "id")Long id) {
 		boolean edicion=true;
 		Ingrediente ingredienteEncontrado = ingredienteService.buscarIngrediente(id);
-		
+		model.addAttribute("recetas", recetaService.obtenerRecetas());
+
 		model.addAttribute("ingrediente", ingredienteEncontrado);
 		model.addAttribute("edicion", edicion);
 		return "nuevo_ingrediente";
@@ -74,6 +76,8 @@ public class IngredienteController {
 	public String modificarIngrediente(@Valid @ModelAttribute("ingrediente") Ingrediente ingredienteModificado, BindingResult resultado,Model model) {
 		if (resultado.hasErrors()) {
 			model.addAttribute("ingrediente",  ingredienteModificado);
+			model.addAttribute("recetas", recetaService.obtenerRecetas());
+
 			return "nuevo_ingrediente";
 		}
 		ingredienteService.modificarIngrediente(ingredienteModificado);

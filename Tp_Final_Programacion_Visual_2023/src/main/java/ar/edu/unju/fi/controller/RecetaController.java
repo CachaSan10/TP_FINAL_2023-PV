@@ -60,17 +60,15 @@ public class RecetaController {
 	
 	@PostMapping("/guardar")
 	public ModelAndView postGuardarIngredientePage(@Valid @ModelAttribute("receta") Receta receta, BindingResult result,
-			@RequestParam("file")MultipartFile imagen,
-			@RequestParam("ingredientes") Long[] idIngredientes) throws IOException {
+			@RequestParam("file")MultipartFile imagen) throws IOException {
 		ModelAndView mav = new ModelAndView("redirect:/receta/gestion");
-		System.out.println(idIngredientes[0]);
 		if (result.hasErrors()) {
 			mav.setViewName("nueva_receta");
 			mav.addObject("ingredientes", ingredienteService.obtenerIngredientes());
 			mav.addObject("edicion", false);
 			return mav;
 		}
-		recetaService.guardarReceta(receta,imagen, idIngredientes);
+		recetaService.guardarReceta(receta,imagen);
 		return mav;
 	}
 	
@@ -87,16 +85,14 @@ public class RecetaController {
 	
 	@PostMapping("/modificar/{id}")
 	public String modificarIngrediente(@Valid @ModelAttribute("receta")Receta recetaModificada, BindingResult result,
-			@RequestParam("file")MultipartFile imagen,Model  model,
-			@RequestParam("ingredientes") Long[] idIngredientes) throws IOException {
-		System.out.println("id del array: " + idIngredientes[0]);
+			@RequestParam("file")MultipartFile imagen,Model  model) throws IOException {
 
 		if (result.hasErrors()) {
 			model.addAttribute("receta", recetaModificada);
 			model.addAttribute("ingredientes", ingredienteService.obtenerIngredientes());
 			return "nueva_receta";
 		}
-		recetaService.modificarReceta(recetaModificada,imagen,idIngredientes);
+		recetaService.modificarReceta(recetaModificada,imagen);
 		return "redirect:/receta/gestion";
 	}
 	
