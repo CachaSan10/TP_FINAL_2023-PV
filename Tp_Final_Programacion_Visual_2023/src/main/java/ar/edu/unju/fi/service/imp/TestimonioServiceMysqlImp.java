@@ -77,8 +77,8 @@ public class TestimonioServiceMysqlImp implements ITestimonioService{
 	public void eliminarTestimonio(Long id) {
 		Testimonio unTestimonio = new Testimonio();
 		unTestimonio = buscarTestimonio(id);
-		unTestimonio.setEstado(false);
 		uploadFile.delete(unTestimonio.getImagen());
+		unTestimonio.setEstado(false);
 		testimonioRepository.save(unTestimonio);
 	}
 	
