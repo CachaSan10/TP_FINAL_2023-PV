@@ -34,7 +34,8 @@
 						<thead class="bg-secondary text-white">
 							<tr>
 								<th>Codigo</th>
-								<th>Nombre</th>
+								<th>Usuario</th>
+								<th>Id-Usuario</th>
 								<th>Peso</th>
 								<th>Imc Calculado</th>
 								<th>Acciones </th>
@@ -44,6 +45,7 @@
 							<tr th:each="imc: ${indicesMasaCorporal}">
 								<td th:text="${imc.id}"></td>
 								<td th:text="${imc.usuario.nombre}"></td>
+								<td th:text="${imc.usuario.id}"></td>
 								<td th:text="${imc.peso}"></td>
 								<td th:text="${imc.calcularImc()}"></td>
 
