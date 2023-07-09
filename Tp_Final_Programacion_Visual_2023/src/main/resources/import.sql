@@ -47,6 +47,10 @@ insert into indices_masa_corporal (imc_id, imc_fecha, imc_estado, imc_peso,usu_i
 insert into indices_masa_corporal (imc_id, imc_fecha, imc_estado, imc_peso,usu_id) values(7,'2023-04-14', 1, 73,2);
 insert into indices_masa_corporal (imc_id, imc_fecha, imc_estado, imc_peso,usu_id) values(8,'2023-05-23', 1, 66,2);
 
+insert into testimonios (estado, fecha, testimonio_id, usuario_id, testimonio_comentario, testimonio_imagen) values(1, '2023-07-08', 1, 1, 'Tuve una muy buena experiencia saludable', 'perfil_1.jpg');
+insert into testimonios (estado, fecha, testimonio_id, usuario_id, testimonio_comentario, testimonio_imagen) values(1, '2023-05-07', 2, 2, 'Gracias a esta plataforma estoy mas saludable', 'perfil_2.jpg');
+insert into testimonios (estado, fecha, testimonio_id, usuario_id, testimonio_comentario, testimonio_imagen) values(1, '2023-04-06', 3, 3, 'Volví a tener un cuerpo saludable', 'perfil_3.jpg');
+
 
 
 
