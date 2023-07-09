@@ -31,7 +31,6 @@ public class TestimonioServiceMysqlImp implements ITestimonioService{
 	private UploadFile uploadFile;
 	
 	@Autowired
-	
 	private Usuario usuario;
 	
 	/**
