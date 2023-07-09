@@ -22,9 +22,9 @@
 		
 		<div class="row gy-3 my-3">
 
-			<div class="col-sm-6 col-md-4 col-lg-3"
+			<div class="col-4"
 				th:each="testimo: ${testimonios}">
-				<div class="card">
+				<div class="card d-flex flex-column" style="height: 100%;">
 					<div class="card-body">
 						<p th:text="${testimo.comentario}" class="card-title"></p>
 						<img th:src="@{/testimonio/cargar/}+${testimo.imagen}" alt="..." class="imagen-usuario img-thumbnail">

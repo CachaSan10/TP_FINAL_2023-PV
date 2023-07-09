@@ -20,37 +20,40 @@
 		<header th:replace="~{layouts/header :: header}"></header>
 		<nav th:replace="~{layouts/nav :: nav}"></nav>
 
-			
-
-
-<div class="container text-center recetas">
-	<h1 class="text-center">Recetas Saludables</h1>
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
-    
-    <div class="col" th:each="receta: ${recetas}">
-		<div class="card" style="width: 18rem;">
-  <img th:src="@{/receta/cargar/}+${receta.imagen}" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h4 class="card-title" th:text="${receta.nombre}"></h4>
-        <h6 class="card-title" th:text="'Recetas de '+${receta.categoria}"></h6>
-    <p class="card-text" th:text="${receta.resumen}"></p>
-    <a th:href="@{/receta/visualizar/}+${receta.id}" class="btn btn-primary">Ver Receta</a>
-  </div>
-</div>
-
-</div>
-    
-  </div>
-</div>
 
 
 
+		<div class="container text-center recetas">
+			<h1 class="text-center">Recetas Saludables</h1>
+			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
 
-	<!--Uso del fragmento footer -->
-	<footer th:replace="~{layouts/footer :: footer}"></footer>
+				<div class="col-4" th:each="receta: ${recetas}">
+					<div class="card card d-flex flex-column h-100" style="width: 18rem;">
+						<img th:src="@{/receta/cargar/}+${receta.imagen}"
+							class="card-img-top" alt="...">
+						<div class="card-body">
+							<h4 class="card-title" th:text="${receta.nombre}"></h4>
+							<h6 class="card-title"
+								th:text="'Recetas de '+${receta.categoria}"></h6>
+							<p class="card-text" th:text="${receta.resumen}"></p>
+							<a th:href="@{/receta/visualizar/}+${receta.id}"
+								class="btn btn-primary">Ver Receta</a>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
 		</div>
-		
-	
+
+
+
+
+		<!--Uso del fragmento footer -->
+		<footer th:replace="~{layouts/footer :: footer}"></footer>
+	</div>
+
+
 	<!-- Configuracion para usar bootstrap js -->
 	<script type="text/javascript"
 		th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
