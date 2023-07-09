@@ -17,12 +17,24 @@ public class GestionDatosController {
 	@Qualifier("usuarioServiceMysqlImp")
 	private IUsuarioService usuarioService;
 	
+	/**
+	 * Metodo que retorna la pagina de autenticacion de usuario para poder acceder a la gestion de datos
+	 * @param model representa la clase que envia usuario
+	 * @return la pagina autenticacion.html
+	 */
     @GetMapping("/autenticacion")
     public String getAutenticacionPage(Model model) {
         model.addAttribute("usuario", new Usuario());
         return "autenticacion";
     }
     
+    /**
+     * Metodo que autentica el id del usuario para acceder a la gestion de datos
+     * @param id representa el id del usuario que se envia desde el formulario atraves del atributo name
+     * @param model representa la clase que envia el error
+     * @return la pagina gestion_datos.html en caso de que el usuario sea administrador 
+     * en caso contrario autenticacion.html
+     */
     @GetMapping("/autenticar")
     public String postAutenticacion(Long id,Model model) {
         if (usuarioService.existeUsuario(id) && usuarioService.buscarUsuario(id).isAdministrador()==true) {
@@ -34,7 +46,10 @@ public class GestionDatosController {
         }
     }
 
-    
+    /**
+     * Metodo de devuelve la pagina gestion de datos 
+     * @return la pagina gestion_datos.html
+     */
     @GetMapping("/datos")
     public String getGestionDatosPage() {
         return "gestion_datos";
