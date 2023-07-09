@@ -17,51 +17,75 @@
 		<!--Uso del fragmento header -->
 		<header th:replace="~{layouts/header :: header}"></header>
 		<nav th:replace="~{layouts/nav :: nav}"></nav>
-		<div class="card">
-			<div th:text="${usuario.nombre}+' '+${usuario.apellido}">
-				
+
+
+
+		<div class="form-container">
+			<div class="container">
+				<div class="row">
+					<div
+						class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+						<h3
+							th:text="${edicion}?'Modificar Testimonio':'Agregar Testimonio'"
+							class="text-center mb-3"></h3>
+						<div class="card-body">
+
+							<div th:text="${usuario.nombre}+' '+${usuario.apellido}"></div>
+							<form
+								th:action="${edicion}?@{/testimonio/modificar/}+${testimonio.id}:@{/testimonio/guardar/}+${usuario.id}"
+								th:object="${testimonio}" enctype="multipart/form-data"
+								method="post">
+
+								<div class="form-group">
+									<label for="idPreparacion" class="form-label">Comentario
+										:</label>
+									<textarea th:field="*{comentario}" class="form-control"
+										id="idcomentario" rows="8" cols="5" name="comentario"
+										placeholder="Comentario"></textarea>
+									<div class="text-danger"
+										th:if="${#fields.hasErrors('comentario')}"
+										th:errors="*{comentario}"></div>
+								</div>
+
+								<div class="form-group">
+									<label for="fecha" class="form-label">Año de
+										Publicación</label> <input type="date" class="form-control" id="fecha"
+										th:field="*{fecha}"
+										th:classappend="${#fields.hasErrors('fecha')} ? 'isinvalid' : ''">
+									<p class="form-text text-danger"
+										th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}"></p>
+								</div>
+
+
+								<div class="form-group">
+									<label class="form-label" for="file">Subir Imagen</label>
+									<div class="input-group">
+										<input type="file" class="form-control" id="file" name="file"
+											th:text="${testimonio.imagen}">
+									</div>
+
+								</div>
+
+								<div class="form-group d-flex justify-content-end mt-3">
+									<a th:if="${edicion == false}" class="btn btn-secondary mx-2"
+										th:href="@{/testimonio/id-usuario-testimonio}">Cancelar</a> <a
+										th:if="${edicion}" class="btn btn-secondary mx-2"
+										th:href="@{/testimonio/gestion}">Cancelar</a>
+									<button type="submit" class="btn btn-primary"
+										th:text="${edicion}?'Modificar':'Agregar'"></button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
 			</div>
-			<form
-				th:action="${edicion}?@{/testimonio/modificar/}+${testimonio.id}:@{/testimonio/guardar/}+${usuario.id}"
-				th:object="${testimonio}" enctype="multipart/form-data" method="post">
-				
-				
-				
-				<label for="idcomentario" class="form-label">Comentario</label>
-				<textarea th:field="*{comentario}" class="form-control"
-					id="idcomentario" rows="15" cols="5" name="comentario"></textarea>
-				<div class="text-danger" th:if="${#fields.hasErrors('comentario')}"
-					th:errors="*{comentario}"></div>
-				
-				<div class="mb-3">
-	 				<label for="fecha" class="form-label">Año de Publicación</label>
-	 				<input type="date" class="form-control" id="fecha" th:field="*{fecha}"
-						th:classappend="${#fields.hasErrors('fecha')} ? 'isinvalid' : ''">
-					 <p class="form-text text-danger"
-					 th:if="${#fields.hasErrors('fecha')}"
-					 th:errors="*{fecha}"></p>
-				</div>
-				
-				<div class="input-group mb-3">
-					<input type="file" class="form-control" id="file" name="file" th:text="${testimonio.imagen}">
-					<label class="input-group-text" for="file">Subir Imagen</label>
-				</div>
-				
-				
-					
-				<div class="mb-3 d-flex justify-content-center">
-					<a th:if="${edicion == false}" class="btn btn-primary btn-testimonio"
-					th:href="@{/testimonio/id-usuario-testimonio}">Cancelar</a>
-					<a th:if="${edicion}" class="btn btn-primary btn-testimonio"
-					th:href="@{/testimonio/gestion}">Cancelar</a>
- 					<button type="submit" class="btn btn-success w-100 mb-1 fw-bolder"
-						th:text="${edicion}?'Modificar':'Agregar'"></button>
-				</div>	
-			</form>
 		</div>
+
 		<!--Uso del fragmento footer -->
 		<footer th:replace="~{layouts/footer :: footer}"></footer>
-		<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
 	</div>
+	<script type="text/javascript"
+		th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>
