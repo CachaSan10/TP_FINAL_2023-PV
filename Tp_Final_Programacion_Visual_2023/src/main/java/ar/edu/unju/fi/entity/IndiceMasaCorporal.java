@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -41,24 +40,11 @@ public class IndiceMasaCorporal {
 	/**
 	 *  Representa la fecha de indice de masa corporal que registro el usuario
 	 */
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull(message = "No debe estar vacio la fecha. Debe Ingresar una fecha")
 	@PastOrPresent(message = "La fecha de registro de Imc debe ser anterior o actual a la fecha actual")
 	@Column(name = "imc_fecha")
 	private LocalDate fechaImc;
-	
-	/**
-	 * Representa el usuario al cual pertenece el indice de masa corporal 
-	 */
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "usu_id")
-	private Usuario usuario;
-	
-	/**
-	 * Representa la disponibilidad del indice de masa corporal en la base de datos
-	 */
-	@Column(name = "imc_estado")
-	private boolean estado;
 	
 	/**
 	 * Representa el peso del usuario
@@ -67,7 +53,19 @@ public class IndiceMasaCorporal {
 	@Positive(message = "Debe ingresar un valor mayor cero")
 	@Min(value = 30, message = "Debe ser mayor a 30 el peso")
 	private double peso;
+	
+	/**
+	 * Representa la disponibilidad del indice de masa corporal en la base de datos
+	 */
+	@Column(name = "imc_estado")
+	private boolean estado;
 
+	/**
+	 * Representa el usuario al cual pertenece el indice de masa corporal 
+	 */
+	@ManyToOne()
+	@JoinColumn(name = "usu_id")
+	private Usuario usuario;
 
 	/**
 	 * Constructor por defecto

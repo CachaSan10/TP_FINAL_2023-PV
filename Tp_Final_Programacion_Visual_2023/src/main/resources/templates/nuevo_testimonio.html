@@ -47,10 +47,13 @@
 					<label class="input-group-text" for="file">Subir Imagen</label>
 				</div>
 				
-				<a class="btn btn-primary btn-testimonio"
-					th:href="@{/testimonio/id-usuario-testimonio}">Cancelar</a>
+				
 					
 				<div class="mb-3 d-flex justify-content-center">
+					<a th:if="${edicion == false}" class="btn btn-primary btn-testimonio"
+					th:href="@{/testimonio/id-usuario-testimonio}">Cancelar</a>
+					<a th:if="${edicion}" class="btn btn-primary btn-testimonio"
+					th:href="@{/testimonio/gestion}">Cancelar</a>
  					<button type="submit" class="btn btn-success w-100 mb-1 fw-bolder"
 						th:text="${edicion}?'Modificar':'Agregar'"></button>
 				</div>	

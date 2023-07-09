@@ -80,7 +80,9 @@ public class TestimonioController {
 	public ModelAndView getObtenerNuevoTestimonioPage(Long idUsuLong, Usuario usuario) {
 		boolean existeUsuario;
 		boolean existeTestimonio = true;
+
 		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("edicion", false);
 		if (usuarioService.existeUsuario(idUsuLong)) {
 			if(testimonioService.existeTestimonioRegistrado(idUsuLong)) {
 				modelAndView.addObject("existeTestimonio", existeTestimonio);
@@ -112,6 +114,8 @@ public class TestimonioController {
 			@RequestParam("file") MultipartFile imagen)throws IOException {
 		ModelAndView  modelAndView = new ModelAndView("redirect:/testimonio/listado");
 		if(result.hasErrors()) {
+			modelAndView.addObject("edicion", false);
+
 			modelAndView.setViewName("nuevo_testimonio");
 			modelAndView.addObject("usuario", usuarioService.buscarUsuario(id));
 			modelAndView.addObject("testimonio", testimonio);

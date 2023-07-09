@@ -37,6 +37,7 @@
 								<th>Usuario</th>
 								<th>Id-Usuario</th>
 								<th>Peso</th>
+								<th>Fecha Imc</th>
 								<th>Imc Calculado</th>
 								<th>Acciones </th>
 							</tr>
@@ -47,10 +48,13 @@
 								<td th:text="${imc.usuario.nombre}"></td>
 								<td th:text="${imc.usuario.id}"></td>
 								<td th:text="${imc.peso}"></td>
+								<td th:text="${imc.fechaImc}"></td>
 								<td th:text="${imc.calcularImc()}"></td>
 
 
 								<td>
+									<a class="btn btn-info btn-sm"
+										th:href="@{/imc/modificar/}+${imc.id}">Modificar</a>
 									<a class="btn btn-danger btn-sm" th:href="@{/imc/eliminar/}+${imc.id}">Eliminar</a>
 								</td>
 							</tr>
