@@ -51,7 +51,8 @@ public class IndiceMasaCorporalController {
 				modelAndView.addObject("indiceMasaCorporal", imc);
 				return modelAndView;
 			}else {
-			indiceMasaCorporalService.guardarIndiceMasaCorporal(imc, idUsuario);
+			imc.setUsuario(usuarioService.buscarUsuario(idUsuario));
+			indiceMasaCorporalService.guardarIndiceMasaCorporal(imc);
 			modelAndView.addObject("existeUsuario", existeUsuario);
 			modelAndView.addObject("usuario", imc.getUsuario());
 			modelAndView.addObject("resultado", indiceMasaCorporalService.calcularImc(imc));
@@ -67,15 +68,26 @@ public class IndiceMasaCorporalController {
 		modelAndView.addObject("existeUsuario", existeUsuario);
 		modelAndView.setViewName("calculadora-imc");
 		}
-		/**
-		if(result.hasErrors()) {
-			modelAndView.setViewName("calculadora-imc");
-			modelAndView.addObject("indiceMasaCorporal", imc);
-			return modelAndView;
-		}**/
+	
 		return modelAndView;
 	}
 	
+	@GetMapping("/modificar/{id}")
+	public String obtenerModificarIndiceMasaCorporalPage(Model model, @PathVariable(value = "id")Long id) {
+		model.addAttribute("indiceMasaCorporal", indiceMasaCorporalService.buscarIndiceMasaCorporal(id));
+		return "gestion_datos_imc_modificar";
+	}
+	
+	@PostMapping("/modificar/{id}")
+	public String modificarIndiceMasaCorporal(@Valid @ModelAttribute("indiceMasaCorporal") IndiceMasaCorporal indiceMasaCorporalModificado, BindingResult resultado,Model model) {
+		if (resultado.hasErrors()) {
+			model.addAttribute("indiceMasaCorporal", indiceMasaCorporalModificado);
+			return "gestion_datos_imc_modificar";
+		}
+		indiceMasaCorporalService.modificarIndiceMasaCorporal(indiceMasaCorporalModificado);
+		return "redirect:/imc/gestion";
+		
+	}
 
  	
 	@GetMapping("/registros")

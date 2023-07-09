@@ -45,9 +45,8 @@ public class IndiceMasaCorporalServiceMysqlImp implements IIndiceMasaCorporalSer
 	 * @param idUsuario representa el id del usuario que se vincula con la masa muscular
 	 */
 	@Override
-	public void guardarIndiceMasaCorporal(IndiceMasaCorporal indiceMasaCorporal, Long idUsuario) {
+	public void guardarIndiceMasaCorporal(IndiceMasaCorporal indiceMasaCorporal) {
 			indiceMasaCorporal.setEstado(true);
-			indiceMasaCorporal.setUsuario(usuarioService.buscarUsuario(idUsuario));
 			indiceMasaCorporalRepository.save(indiceMasaCorporal);
 			
 	}
@@ -58,6 +57,9 @@ public class IndiceMasaCorporalServiceMysqlImp implements IIndiceMasaCorporalSer
 	 */
 	@Override
 	public void modificarIndiceMasaCorporal(IndiceMasaCorporal indiceMasaCorporalModificado) {
+		indiceMasaCorporalModificado.setEstado(true);
+		indiceMasaCorporalModificado.setUsuario(buscarIndiceMasaCorporal(indiceMasaCorporalModificado.getId()).getUsuario());
+	
 		indiceMasaCorporalRepository.save(indiceMasaCorporalModificado);
 	}
 

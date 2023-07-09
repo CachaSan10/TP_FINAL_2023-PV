@@ -1,3 +1,11 @@
+
+insert into usuarios (usu_id, usu_nombre, usu_apellido, usu_email, usu_fecha_nacimiento, usu_telefono, usu_sexo, usu_estatura, usu_estado, usu_administrador) values(1, 'Francisco', 'Franco', 'franco@gmail.com','1999-08-05', '4244667890', 'Masculino', 1.9, 1, 1 );
+insert into usuarios (usu_id, usu_nombre, usu_apellido, usu_email, usu_fecha_nacimiento, usu_telefono, usu_sexo, usu_estatura, usu_estado, usu_administrador) values(2, 'Maria', 'Lopez', 'lopez@gmail.com','2000-03-02', '4249967000', 'Femenino', 1.6, 1, 1 );
+insert into usuarios (usu_id, usu_nombre, usu_apellido, usu_email, usu_fecha_nacimiento, usu_telefono, usu_sexo, usu_estatura, usu_estado, usu_administrador) values(3, 'Carlos', 'Rodriguez', 'rodriguez@gmail.com','1997-09-03', '4233007890', 'Masculino', 1.8, 1, 0 );
+insert into usuarios (usu_id, usu_nombre, usu_apellido, usu_email, usu_fecha_nacimiento, usu_telefono, usu_sexo, usu_estatura, usu_estado, usu_administrador) values(4, 'Patricia', 'Vidal', 'vidal@gmail.com','2003-01-10', '4211777890', 'Femenino', 1.7, 1, 0 );
+insert into usuarios (usu_id, usu_nombre, usu_apellido, usu_email, usu_fecha_nacimiento, usu_telefono, usu_sexo, usu_estatura, usu_estado, usu_administrador) values(5, 'Mauricio', 'Larreta', 'larreta@gmail.com','1997-10-11', '4211487890', 'Masculino', 1.8, 1, 0 );
+insert into usuarios (usu_id, usu_nombre, usu_apellido, usu_email, usu_fecha_nacimiento, usu_telefono, usu_sexo, usu_estatura, usu_estado, usu_administrador) values(6, 'Eugenia', 'Fernandez', 'fernandez@gmail.com','1995-03-12', '4204223881', 'Femenino', 1.5, 1, 0 );
+
 insert into recetas (rec_id, rec_nombre, rec_categoria, rec_preparacion, rec_resumen, rec_imagen, rec_estado) values(1,'Tacos de lechuga con ternera salteada','Carnes','Serviremos estos wraps o tacos de lechuga con ternera','La carne se puede preparar de diferentes maneras.Descúbrelas con nuestras recetas','ternera.png',1);
 
 insert into recetas (rec_id, rec_nombre, rec_categoria, rec_preparacion, rec_resumen, rec_imagen, rec_estado) values(2,'Pescado en salsa de limón con ajo y perejil','Pescados','SIRVE los filetes de pescado bañados en la salsa.','Descubre las recetas deliciosas que se pueden preparar con pescado','pescado.jpg',1);
@@ -28,16 +36,6 @@ insert into ingredientes (ingre_id, ingre_nombre,ingre_estado,rec_id) values(19,
 insert into ingredientes (ingre_id, ingre_nombre,ingre_estado,rec_id) values(20,'1 cucharada de alcaparra ',1,2);
 insert into ingredientes (ingre_id, ingre_nombre,ingre_estado,rec_id) values(21,'1 puñado de algas dulces ',1,1);
 insert into ingredientes (ingre_id, ingre_nombre,ingre_estado,rec_id) values(22,'1 cucharada de alcaparra ',1,3);
-
-
-
-insert into usuarios (usu_id, usu_nombre, usu_apellido, usu_email, usu_fecha_nacimiento, usu_telefono, usu_sexo, usu_estatura, usu_estado, usu_administrador) values(1, 'Francisco', 'Franco', 'franco@gmail.com','1999-08-05', '4244667890', 'Masculino', 1.9, 1, 1 );
-insert into usuarios (usu_id, usu_nombre, usu_apellido, usu_email, usu_fecha_nacimiento, usu_telefono, usu_sexo, usu_estatura, usu_estado, usu_administrador) values(2, 'Maria', 'Lopez', 'lopez@gmail.com','2000-03-02', '4249967000', 'Femenino', 1.6, 1, 1 );
-insert into usuarios (usu_id, usu_nombre, usu_apellido, usu_email, usu_fecha_nacimiento, usu_telefono, usu_sexo, usu_estatura, usu_estado, usu_administrador) values(3, 'Carlos', 'Rodriguez', 'rodriguez@gmail.com','1997-09-03', '4233007890', 'Masculino', 1.8, 1, 0 );
-insert into usuarios (usu_id, usu_nombre, usu_apellido, usu_email, usu_fecha_nacimiento, usu_telefono, usu_sexo, usu_estatura, usu_estado, usu_administrador) values(4, 'Patricia', 'Vidal', 'vidal@gmail.com','2003-01-10', '4211777890', 'Femenino', 1.7, 1, 0 );
-insert into usuarios (usu_id, usu_nombre, usu_apellido, usu_email, usu_fecha_nacimiento, usu_telefono, usu_sexo, usu_estatura, usu_estado, usu_administrador) values(5, 'Mauricio', 'Larreta', 'larreta@gmail.com','1997-10-11', '4211487890', 'Masculino', 1.8, 1, 0 );
-insert into usuarios (usu_id, usu_nombre, usu_apellido, usu_email, usu_fecha_nacimiento, usu_telefono, usu_sexo, usu_estatura, usu_estado, usu_administrador) values(6, 'Eugenia', 'Fernandez', 'fernandez@gmail.com','1995-03-12', '4204223881', 'Femenino', 1.5, 1, 0 );
-
 
 insert into indices_masa_corporal (imc_id, imc_fecha, imc_estado, imc_peso,usu_id) values(1,'2022-06-14', 1, 80.5,1);
 insert into indices_masa_corporal (imc_id, imc_fecha, imc_estado, imc_peso,usu_id) values(2,'2022-09-21', 1, 90,1);

@@ -8,7 +8,7 @@ public interface IIndiceMasaCorporalService {
 	
 	public IndiceMasaCorporal obtenerIndiceMasaCorporal();
 	public List<IndiceMasaCorporal> obtenerIndicesMasaCorporal();
-	public void guardarIndiceMasaCorporal(IndiceMasaCorporal indiceMasaCorporal, Long idUsuario);
+	public void guardarIndiceMasaCorporal(IndiceMasaCorporal indiceMasaCorporal);
 	public List<IndiceMasaCorporal> obtenerFechasImcDescreciente(Long id);
 	public void modificarIndiceMasaCorporal(IndiceMasaCorporal indiceMasaCorporalModificado);
 	public void eliminarIndiceMasaCorporal(Long id);
