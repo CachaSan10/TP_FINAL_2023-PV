@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.entity.Ingrediente;
 import ar.edu.unju.fi.service.IIngredienteService;
-import ar.edu.unju.fi.service.imp.RecetaServiceMysqlImp;
+import ar.edu.unju.fi.service.IRecetaService;
 import jakarta.validation.Valid;
 
 @Controller
@@ -26,7 +26,8 @@ public class IngredienteController {
 	private IIngredienteService ingredienteService;
 	
 	@Autowired
-	private RecetaServiceMysqlImp recetaService;
+	@Qualifier("recetaServiceMysqlImp")
+	private IRecetaService recetaService;
 	
 	/**
 	 * Metodo que retorna la pagina de gestion de datos de ingredientes
